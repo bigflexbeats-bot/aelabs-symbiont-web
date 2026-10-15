@@ -31,6 +31,22 @@ function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function checkStale(){const stale=Date.now()-lastRecordChangeAt>=STALE_AFTER_MS;$('staleBanner').classList.toggle('visible',stale);return stale}
 function buildAlarms(o,m,stale){
  const a=[],q=o.quality||{},flags=Array.isArray(q.flags)?q.flags:[];
+ // Prefer alarms exported by the desktop application. This is the authoritative
+ // state, so resolved desktop alarms disappear on the next published snapshot.
+ const desktop=o.desktop_status;
+ if(desktop && desktop.alarm_state_authoritative===true && Array.isArray(desktop.active_alarms)){
+   for(const item of desktop.active_alarms){
+     if(item && item.active!==false && item.message){
+       a.push({level:item.level==='warning'?'warning':'error',text:String(item.message),key:item.key||''});
+     }
+   }
+   if(desktop.process_data_stale && !a.some(x=>/INI|данных|обновлен/i.test(x.text))){
+     a.push({level:'error',text:'ОШИБКА: настольное приложение сообщает об устаревших данных процесса.'});
+   }
+   if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
+   if(!a.length)a.push({level:'ok',text:'Настольное приложение не сообщает об активных ошибках.'});
+   return a;
+ }
  if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
  const limits=[
   ['ph','pH',6.5,8.0,'','pH вне заданного диапазона'],
