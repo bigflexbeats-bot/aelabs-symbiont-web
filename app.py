@@ -9,8 +9,8 @@ import urllib.request
 from flask import Flask, jsonify, send_from_directory
 
 app = Flask(__name__, static_folder='static')
-OWNER = os.getenv('GITHUB_OWNER', 'bigflexbeats-bot').strip()
-REPO = os.getenv('GITHUB_REPO', 'aelabs-symbiont-data').strip()
+OWNER = os.getenv('GITHUB_OWNER', 'chernushkindm-lab').strip()
+REPO = os.getenv('GITHUB_REPO', 'symbiont_lab').strip()
 BRANCH = os.getenv('GITHUB_BRANCH', 'main').strip() or 'main'
 TOKEN = os.getenv('GITHUB_TOKEN', '').strip()
 API = f'https://api.github.com/repos/{OWNER}/{REPO}'
@@ -82,7 +82,7 @@ def home():
 @app.get('/api/health')
 def health():
     try:
-        latest = cached('latest', 2, lambda: file_json('data/live/latest.json'))
+        latest = cached('latest', 1, lambda: file_json('data/live/latest.json'))
         normalize_observation(latest)
         return jsonify({'ok': True, 'repo': f'{OWNER}/{REPO}', 'branch': BRANCH, 'latest_available': True})
     except urllib.error.HTTPError as exc:
@@ -94,7 +94,7 @@ def health():
 @app.get('/api/latest')
 def latest():
     try:
-        payload = cached('latest', 2, lambda: file_json('data/live/latest.json'))
+        payload = cached('latest', 1, lambda: file_json('data/live/latest.json'))
         return jsonify(normalize_observation(payload))
     except urllib.error.HTTPError as exc:
         app.logger.warning('GitHub latest request failed: HTTP %s', exc.code)
