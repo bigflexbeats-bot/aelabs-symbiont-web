@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: aelabs-symbiont-web
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: GITHUB_OWNER
+        value: bigflexbeats-bot
+      - key: GITHUB_REPO
+        value: aelabs-symbiont-data
+      - key: GITHUB_BRANCH
+        value: main
+      - key: GITHUB_TOKEN
+        sync: false
