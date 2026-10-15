@@ -9,8 +9,8 @@ import urllib.request
 from flask import Flask, jsonify, send_from_directory
 
 app = Flask(__name__, static_folder='static')
-OWNER = os.getenv('GITHUB_OWNER', 'chernushkindm-lab').strip()
-REPO = os.getenv('GITHUB_REPO', 'symbiont_lab').strip()
+OWNER = os.getenv('GITHUB_OWNER', 'bigflexbeats-bot').strip()
+REPO = os.getenv('GITHUB_REPO', 'aelabs-symbiont-data').strip()
 BRANCH = os.getenv('GITHUB_BRANCH', 'main').strip() or 'main'
 TOKEN = os.getenv('GITHUB_TOKEN', '').strip()
 API = f'https://api.github.com/repos/{OWNER}/{REPO}'

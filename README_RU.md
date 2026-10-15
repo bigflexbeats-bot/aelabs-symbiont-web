@@ -60,11 +60,12 @@ Render автоматически может разворачивать новы
 
 ## Важно: источник LIVE-данных
 
-Настольное приложение по умолчанию публикует `data/live/latest.json` в репозиторий
-`chernushkindm-lab/symbiont_lab`, ветка `main`. Веб-монитор теперь использует тот же
-репозиторий по умолчанию. Если на хостинге (например, Render) заданы переменные
+Веб-код размещается отдельно в `bigflexbeats-bot/aelabs-symbiont-web`.
+Настольное приложение публикует `data/live/latest.json` в репозиторий данных
+`bigflexbeats-bot/aelabs-symbiont-data`, ветка `main`. Веб-монитор читает именно
+репозиторий данных `bigflexbeats-bot/aelabs-symbiont-data` по умолчанию. Если на хостинге (например, Render) заданы переменные
 `GITHUB_OWNER` или `GITHUB_REPO`, они имеют приоритет над значениями по умолчанию:
-установите `GITHUB_OWNER=chernushkindm-lab` и `GITHUB_REPO=symbiont_lab`.
+установите `GITHUB_OWNER=bigflexbeats-bot` и `GITHUB_REPO=aelabs-symbiont-data`.
 Также нужен действующий `GITHUB_TOKEN` с доступом на чтение содержимого этого репозитория.
 
 Для диагностики откройте `/api/health` и `/api/latest`. Если `/api/latest` возвращает
