@@ -1,24 +1,44 @@
-# AELABS SYMBIONT WEB — тестовый интерфейс
+# AELABS SYMBIONT WEB — read-only monitoring
 
-Веб-панель читает приватный GitHub-репозиторий через серверный API. Токен хранится только в переменной окружения сервера и не попадает в HTML/браузер.
+Веб-панель отображает телеметрию настольного AELABS MONITORING. Управление оборудованием через сайт не реализовано и в первой версии не предусмотрено.
 
-## Что отображается
-- pH, DO, температура, RPM, MicroCheck OD и off-gas;
-- номер наблюдения, статус качества, локальное время источника и UTC-времена;
-- последние 50 JSON-файлов из `data/history/`;
-- автообновление каждые 5 секунд.
+## Источник данных
 
-## Развёртывание для проверки другом (Render)
-1. Создать отдельный репозиторий GitHub, например `aelabs-symbiont-web`, и загрузить туда содержимое этой папки.
-2. На Render выбрать New → Web Service и подключить этот репозиторий. Можно использовать `render.yaml` (Blueprint).
-3. В Environment Variables добавить `GITHUB_TOKEN` со значением fine-grained token, ограниченного только репозиторием `aelabs-symbiont-data` и правом `Contents: Read-only`.
-4. Нажать Deploy. После успешного запуска Render выдаст HTTPS-ссылку вида `https://aelabs-symbiont-web.onrender.com` — её можно отправить другу.
-5. Не добавлять токен в репозиторий, HTML, JavaScript или переписку. Если токен раньше публиковался, отозвать его и создать новый.
+По умолчанию сервер читает приватный репозиторий `bigflexbeats-bot/aelabs-symbiont-data`, ветку `main`:
 
-## Проверка
-- `/api/health` — сервер видит `data/live/latest.json`.
-- `/api/latest` — последнее наблюдение.
-- `/api/history` — список истории.
+- `data/live/latest.json` — последний снимок;
+- `data/history/**/*.json` — архив наблюдений.
 
-## Важно
-Приложение предполагает, что источник публикует `data/live/latest.json` и отдельные JSON в `data/history/`. Если история ещё не создаётся, карточка истории покажет пустой список. Веб-панель не пишет в репозиторий — только читает.
+API совместим с текущим форматом издателя `symbiont-observation/v1`, в котором `latest.json` содержит объект `observation`, и с прежним форматом, где поля наблюдения находятся на верхнем уровне. Токен GitHub не отправляется в браузер.
+
+## Локальный запуск
+
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
+# Windows PowerShell: $env:GITHUB_TOKEN = 'ваш_read-only_token'
+# Linux/macOS: export GITHUB_TOKEN='ваш_read-only_token'
+python app.py
+```
+
+Откройте `http://127.0.0.1:8080`. Для реального доступа к приватному репозиторию необходим fine-grained GitHub token с доступом только к репозиторию данных и правом **Contents: Read-only**. Не помещайте токен в исходники, HTML, JS или публичные коммиты.
+
+## Деплой на Render
+
+1. Загрузите содержимое этой папки в репозиторий `aelabs-symbiont-web`.
+2. На Render выберите **New → Blueprint** и подключите репозиторий с `render.yaml` либо создайте **Web Service** вручную.
+3. Для ручного создания задайте Build Command `pip install -r requirements.txt` и Start Command `gunicorn app:app --bind 0.0.0.0:$PORT`.
+4. В Environment Variables задайте `GITHUB_TOKEN` (Secret), `GITHUB_OWNER=bigflexbeats-bot`, `GITHUB_REPO=aelabs-symbiont-data`, `GITHUB_BRANCH=main`.
+5. После успешного деплоя проверьте `/api/health`, `/api/latest` и `/api/history`.
+
+Render автоматически может разворачивать новые коммиты связанной ветки. Бесплатные экземпляры могут засыпать при бездействии; это нормально для прототипа, но не для критически важного непрерывного мониторинга.
+
+## API
+
+- `GET /api/health` — проверка доступа к источнику;
+- `GET /api/latest` — нормализованное последнее наблюдение;
+- `GET /api/history` — последние архивные записи.
+
+Чтобы не расходовать лимит GitHub API при частом опросе браузером, последний снимок кэшируется на 2 секунды, браузер проверяет обновления каждые 2 секунды, история обновляется раз в 30 секунд. Если идентификатор/время/содержимое последней записи не меняется 10 минут, интерфейс показывает красное предупреждение о зависших данных. Веб-сервер работает только на чтение и не пишет данные в репозиторий.
