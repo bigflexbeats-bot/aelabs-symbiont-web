@@ -15,8 +15,8 @@ BRANCH = os.getenv('GITHUB_BRANCH', 'main').strip() or 'main'
 TOKEN = os.getenv('GITHUB_TOKEN', '').strip()
 API = f'https://api.github.com/repos/{OWNER}/{REPO}'
 
-# GitHub API is rate-limited. Cache latest briefly and archive longer because
-# the browser polls frequently and the archive normally changes much slower.
+# GitHub API is rate-limited. Keep a short cache so live values and trend
+# history refresh quickly while avoiding duplicate requests within one interval.
 _cache = {}
 _cache_lock = threading.Lock()
 
@@ -130,7 +130,7 @@ def history():
                 app.logger.warning('Skipping invalid history file %s: %s', path, exc)
         return {'items': rows, 'count': len(rows)}
     try:
-        return jsonify(cached('history', 300, load_history))
+        return jsonify(cached('history', 2, load_history))
     except Exception as exc:
         app.logger.warning('History request failed: %s', exc)
         return jsonify({'error': str(exc), 'items': []}), 502
