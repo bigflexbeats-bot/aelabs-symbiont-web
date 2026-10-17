@@ -106,18 +106,29 @@ function drawTrend(){
  const end=allRows.length-trendOffset, rows=allRows.slice(Math.max(0,end-TREND_WINDOW),end);
  if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание числовых измерений pH, DO, OD или температуры…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
  const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:42,r:16,t:18,b:30},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
- // Dynamic Y range: expands in 5-unit steps when a measurement exceeds the current ceiling.
+ // Auto-zoom Y range around the visible data, with a small breathing margin.
+ // This keeps the curves readable instead of wasting most of the plot on empty space.
  const visibleValues=rows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
- const observedMax=Math.max(0,...visibleValues),yMax=Math.max(100,Math.ceil(observedMax/5)*5);
- let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд параметров за ${rows.length} точек, шкала от 0 до ${yMax}"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
- // Labels remain readable; the scale ceiling moves smoothly in 5-unit increments.
- const tickStep=yMax<=100?25:(yMax<=200?25:Math.ceil(yMax/4/5)*5);
- for(let tick=0;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-tick/yMax);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="${tick===0?'0':'3 5'}"/>`;svg+=`<text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${tick}</text>`}
+ let dataMin=visibleValues.length?Math.min(...visibleValues):0;
+ let dataMax=visibleValues.length?Math.max(...visibleValues):10;
+ let spread=dataMax-dataMin;
+ if(spread<1)spread=Math.max(5,Math.abs(dataMax)*0.2);
+ const margin=Math.max(1,spread*0.16);
+ let yMin=Math.floor((dataMin-margin)/5)*5;
+ let yMax=Math.ceil((dataMax+margin)/5)*5;
+ if(yMax-yMin<10){yMin-=5;yMax+=5;}
+ // Keep the baseline at zero when it is close to the data, but zoom in for low-valued data.
+ const range=yMax-yMin;
+ const rawStep=range/4;
+ const tickStep=rawStep<=5?Math.max(1,Math.ceil(rawStep)):Math.ceil(rawStep/5)*5;
+ const tickStart=Math.ceil(yMin/tickStep)*tickStep;
+ let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд параметров за ${rows.length} точек, автошкала от ${yMin} до ${yMax}"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+ for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="3 5"/>`;svg+=`<text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${Number(tick.toFixed(2))}</text>`}
  for(let i=0;i<5;i++){const x=pad.l+pw*i/4;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#24313d" stroke-width="1" stroke-dasharray="3 6"/>`}
  const pointsBySeries={};
  for(const key of visibleSeries){const series=SERIES[key];const vals=rows.map((r,i)=>({i,v:series.get(r.measurements||{})})).filter(p=>Number.isFinite(p.v));if(!vals.length)continue;
     // Preserve actual values; smooth cubic curves, animated path morphing, and a subtle colored glow.
-    const coords=vals.map(p=>({x:pad.l+pw*(rows.length<=1?0.5:p.i/(rows.length-1)),y:pad.t+ph*(1-Math.max(0,p.v)/yMax),v:p.v,i:p.i}));pointsBySeries[key]=coords;
+    const coords=vals.map(p=>({x:pad.l+pw*(rows.length<=1?0.5:p.i/(rows.length-1)),y:pad.t+ph*(1-(p.v-yMin)/(yMax-yMin)),v:p.v,i:p.i}));pointsBySeries[key]=coords;
    let path='';if(coords.length){path=`M ${coords[0].x} ${coords[0].y}`;for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}}
    if(coords.length>1)svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4.5" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color};stroke-dasharray:2000;stroke-dashoffset:0"><animate attributeName="opacity" from=".75" to="1" dur=".35s" fill="freeze"/></path>`;
    for(const point of coords)svg+=`<circle cx="${point.x}" cy="${point.y}" r="${coords.length===1?4:2.5}" fill="${series.color}" stroke="#0b1118" stroke-width="1.2"/>`;
