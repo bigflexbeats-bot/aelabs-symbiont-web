@@ -82,7 +82,7 @@ def home():
 @app.get('/api/health')
 def health():
     try:
-        latest = cached('latest', 1, lambda: file_json('data/live/latest.json'))
+        latest = cached('latest', 4, lambda: file_json('data/live/latest.json'))
         normalize_observation(latest)
         return jsonify({'ok': True, 'repo': f'{OWNER}/{REPO}', 'branch': BRANCH, 'latest_available': True})
     except urllib.error.HTTPError as exc:
@@ -94,7 +94,7 @@ def health():
 @app.get('/api/latest')
 def latest():
     try:
-        payload = cached('latest', 1, lambda: file_json('data/live/latest.json'))
+        payload = cached('latest', 4, lambda: file_json('data/live/latest.json'))
         return jsonify(normalize_observation(payload))
     except urllib.error.HTTPError as exc:
         app.logger.warning('GitHub latest request failed: HTTP %s', exc.code)
@@ -105,35 +105,10 @@ def latest():
 
 @app.get('/api/history')
 def history():
-    def load_history():
-        tree = gh('git/trees/' + BRANCH + '?recursive=1')
-        paths = [item['path'] for item in tree.get('tree', [])
-                 if item.get('type') == 'blob'
-                 and item.get('path', '').startswith('data/history/')
-                 and item.get('path', '').endswith('.json')]
-        paths = sorted(paths, reverse=True)[:50]
-        rows = []
-        for path in paths:
-            try:
-                obj = file_json(path)
-                obj = normalize_observation(obj) if obj.get('schema') == 'symbiont-live-monitor/v1' else obj
-                measurements = obj.get('measurements', {})
-                rows.append({
-                    'path': path,
-                    'observation_no': obj.get('observation_no'),
-                    'source_time_raw': obj.get('source_time_raw'),
-                    'event_time_utc': obj.get('event_time_utc'),
-                    'measurements': measurements if isinstance(measurements, dict) else {},
-                    'source_id': obj.get('source_id'),
-                })
-            except Exception as exc:
-                app.logger.warning('Skipping invalid history file %s: %s', path, exc)
-        return {'items': rows, 'count': len(rows)}
-    try:
-        return jsonify(cached('history', 2, load_history))
-    except Exception as exc:
-        app.logger.warning('History request failed: %s', exc)
-        return jsonify({'error': str(exc), 'items': []}), 502
+    # History is intentionally browser-local for now. Walking the Git tree and
+    # reading dozens of JSON files creates unnecessary API load and commits are
+    # intentionally disabled for history in the desktop publisher.
+    return jsonify({'items': [], 'count': 0, 'storage': 'browser-local'})
 
 @app.get('/<path:path>')
 def static_files(path):
