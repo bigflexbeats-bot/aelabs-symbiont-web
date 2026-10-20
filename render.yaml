@@ -14,3 +14,14 @@ services:
         value: main
       - key: GITHUB_TOKEN
         sync: false
+
+      - key: GITHUB_LOG_OWNER
+        sync: false
+      - key: GITHUB_LOG_REPO
+        sync: false
+      - key: GITHUB_LOG_BRANCH
+        value: main
+      - key: GITHUB_LOG_PATH
+        value: data/log/aelabs_log.csv
+      - key: GITHUB_LOG_TOKEN
+        sync: false

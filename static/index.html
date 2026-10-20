@@ -19,25 +19,29 @@
 .trend-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:11px}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
 .trend-empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
 @media(max-width:520px){.trend-plot{height:240px}.alarm-item{padding:10px}}
-</style></head><body><header><div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small>Live Monitor</small></div></div><div class="topright"><span><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div></header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero"><div><div class="eyebrow">REAL-TIME DATA / DS-01.01</div><h1>AELABS WEB</h1></div><div class="pill">Синхронизация каждые 5 секунд</div></div><div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Тренд параметров</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button><button class="trend-follow" id="trendFollow" type="button">● Автопрокрутка: ВКЛ</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i>DO, мг/л</span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small>Каждые 5 секунд · тренд накапливается в браузере</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th>DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span>AELABS SYMBIONT WEB · READ-ONLY MONITORING</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script>
+</style></head><body><header><div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small>Live Monitor</small></div></div><div class="topright"><span><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div></header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero"><div><div class="eyebrow">REAL-TIME DATA / DS-01.01</div><h1>AELABS WEB</h1></div><div class="pill">Синхронизация каждые 5 секунд</div></div><div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Тренд параметров</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button><button class="trend-follow" id="trendFollow" type="button">● Автопрокрутка: ВКЛ</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span>AELABS SYMBIONT WEB · READ-ONLY MONITORING</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script src="/source-history.js"></script><script>
 const $=id=>document.getElementById(id);
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
 function setVal(id,v){$(id).textContent=fmt(v)}
-let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],latestObservation=null,historyInitialized=false,refreshInFlight=false;
-const TREND_STORAGE_KEY='aelabs_live_trend_v1';
-try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object').slice(-500)}catch(_){historyItems=[]}
+function setValIfReadable(id,v){if(v!==null&&v!==undefined&&!(typeof v==='string'&&!v.trim()))setVal(id,v)}
+let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],latestObservation=null,historyInitialized=false,refreshInFlight=false,historyFetchInFlight=false,historySourceMode='detecting',historyDoUnits='mg_l';
+// v2 intentionally drops the old browser-generated polling samples. Only source-timestamped Git observations are kept.
+const TREND_STORAGE_KEY='aelabs_live_trend_v2_source_time';
+try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object'&&x._source_key&&AELABSHistory.sourceTimeLabel(x)).slice(-500)}catch(_){historyItems=[]}
 let trendAutoFollow=true,trendOffset=0,trendDrag=null,trendLastRenderKey='';const TREND_WINDOW=50;
-const STALE_AFTER_MS=10*60*1000;
+const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000,MAX_TREND_GAP_MS=30000;
+function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObservation);if(Number.isFinite(sourceMs)&&sourceMs<=Date.now()+5*60*1000)return Math.max(0,Date.now()-sourceMs);return Math.max(0,Date.now()-lastRecordChangeAt)}
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
 function scaleName(o,index){
  const i=Number(index), key=`weight_${i}_kg`;
  const candidates=[o?.weight_names?.[key],o?.weight_names?.[`weight_${i}`],o?.scale_names?.[i-1],o?.scale_names?.[key],o?.settings?.weight_names?.[key],o?.settings?.scale_names?.[i-1],o?.desktop_status?.weight_names?.[key],o?.desktop_status?.scale_names?.[i-1],o?.provenance?.weight_names?.[key],o?.provenance?.scale_names?.[i-1]];
  const name=candidates.find(v=>typeof v==='string'&&v.trim()); return name?name.trim():`Весы ${i}`;
 }
-const SERIES={ph:{label:'pH',color:'#4fd18b',get:m=>numericValue(m,['ph','pH'])},do:{label:'DO (растворённый кислород), мг/л',color:'#5da9e9',get:m=>numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO'])},od:{label:'OD',color:'#b17aff',get:m=>numericValue(m,['microcheck_od','od','OD'])},temp:{label:'Температура',color:'#ff6468',get:m=>numericValue(m,['temperature_c','temperature','temp','tC'])}};
+const SERIES={ph:{label:'pH',color:'#4fd18b',get:m=>numericValue(m,['ph','pH','ph_pc'])},do:{label:'DO (растворённый кислород), мг/л',color:'#5da9e9',get:m=>numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','dissolvedOxygen','DO'])},od:{label:'OD',color:'#b17aff',get:m=>numericValue(m,['microcheck_od','od_online','od','OD'])},temp:{label:'Температура',color:'#ff6468',get:m=>numericValue(m,['temperature_c','temperature','temp','tC'])}};
+function updateHistoryLabels(){const pct=historySourceMode==='github-csv'&&historyDoUnits==='pct';SERIES.do.label=pct?'DO, % насыщения':'DO (растворённый кислород), мг/л';if($('trendDoLabel'))$('trendDoLabel').textContent=pct?'DO, %':'DO, мг/л';if($('historyDoLabel'))$('historyDoLabel').textContent=pct?'DO, %':'DO, мг/л';const hint=$('historyUpdateHint');if(hint)hint.textContent=historySourceMode==='github-csv'?'История из GIT LOG CSV · обновление раз в 15 секунд':historySourceMode==='browser-local'?'История по уникальным WEB-наблюдениям с исходным временем':'Определение источника истории…'}
 const visibleSeries=new Set(['ph','do','od','temp']);
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function checkStale(){const stale=Date.now()-lastRecordChangeAt>=STALE_AFTER_MS;$('staleBanner').classList.toggle('visible',stale);return stale}
+function checkStale(){const stale=sourceAgeMs()>=STALE_AFTER_MS;$('staleBanner').classList.toggle('visible',stale);return stale}
 function buildAlarms(o,m,stale){
  const a=[],q=o.quality||{},flags=Array.isArray(q.flags)?q.flags:[];
  // Prefer alarms exported by the desktop application. This is the authoritative
@@ -71,84 +75,130 @@ function buildAlarms(o,m,stale){
  return a
 }
 function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';$('alarmItems').innerHTML=alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join('')}
-const PC_HEARTBEAT_TIMEOUT_MS=20000;
-function updatePcLink(){const row=$('pcLinkRow'),mark=$('pcLinkMark'),label=$('pcLinkStatus');if(!row||!mark||!label)return;const age=Date.now()-lastRecordChangeAt;const online=!!latestObservation&&age<PC_HEARTBEAT_TIMEOUT_MS;row.classList.toggle('pc-online',online);row.classList.toggle('pc-offline',!online);mark.textContent=online?'✓':'!';label.textContent=online?'Подключено · данные от ПК поступают':'ПОТЕРЯ СВЯЗИ · нет нового сигнала от ПК';label.style.color=online?'var(--green)':'var(--red)'}
-async function refresh(){if(refreshInFlight)return;refreshInFlight=true;try{const r=await fetch('/api/latest',{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const o=await r.json();if(o.error)throw new Error(o.error);const m=o.measurements||{};const recordKey=JSON.stringify([o.observation_no,o.event_time_utc,o.received_at_utc,o.source_time_raw,m]);if(lastRecordKey===null||recordKey!==lastRecordKey){lastRecordKey=recordKey;lastRecordChangeAt=Date.now()}latestObservation=o;updatePcLink();setVal('ph',m.ph);setVal('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));setVal('temp',m.temperature_c);setVal('rpm',m.rpm);setVal('od',m.microcheck_od);setVal('offgas',m.offgas_do_pct);for(let i=1;i<=3;i++){setVal(`weight${i}`,m[`weight_${i}_kg`]);$(`weightName${i}`).textContent=scaleName(o,i)}setVal('rawTime',o.source_time_raw);setVal('tz',o.source_timezone);setVal('eventTime',o.event_time_utc);setVal('receivedTime',o.received_at_utc);setVal('experiment',o.experiment_id);setVal('run',o.run_id);$('updated').textContent='Последняя проверка: '+new Date().toLocaleTimeString('ru-RU');const stale=checkStale();renderAlarms(o,m,stale);$('connection').textContent=stale?'ДАННЫЕ НЕ ОБНОВЛЯЮТСЯ':'ONLINE';$('liveDot').style.background=stale?'var(--red)':'var(--green)';$('repoStatus').textContent='GitHub API доступен';$('snapshotStatus').textContent=stale?'Ошибка: запись не менялась более 10 минут':'Данные получены · '+(o.source_time_raw||'время неизвестно');if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}else{mergeLatestIntoHistory();drawTrend();renderHistoryTable()}}catch(e){$('connection').textContent='ОШИБКА СВЯЗИ';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Не удалось загрузить latest.json';$('qualitySub').textContent='Проверьте сервер и GitHub';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`}finally{refreshInFlight=false}}
-async function loadHistory(){
- // No GitHub history scan: it is expensive and the agreed mode stores no history in Git.
- mergeLatestIntoHistory();$('historyStatus').textContent=historyItems.length+' записей в памяти этого браузера';renderHistoryTable();drawTrend();
+function updatePcLink(){const row=$('pcLinkRow'),mark=$('pcLinkMark'),label=$('pcLinkStatus');if(!row||!mark||!label)return;const age=sourceAgeMs();const online=!!latestObservation&&age<PC_HEARTBEAT_TIMEOUT_MS;row.classList.toggle('pc-online',online);row.classList.toggle('pc-offline',!online);mark.textContent=online?'✓':'!';label.textContent=online?'Подключено · данные от ПК поступают':'ПОТЕРЯ СВЯЗИ · нет нового сигнала от ПК';label.style.color=online?'var(--green)':'var(--red)'}
+async function refresh(){
+ if(refreshInFlight)return;refreshInFlight=true;
+ try{
+  const r=await fetch('/api/latest',{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
+  const o=await r.json();if(o.error)throw new Error(o.error);
+  const m=o.measurements||{},recordKey=AELABSHistory.sourceRecordKey(o);
+  // A changed received_at/file-fetch time is NOT a new measurement. Only source timestamp + content can advance the trend.
+  if(recordKey&&recordKey!==lastRecordKey){lastRecordKey=recordKey;lastRecordChangeAt=Date.now()}
+  latestObservation=o;updatePcLink();
+  // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
+  setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
+  setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',m.offgas_do_pct);
+  for(let i=1;i<=3;i++){setValIfReadable(`weight${i}`,m[`weight_${i}_kg`]);$('weightName'+i).textContent=scaleName(o,i)}
+  setValIfReadable('rawTime',o.source_time_raw);setValIfReadable('tz',o.source_timezone);setValIfReadable('eventTime',o.event_time_utc);setValIfReadable('receivedTime',o.received_at_utc);setValIfReadable('experiment',o.experiment_id);setValIfReadable('run',o.run_id);
+  $('updated').textContent='Проверка веба: '+new Date().toLocaleTimeString('ru-RU');
+  const stale=checkStale();renderAlarms(o,m,stale);$('connection').textContent=stale?'ДАННЫЕ НЕ ОБНОВЛЯЮТСЯ':'ONLINE';$('liveDot').style.background=stale?'var(--red)':'var(--green)';$('repoStatus').textContent='GitHub API доступен';
+  $('snapshotStatus').textContent=stale?'Ошибка: источник не публикует новые показания более 10 минут':'Данные источника · '+(AELABSHistory.sourceTimeLabel(o)||'время измерения отсутствует');
+  if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}
+  else{if(historySourceMode==='browser-local')mergeLatestIntoHistory();drawTrend();renderHistoryTable()}
+ }catch(e){$('connection').textContent='ОШИБКА СВЯЗИ';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Не удалось загрузить latest.json';$('qualitySub').textContent='Проверьте сервер и GitHub';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`}
+ finally{refreshInFlight=false}
 }
-function renderHistoryTable(){if(!$('historyRows'))return;$('historyCount').textContent=historyItems.length+' записей';if(!historyItems.length){$('historyRows').innerHTML='<tr><td colspan="5" class="empty">Ожидание новых показаний…</td></tr>';return}$('historyRows').innerHTML=historyItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(x.source_time_raw||x.event_time_utc||x.received_at_utc||'LIVE')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td></tr>`}).join('')}
+async function loadHistory(){
+ await refreshHistoryFromServer();
+ if(historySourceMode==='browser-local')mergeLatestIntoHistory();
+ renderHistoryTable();drawTrend();
+}
+async function refreshHistoryFromServer(){
+ if(historyFetchInFlight)return;historyFetchInFlight=true;
+ try{
+  const response=await fetch('/api/history',{cache:'no-store'}),payload=await response.json();
+  if(payload.storage==='github-csv'){
+   historySourceMode='github-csv';historyDoUnits=payload.do_units==='pct'?'pct':'mg_l';updateHistoryLabels();
+   if(!response.ok||payload.error){$('historyStatus').textContent='GIT LOG: '+(payload.error||('HTTP '+response.status));$('repoStatus').textContent='WEB JSON доступен · ошибка чтения GIT LOG CSV';return}
+   const sourceItems=Array.isArray(payload.items)?payload.items:[];
+   historyItems=sourceItems.map(item=>({...item,_source_key:AELABSHistory.sourceRecordKey(item)})).filter(item=>item._source_key&&AELABSHistory.sourceTimeLabel(item)&&item.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(item.measurements)!==null)).slice(-500);
+   try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* optional local cache */}
+   $('historyStatus').textContent=`GIT LOG · ${historyItems.length} уникальных показаний · ${payload.repo||'CSV'}`;
+  }else if(payload.storage==='browser-local'){
+   if(historySourceMode!=='github-csv'){
+    historySourceMode='browser-local';updateHistoryLabels();
+    if(latestObservation)mergeLatestIntoHistory();
+    $('historyStatus').textContent=historyItems.length+' уникальных показаний с временной меткой источника · локально';
+   }
+  }else if(!response.ok){throw new Error(payload.error||('HTTP '+response.status))}
+  lastHistoryLoadAt=Date.now();renderHistoryTable();drawTrend();
+ }catch(e){
+  // Keep the last successfully loaded Git CSV history and never replace it with browser-time samples.
+  $('historyStatus').textContent=historySourceMode==='github-csv'?'GIT LOG недоступен: '+e.message:'История недоступна: '+e.message;
+ }finally{historyFetchInFlight=false}
+}
+function renderHistoryTable(){
+ if(!$('historyRows'))return;$('historyCount').textContent=historyItems.length+' записей';
+ if(!historyItems.length){$('historyRows').innerHTML='<tr><td colspan="5" class="empty">Ожидание новых показаний со временем источника…</td></tr>';return}
+ $('historyRows').innerHTML=historyItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(AELABSHistory.sourceTimeLabel(x)||'—')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td></tr>`}).join('')
+}
 function mergeLatestIntoHistory(){
  if(!latestObservation)return;
- const o=latestObservation, m=o.measurements||{}, now=Date.now();
- // Sample the live values on each successful browser poll. Source timestamps can
- // stay unchanged when a publisher reuses the same snapshot; they must not freeze the chart.
- const row={observation_no:o.observation_no,source_time_raw:o.source_time_raw||o.event_time_utc||o.received_at_utc||new Date(now).toLocaleTimeString('ru-RU'),event_time_utc:o.event_time_utc,received_at_utc:o.received_at_utc,client_sample_ms:now,measurements:{...m},_isLatest:true};
- const last=historyItems.length?historyItems[historyItems.length-1]:null;
- if(last && last.client_sample_ms && now-last.client_sample_ms<4000){
-   const merged={...(last.measurements||{})};
-   for(const [k,v] of Object.entries(m))if(v!==null&&v!==undefined&&v!=='')merged[k]=v;
-   historyItems[historyItems.length-1]={...last,...row,measurements:merged};
- }else{
-   historyItems.push(row);
- }
+ const o=latestObservation,m=o.measurements||{},sourceKey=AELABSHistory.sourceRecordKey(o),sourceTime=AELABSHistory.sourceTimeLabel(o);
+ // Never fabricate a timestamp from browser clocks or GitHub arrival time.
+ if(!sourceKey||!sourceTime){$('historyStatus').textContent='Нет времени измерения в исходной записи — новая точка не добавлена';return}
+ // Repeated polling of the same latest.json must not create duplicate trend points.
+ if(historyItems.some(x=>x._source_key===sourceKey)){$('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника';return}
+ const row={observation_no:o.observation_no,source_time_raw:o.source_time_raw||null,event_time_utc:o.event_time_utc||null,source_timezone:o.source_timezone||null,source_timestamp_ms:AELABSHistory.sourceTimestampMs(o),_source_key:sourceKey,measurements:{...m}};
+ historyItems.push(row);
  if(historyItems.length>500)historyItems=historyItems.slice(-500);
  try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* local storage is optional */}
- $('historyStatus').textContent=historyItems.length+' точек в тренде · локально';
+ $('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника'
 }
 
 function drawTrend(){
- const plot=$('trendPlot'); if(!plot)return;
- let tooltip=$('trendTooltip');
- if(!tooltip){tooltip=document.createElement('div');tooltip.id='trendTooltip';tooltip.className='trend-tooltip';plot.appendChild(tooltip)}
- const allRows=historyItems.filter(x=>x&&x.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));
- const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);
- trendOffset=trendAutoFollow?0:Math.max(0,Math.min(maxOffset,trendOffset));
- const end=allRows.length-trendOffset, rows=allRows.slice(Math.max(0,end-TREND_WINDOW),end);
- if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание числовых измерений pH, DO, OD или температуры…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
+ const plot=$('trendPlot');if(!plot)return;
+ let tooltip=$('trendTooltip');if(!tooltip){tooltip=document.createElement('div');tooltip.id='trendTooltip';tooltip.className='trend-tooltip';plot.appendChild(tooltip)}
+ let allRows=historyItems.filter(x=>x&&x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));
+ const allTimes=allRows.map(x=>AELABSHistory.sourceTimestampMs(x));
+ if(allTimes.length&&allTimes.every(Number.isFinite))allRows=allRows.map((r,i)=>({r,t:allTimes[i]})).sort((a,b)=>a.t-b.t).map(x=>x.r);
+ const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);trendOffset=trendAutoFollow?0:Math.max(0,Math.min(maxOffset,trendOffset));
+ const end=allRows.length-trendOffset,rows=allRows.slice(Math.max(0,end-TREND_WINDOW),end);
+ if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание новых измерений с временем из исходного файла…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
  const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:42,r:16,t:18,b:30},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
- // Auto-zoom Y range around the visible data, with a small breathing margin.
- // This keeps the curves readable instead of wasting most of the plot on empty space.
+ const rowTimes=rows.map(r=>AELABSHistory.sourceTimestampMs(r)),useTimeAxis=rowTimes.every(Number.isFinite)&&rowTimes.length>1&&Math.max(...rowTimes)>Math.min(...rowTimes);
+ const minTime=useTimeAxis?Math.min(...rowTimes):0,maxTime=useTimeAxis?Math.max(...rowTimes):0;
+ const rowXs=rows.map((r,i)=>pad.l+pw*(useTimeAxis?(rowTimes[i]-minTime)/(maxTime-minTime):(rows.length<=1?.5:i/(rows.length-1))));
  const visibleValues=rows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
- let dataMin=visibleValues.length?Math.min(...visibleValues):0;
- let dataMax=visibleValues.length?Math.max(...visibleValues):10;
- let spread=dataMax-dataMin;
- if(spread<1)spread=Math.max(5,Math.abs(dataMax)*0.2);
- const margin=Math.max(1,spread*0.16);
- let yMin=Math.floor((dataMin-margin)/5)*5;
- let yMax=Math.ceil((dataMax+margin)/5)*5;
- if(yMax-yMin<10){yMin-=5;yMax+=5;}
- // Keep the baseline at zero when it is close to the data, but zoom in for low-valued data.
- const range=yMax-yMin;
- const rawStep=range/4;
- const tickStep=rawStep<=5?Math.max(1,Math.ceil(rawStep)):Math.ceil(rawStep/5)*5;
- const tickStart=Math.ceil(yMin/tickStep)*tickStep;
- let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд параметров за ${rows.length} точек, автошкала от ${yMin} до ${yMax}"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
- for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="3 5"/>`;svg+=`<text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${Number(tick.toFixed(2))}</text>`}
+ let dataMin=visibleValues.length?Math.min(...visibleValues):0,dataMax=visibleValues.length?Math.max(...visibleValues):10,spread=dataMax-dataMin;
+ if(spread<1)spread=Math.max(5,Math.abs(dataMax)*.2);const margin=Math.max(1,spread*.16);
+ let yMin=Math.floor((dataMin-margin)/5)*5,yMax=Math.ceil((dataMax+margin)/5)*5;if(yMax-yMin<10){yMin-=5;yMax+=5}
+ const range=yMax-yMin,rawStep=range/4,tickStep=rawStep<=5?Math.max(1,Math.ceil(rawStep)):Math.ceil(rawStep/5)*5,tickStart=Math.ceil(yMin/tickStep)*tickStep;
+ let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд по ${rows.length} уникальным измерениям с временем источника"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+ for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="3 5"/><text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${Number(tick.toFixed(2))}</text>`}
  for(let i=0;i<5;i++){const x=pad.l+pw*i/4;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#24313d" stroke-width="1" stroke-dasharray="3 6"/>`}
- const pointsBySeries={};
- for(const key of visibleSeries){const series=SERIES[key];const vals=rows.map((r,i)=>({i,v:series.get(r.measurements||{})})).filter(p=>Number.isFinite(p.v));if(!vals.length)continue;
-    // Preserve actual values; smooth cubic curves, animated path morphing, and a subtle colored glow.
-    const coords=vals.map(p=>({x:pad.l+pw*(rows.length<=1?0.5:p.i/(rows.length-1)),y:pad.t+ph*(1-(p.v-yMin)/(yMax-yMin)),v:p.v,i:p.i}));pointsBySeries[key]=coords;
-   let path='';if(coords.length){path=`M ${coords[0].x} ${coords[0].y}`;for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}}
-   if(coords.length>1)svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4.5" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color};stroke-dasharray:2000;stroke-dashoffset:0"><animate attributeName="opacity" from=".75" to="1" dur=".35s" fill="freeze"/></path>`;
+ // Each source sample is drawn once. Missing readings and long timestamp gaps break the line instead of implying measurements existed.
+ for(const key of visibleSeries){
+  const series=SERIES[key],allPoints=rows.map((r,i)=>({i,x:rowXs[i],v:series.get(r.measurements||{}),t:rowTimes[i]}));
+  const segments=[];let segment=[];
+  for(const point of allPoints){
+   if(!Number.isFinite(point.v)){if(segment.length)segments.push(segment);segment=[];continue}
+   const prev=segment.length?segment[segment.length-1]:null;
+   if(prev&&Number.isFinite(point.t)&&Number.isFinite(prev.t)&&point.t-prev.t>MAX_TREND_GAP_MS){segments.push(segment);segment=[]}
+   segment.push({...point,y:pad.t+ph*(1-(point.v-yMin)/(yMax-yMin))})
+  }
+  if(segment.length)segments.push(segment);
+  for(const coords of segments){
+   if(coords.length>1){let path=`M ${coords[0].x} ${coords[0].y}`;for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}
+    svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4.5" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color};stroke-dasharray:2000;stroke-dashoffset:0"><animate attributeName="opacity" from=".75" to="1" dur=".35s" fill="freeze"/></path>`
+   }
    for(const point of coords)svg+=`<circle cx="${point.x}" cy="${point.y}" r="${coords.length===1?4:2.5}" fill="${series.color}" stroke="#0b1118" stroke-width="1.2"/>`;
+  }
  }
- svg+=`<text x="${pad.l}" y="${h-8}" fill="#8193a3" font-size="10">${esc(rows[0].source_time_raw||'Начало')}</text><text x="${w-pad.r}" y="${h-8}" text-anchor="end" fill="#8193a3" font-size="10">${esc(rows[rows.length-1].source_time_raw||'Сейчас')}</text></svg>`;
- const old=plot.querySelector('svg');const holder=document.createElement('div');holder.innerHTML=svg;const next=holder.firstElementChild;if(old)old.replaceWith(next);else plot.insertBefore(next,tooltip);
- next.addEventListener('mousemove',ev=>{const rect=next.getBoundingClientRect(),x=(ev.clientX-rect.left)/Math.max(1,rect.width)*w;let idx=Math.round((x-pad.l)/pw*(rows.length-1));idx=Math.max(0,Math.min(rows.length-1,idx));const row=rows[idx],m=row.measurements||{};const lines=Object.entries(SERIES).filter(([k])=>visibleSeries.has(k)).map(([k,ser])=>`<div><span style="color:${ser.color}">●</span> ${ser.label}: <b>${esc(fmt(ser.get(m)))}</b></div>`).join('');tooltip.innerHTML=`<b>${esc(row.source_time_raw||row.event_time_utc||('Точка '+(idx+1)))}</b>${lines}`;tooltip.style.display='block';tooltip.style.left=Math.min(Math.max(8,ev.clientX-rect.left+12),Math.max(8,rect.width-185))+'px';tooltip.style.top='10px'});
+ svg+=`<text x="${pad.l}" y="${h-8}" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[0])||'')}</text><text x="${w-pad.r}" y="${h-8}" text-anchor="end" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[rows.length-1])||'')}</text></svg>`;
+ const old=plot.querySelector('svg'),holder=document.createElement('div');holder.innerHTML=svg;const next=holder.firstElementChild;if(old)old.replaceWith(next);else plot.insertBefore(next,tooltip);
+ next.addEventListener('mousemove',ev=>{const rect=next.getBoundingClientRect(),x=(ev.clientX-rect.left)/Math.max(1,rect.width)*w;let idx=0,best=Infinity;for(let i=0;i<rowXs.length;i++){const d=Math.abs(rowXs[i]-x);if(d<best){best=d;idx=i}}const row=rows[idx],m=row.measurements||{},lines=Object.entries(SERIES).filter(([k])=>visibleSeries.has(k)).map(([k,ser])=>`<div><span style="color:${ser.color}">●</span> ${ser.label}: <b>${esc(fmt(ser.get(m)))}</b></div>`).join('');tooltip.innerHTML=`<b>${esc(AELABSHistory.sourceTimeLabel(row)||'Время отсутствует')}</b>${lines}`;tooltip.style.display='block';tooltip.style.left=Math.min(Math.max(8,ev.clientX-rect.left+12),Math.max(8,rect.width-185))+'px';tooltip.style.top='10px'});
  next.addEventListener('mouseleave',()=>{if(!trendDrag)tooltip.style.display='none'});
 }
 
 const trendPlot=$('trendPlot');
 trendPlot.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;trendDrag={x:ev.clientX,offset:trendOffset,pointerId:ev.pointerId};trendPlot.classList.add('dragging');try{trendPlot.setPointerCapture(ev.pointerId)}catch(_){}});
-trendPlot.addEventListener('pointermove',ev=>{if(!trendDrag)return;const dx=ev.clientX-trendDrag.x;const step=Math.round(-dx/Math.max(1,trendPlot.clientWidth)*TREND_WINDOW);const allRows=historyItems.filter(x=>x.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);const next=Math.max(0,Math.min(maxOffset,trendDrag.offset+step));if(next!==trendOffset){trendAutoFollow=false;trendOffset=next;updateTrendFollowButton();drawTrend()}});
+trendPlot.addEventListener('pointermove',ev=>{if(!trendDrag)return;const dx=ev.clientX-trendDrag.x;const step=Math.round(-dx/Math.max(1,trendPlot.clientWidth)*TREND_WINDOW);const allRows=historyItems.filter(x=>x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);const next=Math.max(0,Math.min(maxOffset,trendDrag.offset+step));if(next!==trendOffset){trendAutoFollow=false;trendOffset=next;updateTrendFollowButton();drawTrend()}});
 function endTrendDrag(){trendDrag=null;trendPlot.classList.remove('dragging')}
 trendPlot.addEventListener('pointerup',endTrendDrag);trendPlot.addEventListener('pointercancel',endTrendDrag);trendPlot.addEventListener('lostpointercapture',endTrendDrag);
 function updateTrendFollowButton(){const b=$('trendFollow');if(!b)return;b.textContent=trendAutoFollow?'● Автопрокрутка: ВКЛ':'○ Автопрокрутка: ВЫКЛ';b.classList.toggle('off',!trendAutoFollow)}
 setInterval(updatePcLink,1000);updatePcLink();
 $('trendFollow').addEventListener('click',()=>{trendAutoFollow=!trendAutoFollow;if(trendAutoFollow)trendOffset=0;updateTrendFollowButton();drawTrend()});
 document.querySelectorAll('.trend-toggle').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.series;if(visibleSeries.has(k)){visibleSeries.delete(k);b.classList.remove('active')}else{visibleSeries.add(k);b.classList.add('active')}drawTrend()}));
-window.addEventListener('resize',()=>drawTrend());$('refresh').addEventListener('click',refresh);refresh();setInterval(refresh,5000);
+window.addEventListener('resize',()=>drawTrend());$('refresh').addEventListener('click',()=>{refresh();refreshHistoryFromServer()});refresh();setInterval(refresh,5000);setInterval(refreshHistoryFromServer,15000);
 </script></body></html>
