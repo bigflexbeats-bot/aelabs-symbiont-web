@@ -35,6 +35,16 @@ class ThemePickerTests(unittest.TestCase):
         duplicates = [key for key, count in Counter(self.parser.ids).items() if count > 1]
         self.assertEqual(duplicates, [])
 
+
+    def test_aero_theme_uses_reference_wallpaper_and_glass_surfaces(self):
+        self.assertIn("url('/frutiger-aero-wallpaper.webp')", self.source)
+        self.assertIn('backdrop-filter:blur(28px) saturate(180%)', self.source)
+        self.assertTrue((HTML.parent / 'frutiger-aero-wallpaper.webp').is_file())
+
+    def test_other_themes_remain_separately_scoped(self):
+        self.assertIn('html.theme-classic', self.source)
+        self.assertIn("classList.add('theme-russian')", self.source)
+
     def test_monitoring_elements_remain_present(self):
         for required in ('id="trendPlot"', 'id="historyRows"', 'id="refresh"', 'id="repoStatus"', 'function drawTrend'):
             self.assertIn(required, self.source)
