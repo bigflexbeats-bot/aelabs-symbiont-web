@@ -24,8 +24,8 @@ class ThemePickerTests(unittest.TestCase):
         cls.parser = ThemeMarkupParser()
         cls.parser.feed(cls.source)
 
-    def test_three_theme_choices_are_present(self):
-        self.assertEqual(set(self.parser.theme_choices), {'russian', 'classic', 'aero'})
+    def test_two_theme_choices_are_present(self):
+        self.assertEqual(set(self.parser.theme_choices), {'classic', 'aero'})
 
     def test_theme_is_persisted_and_restored(self):
         self.assertIn("localStorage.setItem('aelabs-web-theme', theme)", self.source)
@@ -43,7 +43,14 @@ class ThemePickerTests(unittest.TestCase):
 
     def test_other_themes_remain_separately_scoped(self):
         self.assertIn('html.theme-classic', self.source)
-        self.assertIn("classList.add('theme-russian')", self.source)
+        self.assertIn("classList.add('theme-classic')", self.source)
+        self.assertIn("? saved : 'classic'", self.source)
+
+    def test_nonproduction_decorations_are_removed(self):
+        self.assertNotIn('bearJoke', self.source)
+        self.assertNotIn('supportAftercare', self.source)
+        self.assertNotIn('national-showcase', self.source)
+        self.assertNotIn('patriot-parade', self.source)
 
     def test_monitoring_elements_remain_present(self):
         for required in ('id="trendPlot"', 'id="historyRows"', 'id="refresh"', 'id="repoStatus"', 'function drawTrend'):
