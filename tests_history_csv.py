@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timedelta
 from history_csv import parse_github_log_csv
 
 CANONICAL_HEADER = ';'.join([
@@ -50,6 +51,36 @@ class GithubLogCsvTests(unittest.TestCase):
         content=CANONICAL_HEADER+'\n'+';'.join(['DS-01.01','','Asia/Yekaterinburg','','="2026-10-20T09:05:14Z"','exp-1','run-1','16,123456','1200,00','250,00','300,00','16,123456','7,05','7,00','24,50','80,00','600,00','600,00'])
         got=parse_github_log_csv(content)
         self.assertEqual(got['count'],0)
+
+    def test_default_limit_keeps_more_than_500_historical_points(self):
+        start = datetime(2026, 10, 20, 14, 0, 0)
+        rows = [CANONICAL_HEADER]
+        for i in range(650):
+            t = start + timedelta(seconds=30 * i)
+            source = t.strftime('%d.%m.%Y %H:%M:%S')
+            event = t.strftime('%Y-%m-%dT%H:%M:%SZ')
+            received = (t + timedelta(seconds=4)).strftime('%Y-%m-%dT%H:%M:%SZ')
+            rows.append(csv_row(source, event, received, ph=f'{7 + i / 10000:.4f}'.replace('.', ',')))
+        got = parse_github_log_csv('\n'.join(rows))
+        self.assertEqual(got['count'], 650, 'history API must retain more than the former 500-row cap')
+
+    def test_large_history_is_sampled_across_full_time_span(self):
+        start = datetime(2026, 10, 20, 14, 0, 0)
+        rows = [CANONICAL_HEADER]
+        total = 5000
+        for i in range(total):
+            t = start + timedelta(seconds=2 * i)
+            source = t.strftime('%d.%m.%Y %H:%M:%S')
+            event = t.strftime('%Y-%m-%dT%H:%M:%SZ')
+            received = (t + timedelta(seconds=1)).strftime('%Y-%m-%dT%H:%M:%SZ')
+            rows.append(csv_row(source, event, received, ph=f'{6.5 + (i % 500) / 1000:.3f}'.replace('.', ',')))
+        got = parse_github_log_csv('\n'.join(rows))
+        self.assertEqual(got['count'], total, 'count describes the entire source history')
+        self.assertLessEqual(len(got['items']), 2400, 'trend payload is bounded for rendering performance')
+        self.assertEqual(got['items'][0]['source_time_raw'], start.strftime('%d.%m.%Y %H:%M:%S'))
+        self.assertEqual(got['items'][-1]['source_time_raw'], (start + timedelta(seconds=2 * (total - 1))).strftime('%d.%m.%Y %H:%M:%S'))
+        self.assertEqual(len(got['recent_items']), 100)
+        self.assertEqual(got['recent_items'][-1]['source_time_raw'], got['items'][-1]['source_time_raw'])
 
     def test_legacy_csv_maps_do_mg_l(self):
         header='event_time_utc;received_at_utc;source_time_raw;source_timezone;observation_no;source_id;experiment_id;run_id;ph;temperature_c;do_mg_l;rpm;offgas_do_pct;microcheck_od'

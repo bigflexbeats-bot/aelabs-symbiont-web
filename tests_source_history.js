@@ -31,6 +31,10 @@ assert.equal(H.sourceTimestampMs({ source_time_raw: 'bad timestamp', received_at
 const html = fs.readFileSync(require('node:path').join(__dirname, 'static', 'index.html'), 'utf8');
 assert.ok(!html.includes('client_sample_ms'), 'browser polling timestamps must not be stored as measurement times');
 assert.ok(!html.includes('received_at_utc||'), 'receipt time must not be used as a trend fallback');
-assert.ok(html.includes('MAX_TREND_GAP_MS=30000'), 'large source-time gaps must be represented as line breaks');
+assert.ok(!html.includes('MAX_TREND_GAP_MS'), 'elapsed time must not split the line after a long pause');
+assert.ok(html.includes('MAX_HISTORY_ITEMS=20000'), 'trend must load a long persistent history, not only 50 samples');
+assert.ok(html.includes('downsampleTrendRows'), 'large histories are visually reduced without discarding the full history source');
+assert.ok(!html.includes('for(const point of coords)svg+=`<circle'), 'trend must not draw sample dots');
+assert.ok(html.includes('a long pause') && html.includes('does not sever the trend line'), 'long gaps keep the trend continuous');
 assert.ok(html.includes('setValIfReadable'), 'empty sensor fields should preserve last readable values');
 console.log('source-history tests passed');

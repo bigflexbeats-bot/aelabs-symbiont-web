@@ -12,24 +12,73 @@
 .alarm-item.info{color:#d9eaff}.alarm-item.info .alarm-icon{background:#1b3551;color:#83baff}
 .alarm-empty{padding:13px 14px;color:var(--green);font-size:12px}
 .trend-card{margin-top:14px;padding:18px}.trend-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}.trend-head h2{margin:0;font-size:15px}.trend-head p{margin:5px 0 0;color:var(--muted);font-size:11px}
-.trend-controls{display:flex;gap:7px;flex-wrap:wrap}.trend-plot{cursor:grab;touch-action:none;user-select:none}.trend-plot.dragging{cursor:grabbing}.trend-plot svg{will-change:transform,opacity}.trend-plot svg.trend-enter{animation:trendSlideIn .42s cubic-bezier(.2,.75,.25,1) both}@keyframes trendSlideIn{from{opacity:.48;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}.trend-follow{border:1px solid #39776f;background:#14312f;color:#8df0df;padding:7px 11px;border-radius:999px;font-size:11px;cursor:pointer}.trend-follow.off{border-color:#6d5731;background:#302718;color:#ffd18a}.trend-toggle{border:1px solid var(--line);background:#101720;color:var(--muted);padding:7px 10px;border-radius:999px;font-size:11px;cursor:pointer}.trend-toggle.active{color:var(--text);border-color:#567080;background:#1b2b38}
+.trend-controls{display:flex;gap:7px;flex-wrap:wrap}.trend-plot{cursor:crosshair;touch-action:pan-y;user-select:none}.trend-plot svg{display:block}.trend-toggle{border:1px solid var(--line);background:#101720;color:var(--muted);padding:7px 10px;border-radius:999px;font-size:11px;cursor:pointer}.trend-toggle.active{color:var(--text);border-color:#567080;background:#1b2b38}
 .trend-toggle[data-series="ph"].active{border-color:#4fd18b}.trend-toggle[data-series="do"].active{border-color:#5da9e9}.trend-toggle[data-series="od"].active{border-color:#b17aff}.trend-toggle[data-series="temp"].active{border-color:#ff6468}
 .trend-plot{position:relative;margin-top:12px;height:300px;border:1px solid #24313d;border-radius:10px;overflow:hidden;background:repeating-linear-gradient(to bottom,transparent 0,transparent 59px,#25323e 60px),linear-gradient(180deg,#0d141c,#0b1118)}
 .trend-plot svg{width:100%;height:100%;display:block;overflow:visible}.trend-plot svg .trend-line{transition:opacity .35s ease}.trend-plot svg .trend-glow{opacity:.42;filter:url(#trendGlow)}.trend-plot svg .trend-main{filter:drop-shadow(0 0 2px var(--series-glow, transparent))}.trend-tooltip{position:absolute;display:none;pointer-events:none;z-index:2;background:#080d13ee;border:1px solid #3b4c5b;border-radius:8px;padding:8px 10px;font-size:11px;box-shadow:0 8px 24px #0008;white-space:nowrap}
 .trend-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:11px}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
 .trend-empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
 @media(max-width:520px){.trend-plot{height:240px}.alarm-item{padding:10px}}
-</style></head><body><header><div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small>Live Monitor</small></div></div><div class="topright"><span><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div></header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero"><div><div class="eyebrow">REAL-TIME DATA / DS-01.01</div><h1>AELABS WEB</h1></div><div class="pill">Синхронизация каждые 5 секунд</div></div><div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Тренд параметров</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button><button class="trend-follow" id="trendFollow" type="button">● Автопрокрутка: ВКЛ</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span>AELABS SYMBIONT WEB · READ-ONLY MONITORING</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script src="/source-history.js"></script><script>
+
+/* Playful sliding bear surprise on each site visit */
+.bear-joke{position:fixed;left:14px;top:50%;z-index:30;width:clamp(158px,19vw,238px);padding:10px;border:1px solid #455866;border-radius:16px;background:linear-gradient(155deg,#17232dF5,#0b1118F7);box-shadow:0 18px 50px #0009,0 0 24px #5ce1d022;backdrop-filter:blur(12px);opacity:0;transform:translate(-125%,-50%);animation:bear-joke-enter .9s cubic-bezier(.2,.85,.2,1.15) .35s forwards}
+.bear-joke-tag{padding:3px 26px 9px 2px;color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;line-height:1.35}
+.bear-joke img{display:block;width:100%;height:auto;max-height:55vh;object-fit:contain;object-position:center;border-radius:10px;background:#101720}
+.bear-joke-caption{display:flex;flex-direction:column;gap:3px;padding:10px 3px 2px}
+.bear-joke-caption strong{font-size:12px;color:#fff;letter-spacing:.01em}
+.bear-joke-caption span{font-size:11px;line-height:1.4;color:#aebdca}
+.bear-joke-close{position:absolute;top:7px;right:7px;z-index:2;width:27px;height:27px;display:grid;place-items:center;border:1px solid #546674;border-radius:50%;background:#0b1118ed;color:#f1f6fa;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 3px 12px #0006;transition:background .18s,transform .18s,border-color .18s}
+.bear-joke-close:hover{background:#59333a;border-color:#ff7e88;transform:scale(1.08)}
+.bear-joke.is-closing{animation:bear-joke-exit .42s cubic-bezier(.4,0,.8,.25) forwards;pointer-events:none}
+@keyframes bear-joke-enter{0%{opacity:0;transform:translate(-125%,-50%) rotate(-5deg)}68%{opacity:1;transform:translate(9px,-50%) rotate(1.5deg)}84%{transform:translate(-3px,-50%) rotate(-.5deg)}100%{opacity:1;transform:translate(0,-50%) rotate(0)}}
+@keyframes bear-joke-exit{0%{opacity:1;transform:translate(0,-50%) rotate(0)}100%{opacity:0;transform:translate(-125%,-50%) rotate(-4deg)}}
+@media(max-width:520px){.bear-joke{left:8px;top:auto;bottom:9px;width:clamp(128px,43vw,170px);padding:7px;border-radius:12px;transform:translate(-125%,0);animation-name:bear-joke-enter-mobile}.bear-joke.is-closing{animation-name:bear-joke-exit-mobile}.bear-joke img{max-height:31vh}.bear-joke-tag{font-size:8px;padding-bottom:6px}.bear-joke-caption{padding:7px 2px 1px}.bear-joke-caption strong{font-size:11px}.bear-joke-caption span{font-size:10px}.bear-joke-close{top:5px;right:5px;width:25px;height:25px}}
+@keyframes bear-joke-enter-mobile{0%{opacity:0;transform:translate(-125%,0) rotate(-5deg)}68%{opacity:1;transform:translate(7px,0) rotate(1.5deg)}84%{transform:translate(-2px,0) rotate(-.5deg)}100%{opacity:1;transform:translate(0,0) rotate(0)}}
+@keyframes bear-joke-exit-mobile{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(-125%,0) rotate(-4deg)}}
+@media(prefers-reduced-motion:reduce){.bear-joke{animation-duration:.01ms;animation-delay:0ms}.bear-joke.is-closing{animation-duration:.01ms}}
+
+/* Gentle, dismissible support note appears only after the bear is closed. */
+.support-aftercare{position:fixed;left:16px;bottom:16px;z-index:29;width:min(380px,calc(100vw - 32px));padding:15px 16px 14px;border:1px solid #3f5964;border-radius:14px;background:linear-gradient(150deg,#17232df7,#0b1118f8);box-shadow:0 16px 45px #0009;backdrop-filter:blur(12px);color:var(--text);opacity:0;transform:translate(-24px,12px);pointer-events:none}
+.support-aftercare[hidden]{display:none!important}.support-aftercare.is-visible{animation:support-aftercare-enter .38s cubic-bezier(.2,.8,.2,1) forwards;pointer-events:auto}
+.support-aftercare-head{display:flex;align-items:center;gap:8px;padding-right:26px;margin:0 0 7px;color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.support-aftercare p{margin:0 0 9px;color:#d2dde5;font-size:12px;line-height:1.5}.support-aftercare strong{color:#fff}
+.support-aftercare a{color:#80e4d6;text-decoration:underline;text-underline-offset:2px}.support-aftercare .support-links{display:flex;flex-direction:column;gap:6px;padding-top:3px;font-size:12px}
+.support-aftercare-close{position:absolute;top:8px;right:8px;width:25px;height:25px;display:grid;place-items:center;border:1px solid #546674;border-radius:50%;background:#0b1118ed;color:#f1f6fa;font-size:18px;line-height:1;cursor:pointer}
+.support-aftercare-close:hover{background:#263b46;border-color:#80e4d6}
+@keyframes support-aftercare-enter{from{opacity:0;transform:translate(-24px,12px)}to{opacity:1;transform:translate(0,0)}}
+@media(max-width:520px){.support-aftercare{left:8px;bottom:9px;width:calc(100vw - 16px);padding:13px 14px}.support-aftercare p{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.support-aftercare.is-visible{animation-duration:.01ms}}
+
+</style></head><body>
+<aside id="bearJoke" class="bear-joke" aria-label="Сюрприз отдела моральной поддержки">
+<button id="bearJokeClose" class="bear-joke-close" type="button" aria-label="Закрыть медведя" title="Закрыть">×</button>
+<div class="bear-joke-tag">Аварийная смехоподдержка</div>
+<img src="/surprise-bear.png" alt="Плюшевый медведь пристально наблюдает за биопроцессом">
+<div class="bear-joke-caption"><strong>Аудит пройден.</strong><span>Медведь следит за ферментацией. Не подведи.</span></div>
+</aside>
+<aside id="supportAftercare" class="support-aftercare" role="status" aria-live="polite" aria-label="Информация о психологической поддержке" hidden>
+  <button id="supportAftercareClose" class="support-aftercare-close" type="button" aria-label="Закрыть сообщение поддержки" title="Закрыть">×</button>
+  <div class="support-aftercare-head">🧸 Шутки шутками — береги себя</div>
+  <p>Медведь ушёл, тревожный аудит завершён. Если эта шутка задела не только нервную систему интерфейса — сделай паузу. <strong>Тебе не обязательно справляться в одиночку.</strong></p>
+  <div class="support-links">
+    <a href="tel:+74959895050">Россия: психологическая помощь МЧС — +7 (495) 989-50-50</a>
+    <span>Линия работает круглосуточно, анонимно и бесплатно; междугородняя связь может оплачиваться отдельно.</span>
+    <a href="https://psi.mchs.gov.ru/" target="_blank" rel="noopener noreferrer">Онлайн-служба экстренной психологической помощи МЧС России</a>
+    <a href="https://mchs.gov.ru/contacts/spisok-edinyh-telefonov-doveriya-po-subektam-rf" target="_blank" rel="noopener noreferrer">Телефоны доверия МЧС по регионам России</a>
+    <span>Если есть непосредственная опасность для жизни — звони <a href="tel:112">112</a>.</span>
+  </div>
+</aside>
+<header><div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small>Live Monitor</small></div></div><div class="topright"><span><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div></header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero"><div><div class="eyebrow">REAL-TIME DATA / DS-01.01</div><h1>AELABS WEB</h1></div><div class="pill">Синхронизация каждые 5 секунд</div></div><div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Непрерывная история измерений по времени источника</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span>AELABS SYMBIONT WEB · READ-ONLY MONITORING</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script src="/source-history.js"></script><script>
 const $=id=>document.getElementById(id);
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
 function setVal(id,v){$(id).textContent=fmt(v)}
 function setValIfReadable(id,v){if(v!==null&&v!==undefined&&!(typeof v==='string'&&!v.trim()))setVal(id,v)}
-let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],latestObservation=null,historyInitialized=false,refreshInFlight=false,historyFetchInFlight=false,historySourceMode='detecting',historyDoUnits='mg_l';
-// v2 intentionally drops the old browser-generated polling samples. Only source-timestamped Git observations are kept.
+let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],historyTableItems=[],historyTotalCount=0,latestObservation=null,historyInitialized=false,refreshInFlight=false,historyFetchInFlight=false,historySourceMode='detecting',historyDoUnits='mg_l';
+// The Git LOG CSV is the durable source of truth. The browser cache is only a fallback.
 const TREND_STORAGE_KEY='aelabs_live_trend_v2_source_time';
-try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object'&&x._source_key&&AELABSHistory.sourceTimeLabel(x)).slice(-500)}catch(_){historyItems=[]}
-let trendAutoFollow=true,trendOffset=0,trendDrag=null,trendLastRenderKey='';const TREND_WINDOW=50;
-const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000,MAX_TREND_GAP_MS=30000;
+const MAX_HISTORY_ITEMS=20000,MAX_LOCAL_CACHE_ITEMS=5000,MAX_TREND_RENDER_POINTS=2400;
+try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object'&&x._source_key&&AELABSHistory.sourceTimeLabel(x)).slice(-MAX_LOCAL_CACHE_ITEMS)}catch(_){historyItems=[]}
+const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000;
 function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObservation);if(Number.isFinite(sourceMs)&&sourceMs<=Date.now()+5*60*1000)return Math.max(0,Date.now()-sourceMs);return Math.max(0,Date.now()-lastRecordChangeAt)}
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
 function scaleName(o,index){
@@ -111,13 +160,16 @@ async function refreshHistoryFromServer(){
    historySourceMode='github-csv';historyDoUnits=payload.do_units==='pct'?'pct':'mg_l';updateHistoryLabels();
    if(!response.ok||payload.error){$('historyStatus').textContent='GIT LOG: '+(payload.error||('HTTP '+response.status));$('repoStatus').textContent='WEB JSON доступен · ошибка чтения GIT LOG CSV';return}
    const sourceItems=Array.isArray(payload.items)?payload.items:[];
-   historyItems=sourceItems.map(item=>({...item,_source_key:AELABSHistory.sourceRecordKey(item)})).filter(item=>item._source_key&&AELABSHistory.sourceTimeLabel(item)&&item.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(item.measurements)!==null)).slice(-500);
-   try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* optional local cache */}
-   $('historyStatus').textContent=`GIT LOG · ${historyItems.length} уникальных показаний · ${payload.repo||'CSV'}`;
+   historyItems=sourceItems.map(item=>({...item,_source_key:AELABSHistory.sourceRecordKey(item)})).filter(item=>item._source_key&&AELABSHistory.sourceTimeLabel(item)&&item.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(item.measurements)!==null)).slice(-MAX_HISTORY_ITEMS);
+   historyTableItems=Array.isArray(payload.recent_items)?payload.recent_items:historyItems.slice(-100);
+   historyTotalCount=Number.isFinite(Number(payload.count))?Number(payload.count):historyItems.length;
+   persistTrendCache();
+   $('historyStatus').textContent=`GIT LOG · ${historyTotalCount} исходных записей · ${historyItems.length} точек тренда · ${payload.repo||'CSV'}`;
   }else if(payload.storage==='browser-local'){
    if(historySourceMode!=='github-csv'){
     historySourceMode='browser-local';updateHistoryLabels();
     if(latestObservation)mergeLatestIntoHistory();
+    historyTableItems=historyItems;historyTotalCount=historyItems.length;
     $('historyStatus').textContent=historyItems.length+' уникальных показаний с временной меткой источника · локально';
    }
   }else if(!response.ok){throw new Error(payload.error||('HTTP '+response.status))}
@@ -128,10 +180,43 @@ async function refreshHistoryFromServer(){
  }finally{historyFetchInFlight=false}
 }
 function renderHistoryTable(){
- if(!$('historyRows'))return;$('historyCount').textContent=historyItems.length+' записей';
- if(!historyItems.length){$('historyRows').innerHTML='<tr><td colspan="5" class="empty">Ожидание новых показаний со временем источника…</td></tr>';return}
- $('historyRows').innerHTML=historyItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(AELABSHistory.sourceTimeLabel(x)||'—')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td></tr>`}).join('')
+ if(!$('historyRows'))return;const tableItems=historySourceMode==='github-csv'?historyTableItems:historyItems;$('historyCount').textContent=(historyTotalCount||tableItems.length)+' записей';
+ if(!tableItems.length){$('historyRows').innerHTML='<tr><td colspan="5" class="empty">Ожидание новых показаний со временем источника…</td></tr>';return}
+ $('historyRows').innerHTML=tableItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(AELABSHistory.sourceTimeLabel(x)||'—')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td></tr>`}).join('')
 }
+function persistTrendCache(){
+ try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems.slice(-MAX_LOCAL_CACHE_ITEMS)))}catch(_){/* localStorage is only a fallback; Git LOG remains authoritative */}
+}
+function axisTimeLabel(row, timestamp, includeDate){
+ const raw=String(AELABSHistory.sourceTimeLabel(row)||'');
+ const local=/^(\d{1,2}[./-]\d{1,2}[./-]\d{4})[ T,]+(\d{1,2}:\d{2})(?::\d{2})?/.exec(raw);
+ if(local)return includeDate?`${local[1].slice(0,5)} ${local[2]}`:local[2];
+ const iso=/^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(raw);
+ if(iso)return includeDate?`${iso[3]}.${iso[2]} ${iso[4]}:${iso[5]}`:`${iso[4]}:${iso[5]}`;
+ if(Number.isFinite(timestamp)){
+  const d=new Date(timestamp),time=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',hour12:false});
+  return includeDate?`${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${time}`:time;
+ }
+ return raw;
+}
+function downsampleTrendRows(rows,limit=MAX_TREND_RENDER_POINTS){
+ if(rows.length<=limit)return rows;
+ const keys=[...visibleSeries],bucketCount=Math.max(1,Math.floor((limit-2)/(2*keys.length+2))),selected=new Set([0,rows.length-1]);
+ for(let b=0;b<bucketCount;b++){
+  const start=Math.floor(b*rows.length/bucketCount),end=Math.max(start+1,Math.floor((b+1)*rows.length/bucketCount));
+  selected.add(start);selected.add(Math.min(rows.length-1,end-1));
+  for(const key of keys){
+   let minIndex=-1,maxIndex=-1,minValue=Infinity,maxValue=-Infinity;
+   for(let i=start;i<end;i++){
+    const value=SERIES[key]?.get(rows[i].measurements||{});if(!Number.isFinite(value))continue;
+    if(value<minValue){minValue=value;minIndex=i}if(value>maxValue){maxValue=value;maxIndex=i}
+   }
+   if(minIndex>=0)selected.add(minIndex);if(maxIndex>=0)selected.add(maxIndex);
+  }
+ }
+ return [...selected].sort((a,b)=>a-b).map(i=>rows[i]);
+}
+
 function mergeLatestIntoHistory(){
  if(!latestObservation)return;
  const o=latestObservation,m=o.measurements||{},sourceKey=AELABSHistory.sourceRecordKey(o),sourceTime=AELABSHistory.sourceTimeLabel(o);
@@ -141,8 +226,9 @@ function mergeLatestIntoHistory(){
  if(historyItems.some(x=>x._source_key===sourceKey)){$('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника';return}
  const row={observation_no:o.observation_no,source_time_raw:o.source_time_raw||null,event_time_utc:o.event_time_utc||null,source_timezone:o.source_timezone||null,source_timestamp_ms:AELABSHistory.sourceTimestampMs(o),_source_key:sourceKey,measurements:{...m}};
  historyItems.push(row);
- if(historyItems.length>500)historyItems=historyItems.slice(-500);
- try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* local storage is optional */}
+ historyItems.sort((a,b)=>{const ta=AELABSHistory.sourceTimestampMs(a),tb=AELABSHistory.sourceTimestampMs(b);return Number.isFinite(ta)&&Number.isFinite(tb)?ta-tb:0});
+ if(historyItems.length>MAX_LOCAL_CACHE_ITEMS)historyItems=historyItems.slice(-MAX_LOCAL_CACHE_ITEMS);
+ persistTrendCache();
  $('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника'
 }
 
@@ -152,53 +238,91 @@ function drawTrend(){
  let allRows=historyItems.filter(x=>x&&x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));
  const allTimes=allRows.map(x=>AELABSHistory.sourceTimestampMs(x));
  if(allTimes.length&&allTimes.every(Number.isFinite))allRows=allRows.map((r,i)=>({r,t:allTimes[i]})).sort((a,b)=>a.t-b.t).map(x=>x.r);
- const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);trendOffset=trendAutoFollow?0:Math.max(0,Math.min(maxOffset,trendOffset));
- const end=allRows.length-trendOffset,rows=allRows.slice(Math.max(0,end-TREND_WINDOW),end);
- if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание новых измерений с временем из исходного файла…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
- const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:42,r:16,t:18,b:30},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
- const rowTimes=rows.map(r=>AELABSHistory.sourceTimestampMs(r)),useTimeAxis=rowTimes.every(Number.isFinite)&&rowTimes.length>1&&Math.max(...rowTimes)>Math.min(...rowTimes);
- const minTime=useTimeAxis?Math.min(...rowTimes):0,maxTime=useTimeAxis?Math.max(...rowTimes):0;
+ const rows=downsampleTrendRows(allRows);
+ if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание истории измерений из GIT LOG CSV…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
+ const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:46,r:14,t:16,b:34},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
+ const rowTimes=rows.map(r=>AELABSHistory.sourceTimestampMs(r)),useTimeAxis=allRows.length>1&&allRows.every(r=>Number.isFinite(AELABSHistory.sourceTimestampMs(r)))&&Math.max(...allTimes)>Math.min(...allTimes);
+ const minTime=useTimeAxis?Math.min(...allTimes):0,maxTime=useTimeAxis?Math.max(...allTimes):0;
  const rowXs=rows.map((r,i)=>pad.l+pw*(useTimeAxis?(rowTimes[i]-minTime)/(maxTime-minTime):(rows.length<=1?.5:i/(rows.length-1))));
- const visibleValues=rows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
- let dataMin=visibleValues.length?Math.min(...visibleValues):0,dataMax=visibleValues.length?Math.max(...visibleValues):10,spread=dataMax-dataMin;
- if(spread<1)spread=Math.max(5,Math.abs(dataMax)*.2);const margin=Math.max(1,spread*.16);
+ const visibleValues=allRows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
+ let dataMin=0,dataMax=10;if(visibleValues.length){dataMin=visibleValues.reduce((a,b)=>Math.min(a,b),Infinity);dataMax=visibleValues.reduce((a,b)=>Math.max(a,b),-Infinity)}let spread=dataMax-dataMin;
+ if(spread<1)spread=Math.max(5,Math.abs(dataMax)*.2);const margin=Math.max(1,spread*.12);
  let yMin=Math.floor((dataMin-margin)/5)*5,yMax=Math.ceil((dataMax+margin)/5)*5;if(yMax-yMin<10){yMin-=5;yMax+=5}
  const range=yMax-yMin,rawStep=range/4,tickStep=rawStep<=5?Math.max(1,Math.ceil(rawStep)):Math.ceil(rawStep/5)*5,tickStart=Math.ceil(yMin/tickStep)*tickStep;
- let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд по ${rows.length} уникальным измерениям с временем источника"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+ let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Непрерывный тренд по ${allRows.length} исходным измерениям"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
  for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="3 5"/><text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${Number(tick.toFixed(2))}</text>`}
- for(let i=0;i<5;i++){const x=pad.l+pw*i/4;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#24313d" stroke-width="1" stroke-dasharray="3 6"/>`}
- // Each source sample is drawn once. Missing readings and long timestamp gaps break the line instead of implying measurements existed.
+ const tickCount=w<500?3:5,spanMs=useTimeAxis?maxTime-minTime:0,includeDate=useTimeAxis&&spanMs>=6*60*60*1000;
+ for(let i=0;i<tickCount;i++){
+  const f=i/(tickCount-1),x=pad.l+pw*f;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#24313d" stroke-width="1" stroke-dasharray="3 6"`+(i===0||i===tickCount-1?'':'')+`/>`;
+  const target=useTimeAxis?minTime+spanMs*f:NaN;let idx=Math.round((rows.length-1)*f);
+  if(useTimeAxis){let best=Infinity;for(let j=0;j<rowTimes.length;j++){const d=Math.abs(rowTimes[j]-target);if(d<best){best=d;idx=j}}}
+  const label=axisTimeLabel(rows[idx],rowTimes[idx],includeDate);svg+=`<text x="${x}" y="${h-10}" text-anchor="${i===0?'start':i===tickCount-1?'end':'middle'}" fill="#8193a3" font-size="9">${esc(label)}</text>`;
+ }
+ // Draw only real source readings. No synthetic samples or point markers; a long pause
+ // in logging leaves a horizontal time gap but does not sever the trend line.
  for(const key of visibleSeries){
-  const series=SERIES[key],allPoints=rows.map((r,i)=>({i,x:rowXs[i],v:series.get(r.measurements||{}),t:rowTimes[i]}));
-  const segments=[];let segment=[];
-  for(const point of allPoints){
-   if(!Number.isFinite(point.v)){if(segment.length)segments.push(segment);segment=[];continue}
-   const prev=segment.length?segment[segment.length-1]:null;
-   if(prev&&Number.isFinite(point.t)&&Number.isFinite(prev.t)&&point.t-prev.t>MAX_TREND_GAP_MS){segments.push(segment);segment=[]}
-   segment.push({...point,y:pad.t+ph*(1-(point.v-yMin)/(yMax-yMin))})
-  }
-  if(segment.length)segments.push(segment);
-  for(const coords of segments){
-   if(coords.length>1){let path=`M ${coords[0].x} ${coords[0].y}`;for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}
-    svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4.5" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color};stroke-dasharray:2000;stroke-dashoffset:0"><animate attributeName="opacity" from=".75" to="1" dur=".35s" fill="freeze"/></path>`
-   }
-   for(const point of coords)svg+=`<circle cx="${point.x}" cy="${point.y}" r="${coords.length===1?4:2.5}" fill="${series.color}" stroke="#0b1118" stroke-width="1.2"/>`;
+  const series=SERIES[key],coords=rows.map((r,i)=>({x:rowXs[i],v:series.get(r.measurements||{}),t:rowTimes[i]})).filter(point=>Number.isFinite(point.v)).map(point=>({...point,y:pad.t+ph*(1-(point.v-yMin)/(yMax-yMin))}));
+  if(coords.length>1){
+   let path=`M ${coords[0].x} ${coords[0].y}`;
+   for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}
+   svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color}"/>`;
   }
  }
- svg+=`<text x="${pad.l}" y="${h-8}" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[0])||'')}</text><text x="${w-pad.r}" y="${h-8}" text-anchor="end" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[rows.length-1])||'')}</text></svg>`;
+ svg+='</svg>';
  const old=plot.querySelector('svg'),holder=document.createElement('div');holder.innerHTML=svg;const next=holder.firstElementChild;if(old)old.replaceWith(next);else plot.insertBefore(next,tooltip);
  next.addEventListener('mousemove',ev=>{const rect=next.getBoundingClientRect(),x=(ev.clientX-rect.left)/Math.max(1,rect.width)*w;let idx=0,best=Infinity;for(let i=0;i<rowXs.length;i++){const d=Math.abs(rowXs[i]-x);if(d<best){best=d;idx=i}}const row=rows[idx],m=row.measurements||{},lines=Object.entries(SERIES).filter(([k])=>visibleSeries.has(k)).map(([k,ser])=>`<div><span style="color:${ser.color}">●</span> ${ser.label}: <b>${esc(fmt(ser.get(m)))}</b></div>`).join('');tooltip.innerHTML=`<b>${esc(AELABSHistory.sourceTimeLabel(row)||'Время отсутствует')}</b>${lines}`;tooltip.style.display='block';tooltip.style.left=Math.min(Math.max(8,ev.clientX-rect.left+12),Math.max(8,rect.width-185))+'px';tooltip.style.top='10px'});
- next.addEventListener('mouseleave',()=>{if(!trendDrag)tooltip.style.display='none'});
+ next.addEventListener('mouseleave',()=>{tooltip.style.display='none'});
 }
 
 const trendPlot=$('trendPlot');
-trendPlot.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;trendDrag={x:ev.clientX,offset:trendOffset,pointerId:ev.pointerId};trendPlot.classList.add('dragging');try{trendPlot.setPointerCapture(ev.pointerId)}catch(_){}});
-trendPlot.addEventListener('pointermove',ev=>{if(!trendDrag)return;const dx=ev.clientX-trendDrag.x;const step=Math.round(-dx/Math.max(1,trendPlot.clientWidth)*TREND_WINDOW);const allRows=historyItems.filter(x=>x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);const next=Math.max(0,Math.min(maxOffset,trendDrag.offset+step));if(next!==trendOffset){trendAutoFollow=false;trendOffset=next;updateTrendFollowButton();drawTrend()}});
-function endTrendDrag(){trendDrag=null;trendPlot.classList.remove('dragging')}
-trendPlot.addEventListener('pointerup',endTrendDrag);trendPlot.addEventListener('pointercancel',endTrendDrag);trendPlot.addEventListener('lostpointercapture',endTrendDrag);
-function updateTrendFollowButton(){const b=$('trendFollow');if(!b)return;b.textContent=trendAutoFollow?'● Автопрокрутка: ВКЛ':'○ Автопрокрутка: ВЫКЛ';b.classList.toggle('off',!trendAutoFollow)}
 setInterval(updatePcLink,1000);updatePcLink();
-$('trendFollow').addEventListener('click',()=>{trendAutoFollow=!trendAutoFollow;if(trendAutoFollow)trendOffset=0;updateTrendFollowButton();drawTrend()});
 document.querySelectorAll('.trend-toggle').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.series;if(visibleSeries.has(k)){visibleSeries.delete(k);b.classList.remove('active')}else{visibleSeries.add(k);b.classList.add('active')}drawTrend()}));
 window.addEventListener('resize',()=>drawTrend());$('refresh').addEventListener('click',()=>{refresh();refreshHistoryFromServer()});refresh();setInterval(refresh,5000);setInterval(refreshHistoryFromServer,15000);
-</script></body></html>
+</script>
+<script>
+(() => {
+  const panel = document.getElementById('bearJoke');
+  const closeButton = document.getElementById('bearJokeClose');
+  const support = document.getElementById('supportAftercare');
+  const supportClose = document.getElementById('supportAftercareClose');
+  if (!panel || !closeButton || !support || !supportClose) return;
+
+  let panelClosing = false;
+  let supportDismissed = false;
+  const showSupport = () => {
+    if (supportDismissed) return;
+    support.hidden = false;
+    // Ensure the browser paints the hidden state before starting the entrance animation.
+    requestAnimationFrame(() => support.classList.add('is-visible'));
+  };
+  const closeSupport = () => {
+    supportDismissed = true;
+    support.classList.remove('is-visible');
+    support.hidden = true;
+  };
+  const closePanel = () => {
+    if (panelClosing || !document.body.contains(panel)) return;
+    panelClosing = true;
+    panel.classList.add('is-closing');
+    let finished = false;
+    const finishClosing = () => {
+      if (finished) return;
+      finished = true;
+      panel.remove();
+      showSupport();
+    };
+    panel.addEventListener('animationend', finishClosing, { once: true });
+    // Fallback also covers browsers that suppress animation events for reduced motion.
+    window.setTimeout(finishClosing, 500);
+  };
+  closeButton.addEventListener('click', closePanel);
+  supportClose.addEventListener('click', closeSupport);
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    if (document.body.contains(panel)) closePanel();
+    else if (!support.hidden) closeSupport();
+  });
+})();
+</script>
+
+</body></html>

@@ -120,7 +120,7 @@ def git_log_csv_text():
 
 def load_git_log_history():
     content = git_log_csv_text()
-    return parse_github_log_csv(content, limit=500)
+    return parse_github_log_csv(content)
 
 def normalize_observation(payload):
     """Accept current observations and legacy snapshots without inventing receipt timestamps."""
