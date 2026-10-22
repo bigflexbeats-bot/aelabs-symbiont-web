@@ -157,6 +157,56 @@ html.theme-aero .theme-choice-icon{filter:drop-shadow(0 1px 2px #07568144)}
 @media(max-width:520px){html.theme-aero body{background-position:center,center top}html.theme-aero .hero{border-radius:23px}html.theme-aero .card{border-radius:20px}html.theme-aero .theme-dock{border-radius:19px}}
 @media(prefers-reduced-motion:reduce){html.theme-aero .card,html.theme-aero .btn,html.theme-aero .theme-choice{transition:none}}
 
+/* Private visitor analytics panel */
+.analytics-trigger{margin-left:auto;padding:6px 9px;border:1px solid #344756;border-radius:8px;background:#111b25;color:#91a6b8;font:600 10px/1.2 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.03em;cursor:pointer;opacity:.82;transition:opacity .15s,border-color .15s,color .15s}
+.analytics-trigger:hover{opacity:1;border-color:#5ce1d0;color:#e8ffff}
+.footer-admin{position:relative;z-index:70;display:inline-flex;align-items:center}
+.analytics-modal{position:fixed;z-index:1000;inset:0;display:flex;align-items:center;justify-content:center;padding:18px}
+.analytics-modal[hidden],.analytics-view[hidden]{display:none!important}
+.analytics-backdrop{position:absolute;inset:0;background:#02070dcc;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.analytics-dialog{position:relative;z-index:1;width:min(720px,100%);max-height:min(86vh,850px);overflow:auto;border:1px solid #344756;border-radius:20px;padding:22px;background:linear-gradient(145deg,#17232f,#0c121a 72%);color:#edf3f8;box-shadow:0 30px 100px #000a,inset 0 1px #ffffff10}
+.analytics-dialog-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:10px}
+.analytics-dialog-head h2{margin:0;font-size:20px;letter-spacing:-.02em}
+.analytics-dialog-head p{margin:5px 0 0;color:#91a6b8;font-size:11px}
+.analytics-close{width:34px;height:34px;flex:0 0 34px;border:1px solid #344756;border-radius:10px;background:#121c26;color:#d8e4ef;font-size:22px;line-height:1;cursor:pointer}
+.analytics-form{display:grid;gap:9px;margin:22px 0 4px;max-width:360px}
+.analytics-form label{font-size:12px;color:#a6b8c8}
+.analytics-form input{width:100%;margin-top:6px;padding:12px 13px;border:1px solid #344756;border-radius:10px;background:#080e15;color:#f2f7fb;font:inherit;outline:none}
+.analytics-form input:focus{border-color:#5ce1d0;box-shadow:0 0 0 3px #5ce1d01f}
+.analytics-submit,.analytics-logout{border:1px solid #32766d;border-radius:10px;padding:10px 14px;background:linear-gradient(180deg,#24584f,#143a37);color:#dffffa;font-weight:700;cursor:pointer}
+.analytics-message{min-height:18px;margin:0;color:#ff9ba3;font-size:12px}
+.analytics-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:19px 0 17px}
+.analytics-kpi{min-width:0;border:1px solid #2b3b49;border-radius:13px;padding:13px;background:linear-gradient(145deg,#1b2935,#111923);box-shadow:inset 0 1px #ffffff08}
+.analytics-kpi span{display:block;color:#91a6b8;font-size:10px;line-height:1.4}
+.analytics-kpi strong{display:block;margin-top:9px;font-size:27px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#f2f7fb}
+.analytics-kpi small{display:block;margin-top:3px;color:#7990a3;font-size:9px}
+.analytics-section-title{margin:18px 0 9px;color:#dce8f2;font-size:12px;font-weight:750}
+.analytics-bars{min-height:100px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:10px;border:1px solid #263442;border-radius:13px;padding:12px;background:#090f16}
+.analytics-bar-col{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:6px;min-width:0;height:92px}
+.analytics-bar-value{color:#a9c0d1;font-size:10px;font-variant-numeric:tabular-nums}
+.analytics-bar{width:min(100%,34px);min-height:3px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#76f4df,#238f91);box-shadow:0 0 14px #43dbba1c,inset 0 1px #d6fff8a8}
+.analytics-bar-label{color:#8095a6;font-size:9px}
+.analytics-pages{display:grid;gap:7px;margin-bottom:6px}
+.analytics-page{display:flex;justify-content:space-between;gap:12px;padding:9px 11px;border:1px solid #263442;border-radius:9px;background:#101923;color:#aebfcd;font-size:11px;overflow-wrap:anywhere}
+.analytics-page strong{color:#e5f0f8;white-space:nowrap}
+.analytics-notice{margin:14px 0 0;padding:10px 12px;border:1px solid #705b2c;border-radius:10px;background:#2a2417;color:#f0d9a7;font-size:11px;line-height:1.5}
+.analytics-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:13px;border-top:1px solid #263442;color:#7e93a4;font-size:10px}
+.analytics-logout{padding:7px 10px;font-size:10px}
+html.theme-aero .analytics-trigger{border-color:#fff;background:linear-gradient(180deg,#fff,#c8f1f8);color:#286c85;box-shadow:inset 0 2px #fff,0 3px 0 #7bc8dc;text-shadow:0 1px #fff}
+html.theme-aero .analytics-dialog{border-color:#fff;background:linear-gradient(145deg,#effefff5,#d5f4facf);color:#174e68;box-shadow:0 30px 100px #06456a4d,inset 0 2px #fff;backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}
+html.theme-aero .analytics-dialog-head p,html.theme-aero .analytics-form label{color:#46798d}
+html.theme-aero .analytics-close{border-color:#fff;background:linear-gradient(180deg,#fff,#caeef6);color:#176181;box-shadow:inset 0 2px #fff,0 3px 0 #8acfe0}
+html.theme-aero .analytics-form input{border-color:#a5dbe8;background:#f8feff;color:#164f6b}
+html.theme-aero .analytics-kpi{border-color:#fff;background:linear-gradient(145deg,#fffdf9df,#bfeaf4ba);box-shadow:inset 0 2px #fff,0 5px 12px #08749f14}
+html.theme-aero .analytics-kpi span,html.theme-aero .analytics-kpi small{color:#47798d}
+html.theme-aero .analytics-kpi strong,html.theme-aero .analytics-section-title{color:#0b5476}
+html.theme-aero .analytics-bars{border-color:#fff;background:linear-gradient(180deg,#effdffdd,#b7e9f5c2);box-shadow:inset 0 2px #fff}
+html.theme-aero .analytics-bar-label,html.theme-aero .analytics-bar-value{color:#286b85}
+html.theme-aero .analytics-page{border-color:#fff;background:#ffffff8c;color:#28657d}
+html.theme-aero .analytics-page strong{color:#0b5476}
+html.theme-aero .analytics-footer{border-top-color:#9bd4e0;color:#507f92}
+@media(max-width:600px){.analytics-modal{padding:9px}.analytics-dialog{padding:16px;border-radius:16px;max-height:90vh}.analytics-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.analytics-kpi strong{font-size:24px}.analytics-bars{gap:5px;padding:9px}.analytics-footer{align-items:start;flex-direction:column}}
+
 </style><script>
 (() => { try { const saved = localStorage.getItem('aelabs-web-theme'); const theme = ['classic','aero'].includes(saved) ? saved : 'classic'; document.documentElement.classList.add('theme-' + theme); } catch (_) { document.documentElement.classList.add('theme-classic'); } })();
 </script></head><body>
@@ -171,7 +221,9 @@ html.theme-aero .theme-choice-icon{filter:drop-shadow(0 1px 2px #07568144)}
 <div class="hero-bottom"><div class="pill" id="heroPill">Автообновление каждые 5 секунд</div></div>
 </div>
 </div>
-<div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Непрерывная история измерений по времени источника</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span id="footerBadge">AELABS SYMBIONT WEB · LIVE MONITORING · READ-ONLY</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script src="/source-history.js"></script><script>
+<div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Непрерывная история измерений по времени источника</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span id="footerBadge">AELABS SYMBIONT WEB · LIVE MONITORING · READ-ONLY</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span>
+<div class="footer-admin"><button type="button" class="analytics-trigger" id="analyticsOpen">Статистика</button></div>
+</div></main><script src="/source-history.js"></script><script>
 const $=id=>document.getElementById(id);
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
 function setVal(id,v){$(id).textContent=fmt(v)}
@@ -411,5 +463,195 @@ window.addEventListener('resize',()=>drawTrend());$('refresh').addEventListener(
   const current = ['classic','aero'].find(name => root.classList.contains('theme-' + name)) || 'classic';
   applyTheme(current, false);
 })();
+</script>
+<div class="analytics-modal" id="analyticsModal" hidden>
+  <div class="analytics-backdrop" id="analyticsBackdrop"></div>
+  <section class="analytics-dialog" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle">
+    <div class="analytics-dialog-head">
+      <div><h2 id="analyticsTitle">Статистика сайта</h2><p>Посещаемость AELABS WEB · без имён и сохранения IP-адресов</p></div>
+      <button type="button" class="analytics-close" id="analyticsClose" aria-label="Закрыть">×</button>
+    </div>
+    <div class="analytics-view" id="analyticsLoginView">
+      <p style="color:var(--muted);font-size:12px;margin:18px 0 0">Введите пароль администратора.</p>
+      <form class="analytics-form" id="analyticsLoginForm">
+        <label for="analyticsPassword">Пароль</label>
+        <input id="analyticsPassword" type="password" autocomplete="current-password" maxlength="256" required>
+        <button type="submit" class="analytics-submit">Войти</button>
+        <p class="analytics-message" id="analyticsAuthMessage" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="analytics-view" id="analyticsDashboard" hidden>
+      <div class="analytics-kpis">
+        <div class="analytics-kpi"><span>Сейчас на сайте</span><strong id="analyticsActive">—</strong><small>активные браузеры · 90 сек.</small></div>
+        <div class="analytics-kpi"><span>Посещений сегодня</span><strong id="analyticsToday">—</strong><small>по московскому времени</small></div>
+        <div class="analytics-kpi"><span>Всего посещений</span><strong id="analyticsTotal">—</strong><small>сессии с момента запуска</small></div>
+        <div class="analytics-kpi"><span>Уникальные браузеры</span><strong id="analyticsVisitors">—</strong><small>ориентировочная оценка</small></div>
+      </div>
+      <h3 class="analytics-section-title">Посещения за 7 дней</h3>
+      <div class="analytics-bars" id="analyticsBars" aria-label="Посещения по дням"></div>
+      <h3 class="analytics-section-title">Активные страницы</h3>
+      <div class="analytics-pages" id="analyticsPages"><div class="analytics-page">Сейчас активных страниц нет</div></div>
+      <p class="analytics-notice" id="analyticsStorageNotice" hidden></p>
+      <div class="analytics-footer"><span id="analyticsUpdated">Обновление каждые 15 секунд</span><button type="button" class="analytics-logout" id="analyticsLogout">Выйти из панели</button></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const modal = $('analyticsModal');
+  const loginView = $('analyticsLoginView');
+  const dashboard = $('analyticsDashboard');
+  const authMessage = $('analyticsAuthMessage');
+  let refreshTimer = null;
+  let visitorId = null;
+  let visitSessionId = null;
+
+  function newId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    const bytes = new Uint8Array(16);
+    if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
+    else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    const hex = [...bytes].map(b => b.toString(16).padStart(2, '0')).join('');
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  }
+  function storedId(storageName, key) {
+    try {
+      const storage = window[storageName];
+      let id = storage.getItem(key);
+      if (!id) { id = newId(); storage.setItem(key, id); }
+      return id;
+    } catch (_) { return newId(); }
+  }
+  visitorId = storedId('localStorage', 'aelabs_analytics_visitor_id');
+  visitSessionId = storedId('sessionStorage', 'aelabs_analytics_session_id');
+
+  function ping() {
+    if (document.visibilityState === 'hidden') return;
+    fetch('/api/analytics/ping', {
+      method: 'POST', credentials: 'same-origin', keepalive: true,
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({visitor_id: visitorId, session_id: visitSessionId, path: window.location.pathname})
+    }).catch(() => {});
+  }
+  ping();
+  window.setInterval(ping, 25000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') ping(); });
+
+  function setMessage(message) { authMessage.textContent = message || ''; }
+  function showLogin(message = '') {
+    if (refreshTimer) window.clearInterval(refreshTimer);
+    refreshTimer = null;
+    loginView.hidden = false;
+    dashboard.hidden = true;
+    setMessage(message);
+    window.setTimeout(() => $('analyticsPassword').focus(), 20);
+  }
+  function showDashboard() {
+    loginView.hidden = true;
+    dashboard.hidden = false;
+    setMessage('');
+    loadStats();
+    if (refreshTimer) window.clearInterval(refreshTimer);
+    refreshTimer = window.setInterval(() => { if (!modal.hidden && !dashboard.hidden) loadStats(); }, 15000);
+  }
+  function closePanel() {
+    modal.hidden = true;
+    if (refreshTimer) window.clearInterval(refreshTimer);
+    refreshTimer = null;
+    $('analyticsOpen').focus();
+  }
+  async function openPanel() {
+    modal.hidden = false;
+    showLogin('');
+    try {
+      const response = await fetch('/api/analytics/session', {credentials: 'same-origin', cache: 'no-store'});
+      const state = await response.json();
+      if (!state.configured) {
+        showLogin('Панель ещё не настроена на сервере. Добавьте переменные ANALYTICS_ADMIN_PASSWORD и FLASK_SECRET_KEY в Render.');
+      } else if (state.authenticated) {
+        showDashboard();
+      }
+    } catch (_) {
+      showLogin('Не удалось связаться с сервером. Проверьте подключение и попробуйте ещё раз.');
+    }
+  }
+  async function loadStats() {
+    try {
+      const response = await fetch('/api/analytics/stats', {credentials: 'same-origin', cache: 'no-store'});
+      const data = await response.json();
+      if (response.status === 401) { showLogin('Сеанс завершён. Войдите снова.'); return; }
+      if (!response.ok) throw new Error(data.error || 'Статистика временно недоступна.');
+      $('analyticsActive').textContent = data.active_visitors ?? '—';
+      $('analyticsToday').textContent = data.today_visits ?? '—';
+      $('analyticsTotal').textContent = data.total_visits ?? '—';
+      $('analyticsVisitors').textContent = data.total_visitors ?? '—';
+      $('analyticsUpdated').textContent = `Обновлено: ${new Date(data.updated_at).toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit',second:'2-digit'})} · время: ${data.timezone}`;
+      const bars = $('analyticsBars');
+      bars.replaceChildren();
+      const days = Array.isArray(data.daily) ? data.daily : [];
+      const max = Math.max(1, ...days.map(day => Number(day.visits) || 0));
+      for (const day of days) {
+        const col = document.createElement('div'); col.className = 'analytics-bar-col';
+        const value = document.createElement('span'); value.className = 'analytics-bar-value'; value.textContent = String(day.visits ?? 0);
+        const bar = document.createElement('div'); bar.className = 'analytics-bar'; bar.style.height = `${Math.max(3, ((Number(day.visits) || 0) / max) * 59)}px`;
+        bar.title = `${day.label}: ${day.visits} посещений`;
+        const label = document.createElement('span'); label.className = 'analytics-bar-label'; label.textContent = day.label || '';
+        col.append(value, bar, label); bars.append(col);
+      }
+      const pages = $('analyticsPages'); pages.replaceChildren();
+      const activePages = Array.isArray(data.active_pages) ? data.active_pages : [];
+      if (!activePages.length) {
+        const empty = document.createElement('div'); empty.className = 'analytics-page'; empty.textContent = 'Сейчас нет активных страниц'; pages.append(empty);
+      } else {
+        for (const item of activePages) {
+          const row = document.createElement('div'); row.className = 'analytics-page';
+          const path = document.createElement('span'); path.textContent = item.path;
+          const count = document.createElement('strong'); count.textContent = `${item.sessions} сесс.`;
+          row.append(path, count); pages.append(row);
+        }
+      }
+      const notice = $('analyticsStorageNotice');
+      notice.hidden = Boolean(data.persistent_storage);
+      notice.textContent = 'История статистики сейчас хранится во временной SQLite-базе приложения. Для сохранения данных между перезапусками и обновлениями Render подключите PostgreSQL и задайте DATABASE_URL.';
+    } catch (error) {
+      if (!modal.hidden) $('analyticsUpdated').textContent = error.message || 'Ошибка загрузки статистики';
+    }
+  }
+
+  $('analyticsOpen').addEventListener('click', openPanel);
+  $('analyticsClose').addEventListener('click', closePanel);
+  $('analyticsBackdrop').addEventListener('click', closePanel);
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.hidden) closePanel(); });
+  $('analyticsLoginForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const button = event.submitter || $('analyticsLoginForm').querySelector('button[type="submit"]');
+    button.disabled = true;
+    setMessage('Проверка…');
+    try {
+      const response = await fetch('/api/analytics/login', {
+        method: 'POST', credentials: 'same-origin',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({password: $('analyticsPassword').value})
+      });
+      const data = await response.json();
+      if (!response.ok) { showLogin(data.error || 'Не удалось войти.'); return; }
+      $('analyticsPassword').value = '';
+      showDashboard();
+    } catch (_) {
+      showLogin('Ошибка соединения с сервером.');
+    } finally { button.disabled = false; }
+  });
+  $('analyticsLogout').addEventListener('click', async () => {
+    try { await fetch('/api/analytics/logout', {method:'POST', credentials:'same-origin'}); } catch (_) {}
+    if (refreshTimer) window.clearInterval(refreshTimer);
+    refreshTimer = null;
+    showLogin('Вы вышли из панели статистики.');
+  });
+})();
+
 </script>
 </body></html>

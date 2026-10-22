@@ -14,6 +14,12 @@ services:
         value: main
       - key: GITHUB_TOKEN
         sync: false
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: ANALYTICS_ADMIN_PASSWORD
+        sync: false
+      - key: ANALYTICS_TIMEZONE
+        value: Europe/Moscow
 
       - key: GITHUB_LOG_OWNER
         sync: false
