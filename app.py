@@ -163,7 +163,9 @@ def normalize_observation(payload):
 
 @app.get('/')
 def home():
-    return send_from_directory('static', 'index.html')
+    response = send_from_directory('static', 'index.html', max_age=0)
+    response.headers['Cache-Control'] = 'no-cache'
+    return response
 
 @app.get('/api/health')
 def health():
@@ -208,7 +210,8 @@ def history():
 
 @app.get('/<path:path>')
 def static_files(path):
-    return send_from_directory('static', path)
+    # Logo, icons and scripts are static: browsers may cache them for a day.
+    return send_from_directory('static', path, max_age=86400)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', '8080')))
