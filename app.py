@@ -2,146 +2,15 @@
 import base64
 import json
 import os
-import hmac
-import sqlite3
 import threading
 import time
 import urllib.error
 import urllib.request
-import uuid
-from contextlib import contextmanager
-from datetime import datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 from urllib.parse import quote
-from flask import Flask, jsonify, request, send_from_directory, session
-from werkzeug.middleware.proxy_fix import ProxyFix
+from flask import Flask, jsonify, send_from_directory
 from history_csv import parse_github_log_csv
 
 app = Flask(__name__, static_folder='static')
-# Render terminates HTTPS at one trusted reverse proxy; this also allows per-client login throttling.
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
-# Keep the admin password and cookie-signing key in Render environment variables,
-# never in this source file or client-side JavaScript.
-ADMIN_PASSWORD = os.getenv('ANALYTICS_ADMIN_PASSWORD', '')
-app.secret_key = os.getenv('FLASK_SECRET_KEY', '').strip() or None
-app.config.update(
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-    SESSION_COOKIE_SECURE=os.getenv('SESSION_COOKIE_SECURE', 'true').strip().lower() not in {'0', 'false', 'no'},
-    PERMANENT_SESSION_LIFETIME=timedelta(hours=12),
-    SESSION_REFRESH_EACH_REQUEST=True,
-)
-DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
-SQLITE_PATH = os.path.abspath(os.getenv(
-    'ANALYTICS_SQLITE_PATH',
-    os.path.join(os.path.dirname(__file__), 'instance', 'aelabs_analytics.sqlite3'),
-))
-USE_POSTGRES = DATABASE_URL.startswith(('postgres://', 'postgresql://'))
-try:
-    ANALYTICS_TZ = ZoneInfo(os.getenv('ANALYTICS_TIMEZONE', 'Europe/Moscow'))
-except Exception:
-    ANALYTICS_TZ = ZoneInfo('UTC')
-_analytics_schema_lock = threading.Lock()
-_analytics_schema_ready = False
-_login_attempts = {}
-_login_attempts_lock = threading.Lock()
-
-
-@contextmanager
-def analytics_connection():
-    # Use PostgreSQL when DATABASE_URL exists; SQLite is a convenient fallback.
-    if USE_POSTGRES:
-        import psycopg
-        url = DATABASE_URL
-        if url.startswith('postgres://'):
-            url = 'postgresql://' + url[len('postgres://'):]
-        conn = psycopg.connect(url, connect_timeout=8)
-    else:
-        os.makedirs(os.path.dirname(SQLITE_PATH), exist_ok=True)
-        conn = sqlite3.connect(SQLITE_PATH, timeout=10)
-        conn.execute('PRAGMA busy_timeout = 10000')
-    try:
-        yield conn
-        conn.commit()
-    except Exception:
-        conn.rollback()
-        raise
-    finally:
-        conn.close()
-
-
-def analytics_execute(conn, sql, params=()):
-    if USE_POSTGRES:
-        sql = sql.replace('?', '%s')
-    return conn.execute(sql, params)
-
-
-def ensure_analytics_schema():
-    global _analytics_schema_ready
-    if _analytics_schema_ready:
-        return
-    with _analytics_schema_lock:
-        if _analytics_schema_ready:
-            return
-        with analytics_connection() as conn:
-            analytics_execute(conn, '''CREATE TABLE IF NOT EXISTS analytics_visitors (
-                visitor_id TEXT PRIMARY KEY,
-                first_seen TEXT NOT NULL,
-                last_seen TEXT NOT NULL
-            )''')
-            analytics_execute(conn, '''CREATE TABLE IF NOT EXISTS analytics_visits (
-                session_id TEXT PRIMARY KEY,
-                visitor_id TEXT NOT NULL,
-                visit_date TEXT NOT NULL,
-                first_seen TEXT NOT NULL,
-                last_seen TEXT NOT NULL,
-                last_path TEXT NOT NULL,
-                ping_count INTEGER NOT NULL DEFAULT 1
-            )''')
-            analytics_execute(conn, 'CREATE INDEX IF NOT EXISTS idx_analytics_visits_date ON analytics_visits (visit_date)')
-            analytics_execute(conn, 'CREATE INDEX IF NOT EXISTS idx_analytics_visits_last_seen ON analytics_visits (last_seen)')
-        _analytics_schema_ready = True
-
-
-def valid_analytics_uuid(value):
-    try:
-        return str(uuid.UUID(str(value)))
-    except (ValueError, TypeError, AttributeError):
-        return None
-
-
-def analytics_time_pair():
-    now_utc = datetime.now(timezone.utc).replace(microsecond=0)
-    return now_utc, now_utc.astimezone(ANALYTICS_TZ)
-
-
-def admin_not_ready_response():
-    if not ADMIN_PASSWORD:
-        return jsonify({'error': 'Панель не настроена: добавьте ANALYTICS_ADMIN_PASSWORD в переменные окружения сервера.'}), 503
-    if not app.secret_key:
-        return jsonify({'error': 'Панель не настроена: добавьте FLASK_SECRET_KEY в переменные окружения сервера.'}), 503
-    return None
-
-
-def login_retry_seconds(client_key):
-    now = time.time()
-    with _login_attempts_lock:
-        for key in list(_login_attempts):
-            recent = [stamp for stamp in _login_attempts[key] if now - stamp < 900]
-            if recent:
-                _login_attempts[key] = recent
-            else:
-                _login_attempts.pop(key, None)
-        recent = _login_attempts.get(client_key, [])
-        if len(recent) >= 5:
-            return max(1, int(900 - (now - recent[0])))
-    return 0
-
-
-def record_failed_login(client_key):
-    with _login_attempts_lock:
-        _login_attempts.setdefault(client_key, []).append(time.time())
-
 OWNER = os.getenv('GITHUB_OWNER', 'bigflexbeats-bot').strip()
 REPO = os.getenv('GITHUB_REPO', 'aelabs-symbiont-data').strip()
 BRANCH = os.getenv('GITHUB_BRANCH', 'main').strip() or 'main'
@@ -251,7 +120,7 @@ def git_log_csv_text():
 
 def load_git_log_history():
     content = git_log_csv_text()
-    return parse_github_log_csv(content)
+    return parse_github_log_csv(content, limit=500)
 
 def normalize_observation(payload):
     """Accept current observations and legacy snapshots without inventing receipt timestamps."""
@@ -340,145 +209,6 @@ def history():
 @app.get('/<path:path>')
 def static_files(path):
     return send_from_directory('static', path)
-
-@app.after_request
-def analytics_no_cache(response):
-    if request.path.startswith('/api/analytics/'):
-        response.headers['Cache-Control'] = 'no-store, private, max-age=0'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['X-Content-Type-Options'] = 'nosniff'
-    return response
-
-
-@app.get('/api/analytics/session')
-def analytics_session_status():
-    return jsonify({
-        'configured': bool(ADMIN_PASSWORD and app.secret_key),
-        'authenticated': bool(session.get('analytics_admin')),
-    })
-
-
-@app.post('/api/analytics/login')
-def analytics_login():
-    not_ready = admin_not_ready_response()
-    if not_ready:
-        return not_ready
-    client_key = request.remote_addr or 'unknown'
-    retry = login_retry_seconds(client_key)
-    if retry:
-        response = jsonify({'error': 'Слишком много попыток входа. Попробуйте позже.'})
-        response.status_code = 429
-        response.headers['Retry-After'] = str(retry)
-        return response
-    body = request.get_json(silent=True)
-    if not isinstance(body, dict):
-        body = {}
-    supplied = body.get('password', '')
-    if not isinstance(supplied, str) or len(supplied) > 256 or not hmac.compare_digest(supplied.encode('utf-8'), ADMIN_PASSWORD.encode('utf-8')):
-        record_failed_login(client_key)
-        return jsonify({'error': 'Неверный пароль.'}), 401
-    with _login_attempts_lock:
-        _login_attempts.pop(client_key, None)
-    session.clear()
-    session['analytics_admin'] = True
-    session.permanent = True
-    return jsonify({'ok': True})
-
-
-@app.post('/api/analytics/logout')
-def analytics_logout():
-    if app.secret_key:
-        session.clear()
-    return jsonify({'ok': True})
-
-
-@app.post('/api/analytics/ping')
-def analytics_ping():
-    # Anonymous random browser/session IDs only; IP addresses and query strings are not stored.
-    body = request.get_json(silent=True)
-    if not isinstance(body, dict):
-        body = {}
-    visitor_id = valid_analytics_uuid(body.get('visitor_id'))
-    session_id = valid_analytics_uuid(body.get('session_id'))
-    if not visitor_id or not session_id:
-        return jsonify({'error': 'Invalid analytics IDs'}), 400
-    raw_path = body.get('path', '/')
-    if not isinstance(raw_path, str):
-        raw_path = '/'
-    path = raw_path.split('?', 1)[0].split('#', 1)[0][:120]
-    if not path.startswith('/'):
-        path = '/'
-    now_utc, now_local = analytics_time_pair()
-    timestamp = now_utc.isoformat()
-    visit_date = now_local.date().isoformat()
-    try:
-        ensure_analytics_schema()
-        with analytics_connection() as conn:
-            analytics_execute(conn, '''INSERT INTO analytics_visitors (visitor_id, first_seen, last_seen)
-                VALUES (?, ?, ?)
-                ON CONFLICT(visitor_id) DO UPDATE SET last_seen = excluded.last_seen''',
-                (visitor_id, timestamp, timestamp))
-            analytics_execute(conn, '''INSERT INTO analytics_visits
-                (session_id, visitor_id, visit_date, first_seen, last_seen, last_path, ping_count)
-                VALUES (?, ?, ?, ?, ?, ?, 1)
-                ON CONFLICT(session_id) DO UPDATE SET
-                    last_seen = excluded.last_seen,
-                    last_path = excluded.last_path,
-                    ping_count = analytics_visits.ping_count + 1''',
-                (session_id, visitor_id, visit_date, timestamp, timestamp, path))
-        return jsonify({'ok': True})
-    except Exception as exc:
-        app.logger.warning('Analytics ping could not be stored: %s', exc)
-        return jsonify({'error': 'Статистика временно недоступна.'}), 503
-
-
-@app.get('/api/analytics/stats')
-def analytics_stats():
-    if not session.get('analytics_admin'):
-        return jsonify({'error': 'Требуется вход.'}), 401
-    now_utc, now_local = analytics_time_pair()
-    timestamp = now_utc.isoformat()
-    cutoff = (now_utc - timedelta(seconds=90)).isoformat()
-    today = now_local.date()
-    first_day = today - timedelta(days=6)
-    try:
-        ensure_analytics_schema()
-        with analytics_connection() as conn:
-            active_visitors = analytics_execute(conn,
-                'SELECT COUNT(DISTINCT visitor_id) FROM analytics_visits WHERE last_seen >= ?', (cutoff,)).fetchone()[0]
-            active_sessions = analytics_execute(conn,
-                'SELECT COUNT(*) FROM analytics_visits WHERE last_seen >= ?', (cutoff,)).fetchone()[0]
-            today_visits = analytics_execute(conn,
-                'SELECT COUNT(*) FROM analytics_visits WHERE visit_date = ?', (today.isoformat(),)).fetchone()[0]
-            total_visits = analytics_execute(conn, 'SELECT COUNT(*) FROM analytics_visits').fetchone()[0]
-            total_visitors = analytics_execute(conn, 'SELECT COUNT(*) FROM analytics_visitors').fetchone()[0]
-            daily_rows = analytics_execute(conn,
-                'SELECT visit_date, COUNT(*) FROM analytics_visits WHERE visit_date >= ? GROUP BY visit_date ORDER BY visit_date',
-                (first_day.isoformat(),)).fetchall()
-            pages = analytics_execute(conn,
-                'SELECT last_path, COUNT(*) FROM analytics_visits WHERE last_seen >= ? GROUP BY last_path ORDER BY COUNT(*) DESC LIMIT 5',
-                (cutoff,)).fetchall()
-        daily_map = {str(day): int(count) for day, count in daily_rows}
-        daily = []
-        for offset in range(7):
-            day = first_day + timedelta(days=offset)
-            daily.append({'date': day.isoformat(), 'label': day.strftime('%d.%m'), 'visits': daily_map.get(day.isoformat(), 0)})
-        return jsonify({
-            'active_visitors': int(active_visitors),
-            'active_sessions': int(active_sessions),
-            'today_visits': int(today_visits),
-            'total_visits': int(total_visits),
-            'total_visitors': int(total_visitors),
-            'daily': daily,
-            'active_pages': [{'path': str(path), 'sessions': int(count)} for path, count in pages],
-            'storage': 'postgresql' if USE_POSTGRES else 'sqlite',
-            'persistent_storage': bool(USE_POSTGRES),
-            'timezone': str(ANALYTICS_TZ),
-            'updated_at': timestamp,
-        })
-    except Exception as exc:
-        app.logger.warning('Analytics stats could not be read: %s', exc)
-        return jsonify({'error': 'Не удалось прочитать статистику. Проверьте настройки базы данных.'}), 503
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', '8080')))

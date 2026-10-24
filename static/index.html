@@ -1,5 +1,5 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AELABS WEB — Мониторинг биопроцесса</title><style>
-:root{--bg:#090d12;--panel:#111821;--panel2:#151f2a;--line:#263442;--muted:#8fa0b1;--text:#edf3f8;--cyan:#5ce1d0;--blue:#6ba8ff;--green:#5de0a0;--yellow:#ffc66d;--red:#ff7e88}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#142b36 0,transparent 36%),var(--bg);color:var(--text);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif}header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,54px);background:#0b1118e8;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}.brand{display:flex;align-items:center;gap:13px}.brand img{width:42px;height:42px;object-fit:contain}.brand strong{letter-spacing:.16em;font-size:16px}.brand small{display:block;color:var(--muted);letter-spacing:.12em;font-size:10px}.topright{display:flex;align-items:center;gap:16px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--yellow);margin-right:7px;box-shadow:0 0 10px currentColor}main{max-width:1320px;margin:auto;padding:32px clamp(16px,4vw,48px) 50px}.eyebrow{color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:700}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.hero h1{font-size:clamp(28px,4vw,42px);letter-spacing:-.04em;margin:7px 0 8px}.hero p{margin:0;color:var(--muted)}.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:var(--muted);font-size:11px;white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.quality-blank>*{visibility:hidden}.card{background:linear-gradient(145deg,#151e28,#0f151d);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0;box-shadow:0 12px 30px #0002}.metric-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.metric-icon{color:var(--cyan);font-size:16px}.value{font-size:clamp(26px,2.5vw,34px);font-weight:650;letter-spacing:-.04em;margin:13px 0 2px;font-variant-numeric:tabular-nums}.unit{color:var(--muted);font-size:12px}.metric-foot{margin-top:12px;border-top:1px solid #263442;padding-top:9px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between}.section-title{display:flex;align-items:center;justify-content:space-between;margin:30px 0 13px}.section-title h2{font-size:15px;margin:0;letter-spacing:.01em}.section-title span{font-size:11px;color:var(--muted)}.lower{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px}.meta-item{background:#0d141c;border:1px solid #202d39;border-radius:10px;padding:12px}.meta-item label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.meta-item strong{font-size:12px;font-weight:550;overflow-wrap:anywhere}.statusline.pc-offline{border-color:#743b42;background:#25171b}.statusline.pc-offline .statusmark{background:#4b2027;color:#ff737b}.statusline.pc-online .statusmark{background:#12372b;color:#4fd18b}.statusline{display:flex;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid #263442}.statusline:last-child{border:0}.statusmark{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#17372f;color:var(--green)}.statusline b{font-size:12px;display:block}.statusline small{color:var(--muted);font-size:11px}.history{width:100%;border-collapse:collapse;font-size:12px}.history th{text-align:left;color:var(--muted);font-weight:500;padding:10px;border-bottom:1px solid var(--line)}.history td{padding:12px 10px;border-bottom:1px solid #202b36;font-variant-numeric:tabular-nums}.history-wrap{overflow:auto}.empty{color:var(--muted);padding:22px 0;text-align:center}.footer{display:flex;justify-content:space-between;gap:12px;color:#607181;font-size:10px;margin-top:28px;flex-wrap:wrap}.btn{background:#142c32;border:1px solid #24504f;color:var(--cyan);padding:9px 13px;border-radius:8px;cursor:pointer;font-size:11px}.btn:hover{background:#1a3a40}.error{color:var(--red)}.stale-banner{display:none;margin:18px 0;padding:14px 16px;border:1px solid #8f303b;background:#35151b;color:#ffdce0;border-radius:10px;font-weight:600}.stale-banner.visible{display:block}.stale-banner small{display:block;font-weight:400;color:#ffb8bf;margin-top:4px}@media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr}}@media(max-width:520px){header{padding:0 15px}.topright .hide-sm{display:none}.hero{align-items:start;flex-direction:column}.grid{gap:9px}.card{padding:14px}.value{font-size:28px}.meta{grid-template-columns:1fr}.pill{white-space:normal}}
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AELABS SYMBIONT WEB — Monitoring</title><style>
+:root{--bg:#090d12;--panel:#111821;--panel2:#151f2a;--line:#263442;--muted:#8fa0b1;--text:#edf3f8;--cyan:#5ce1d0;--blue:#6ba8ff;--green:#5de0a0;--yellow:#ffc66d;--red:#ff7e88}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#142b36 0,transparent 36%),var(--bg);color:var(--text);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif}header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,54px);background:#0b1118e8;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}.brand{display:flex;align-items:center;gap:13px}.brand img{width:42px;height:42px;object-fit:contain}.brand strong{letter-spacing:.16em;font-size:16px}.brand small{display:block;color:var(--muted);letter-spacing:.12em;font-size:10px}.topright{display:flex;align-items:center;gap:16px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--yellow);margin-right:7px;box-shadow:0 0 10px currentColor}main{max-width:1320px;margin:auto;padding:32px clamp(16px,4vw,48px) 50px}.eyebrow{color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;font-size:10px;font-weight:700}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.hero h1{font-size:clamp(28px,4vw,42px);letter-spacing:-.04em;margin:7px 0 8px}.hero p{margin:0;color:var(--muted)}.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:var(--muted);font-size:11px;white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(60,minmax(0,1fr));gap:12px}.grid>.card{grid-column:span 12}.grid>.card.g-gas,.grid>.card.g-air,.grid>.card.g-o2{grid-column:span 15}.grid>.card.g-w{grid-column:span 20}.card.g-proc{border-left:3px solid #5c6aa0;background:linear-gradient(145deg,#161d2a,#0f151d)}.card.g-gas{border-left:3px solid #34766b;background:linear-gradient(145deg,#12202a,#0f151d)}.card.g-air{border-left:3px solid #3d7396;background:linear-gradient(145deg,#122030,#0f151d)}.card.g-w{border-left:3px solid #6f6446;background:linear-gradient(145deg,#1b1d20,#0f151d)}.quality-blank>*{visibility:hidden}.card{background:linear-gradient(145deg,#151e28,#0f151d);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0;box-shadow:0 12px 30px #0002}.metric-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.metric-icon{color:var(--cyan);font-size:16px}.value{font-size:clamp(26px,2.5vw,34px);font-weight:650;letter-spacing:-.04em;margin:13px 0 2px;font-variant-numeric:tabular-nums}.unit{color:var(--muted);font-size:12px}.metric-foot{margin-top:12px;border-top:1px solid #263442;padding-top:9px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between}.section-title{display:flex;align-items:center;justify-content:space-between;margin:30px 0 13px}.section-title h2{font-size:15px;margin:0;letter-spacing:.01em}.section-title span{font-size:11px;color:var(--muted)}.lower{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px}.meta-item{background:#0d141c;border:1px solid #202d39;border-radius:10px;padding:12px}.meta-item label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}.meta-item strong{font-size:12px;font-weight:550;overflow-wrap:anywhere}.statusline.pc-offline{border-color:#743b42;background:#25171b}.statusline.pc-offline .statusmark{background:#4b2027;color:#ff737b}.statusline.pc-online .statusmark{background:#12372b;color:#4fd18b}.statusline{display:flex;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid #263442}.statusline:last-child{border:0}.statusmark{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#17372f;color:var(--green)}.statusline b{font-size:12px;display:block}.statusline small{color:var(--muted);font-size:11px}.history{width:100%;border-collapse:collapse;font-size:12px}.history th{text-align:left;color:var(--muted);font-weight:500;padding:10px;border-bottom:1px solid var(--line)}.history td{padding:12px 10px;border-bottom:1px solid #202b36;font-variant-numeric:tabular-nums}.history-wrap{overflow:auto}.empty{color:var(--muted);padding:22px 0;text-align:center}.footer{display:flex;justify-content:space-between;gap:12px;color:#607181;font-size:10px;margin-top:28px;flex-wrap:wrap}.btn{background:#142c32;border:1px solid #24504f;color:var(--cyan);padding:9px 13px;border-radius:8px;cursor:pointer;font-size:11px}.btn:hover{background:#1a3a40}.error{color:var(--red)}.stale-banner{display:none;margin:18px 0;padding:14px 16px;border:1px solid #8f303b;background:#35151b;color:#ffdce0;border-radius:10px;font-weight:600}.stale-banner.visible{display:block}.stale-banner small{display:block;font-weight:400;color:#ffb8bf;margin-top:4px}@media(max-width:1100px){.grid{grid-template-columns:repeat(6,minmax(0,1fr))}.grid>.card,.grid>.card.g-gas,.grid>.card.g-air,.grid>.card.g-o2,.grid>.card.g-w{grid-column:span 2}.grid>.card.g-gas,.grid>.card.g-air,.grid>.card.g-o2{grid-column:span 3}}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid>.card,.grid>.card.g-gas,.grid>.card.g-air,.grid>.card.g-o2,.grid>.card.g-w{grid-column:span 1}.lower{grid-template-columns:1fr}}@media(max-width:520px){header{padding:0 15px}.topright .hide-sm{display:none}.hero{align-items:start;flex-direction:column}.grid{gap:9px}.card{padding:14px}.value{font-size:28px}.meta{grid-template-columns:1fr}.pill{white-space:normal}}
 
 /* Desktop-like alarm strip and modern trend */
 .alarm-strip{display:none;margin:0 0 18px;border:1px solid #3a4654;border-radius:12px;overflow:hidden;background:#101720}
@@ -12,228 +12,24 @@
 .alarm-item.info{color:#d9eaff}.alarm-item.info .alarm-icon{background:#1b3551;color:#83baff}
 .alarm-empty{padding:13px 14px;color:var(--green);font-size:12px}
 .trend-card{margin-top:14px;padding:18px}.trend-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}.trend-head h2{margin:0;font-size:15px}.trend-head p{margin:5px 0 0;color:var(--muted);font-size:11px}
-.trend-controls{display:flex;gap:7px;flex-wrap:wrap}.trend-plot{cursor:crosshair;touch-action:pan-y;user-select:none}.trend-plot svg{display:block}.trend-toggle{border:1px solid var(--line);background:#101720;color:var(--muted);padding:7px 10px;border-radius:999px;font-size:11px;cursor:pointer}.trend-toggle.active{color:var(--text);border-color:#567080;background:#1b2b38}
-.trend-toggle[data-series="ph"].active{border-color:#4fd18b}.trend-toggle[data-series="do"].active{border-color:#5da9e9}.trend-toggle[data-series="od"].active{border-color:#b17aff}.trend-toggle[data-series="temp"].active{border-color:#ff6468}
+.trend-controls{display:flex;gap:7px;flex-wrap:wrap}.trend-plot{cursor:grab;touch-action:none;user-select:none}.trend-plot.dragging{cursor:grabbing}.trend-plot svg{will-change:transform,opacity}.trend-plot svg.trend-enter{animation:trendSlideIn .42s cubic-bezier(.2,.75,.25,1) both}@keyframes trendSlideIn{from{opacity:.48;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}.trend-follow{border:1px solid #39776f;background:#14312f;color:#8df0df;padding:7px 11px;border-radius:999px;font-size:11px;cursor:pointer}.trend-follow.off{border-color:#6d5731;background:#302718;color:#ffd18a}.trend-toggle{border:1px solid var(--line);background:#101720;color:var(--muted);padding:7px 10px;border-radius:999px;font-size:11px;cursor:pointer}.trend-toggle.active{color:var(--text);border-color:#567080;background:#1b2b38}
+.trend-toggle[data-series="ph"].active{border-color:#4fd18b}.trend-toggle[data-series="do"].active{border-color:#5da9e9}.trend-toggle[data-series="od"].active{border-color:#b17aff}.trend-toggle[data-series="temp"].active{border-color:#ff6468}.trend-toggle[data-series="o2"].active{border-color:#5ce1d0}.trend-toggle[data-series="ch4"].active{border-color:#ffc66d}.trend-toggle[data-series="co2"].active{border-color:#ff9f5a}.trend-toggle[data-series="air"].active{border-color:#6ba8ff}.trend-toggle[data-series="o2f"].active{border-color:#62d3a2}.card.g-o2{border-left:3px solid #3f9a74;background:linear-gradient(145deg,#12231d,#0f151d)}
 .trend-plot{position:relative;margin-top:12px;height:300px;border:1px solid #24313d;border-radius:10px;overflow:hidden;background:repeating-linear-gradient(to bottom,transparent 0,transparent 59px,#25323e 60px),linear-gradient(180deg,#0d141c,#0b1118)}
 .trend-plot svg{width:100%;height:100%;display:block;overflow:visible}.trend-plot svg .trend-line{transition:opacity .35s ease}.trend-plot svg .trend-glow{opacity:.42;filter:url(#trendGlow)}.trend-plot svg .trend-main{filter:drop-shadow(0 0 2px var(--series-glow, transparent))}.trend-tooltip{position:absolute;display:none;pointer-events:none;z-index:2;background:#080d13ee;border:1px solid #3b4c5b;border-radius:8px;padding:8px 10px;font-size:11px;box-shadow:0 8px 24px #0008;white-space:nowrap}
 .trend-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:11px}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
 .trend-empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px}
 @media(max-width:520px){.trend-plot{height:240px}.alarm-item{padding:10px}}
-
-
-
-
-/* Persistent theme chooser */
-html{scroll-padding-bottom:110px}
-main{padding-bottom:124px}
-.theme-dock{position:fixed;z-index:60;left:50%;bottom:13px;transform:translateX(-50%);display:flex;align-items:center;gap:11px;max-width:calc(100vw - 24px);padding:8px 10px 8px 14px;border:1px solid #cbb895;border-radius:17px;background:linear-gradient(180deg,#fffdf7f5,#f0e2c9f5);box-shadow:0 12px 35px #20170730,0 3px 0 #d8c4a3;backdrop-filter:blur(18px);color:#23374b;font-size:11px}
-.theme-dock-label{font-size:9px;font-weight:900;letter-spacing:.15em;color:#9c2437;white-space:nowrap}
-.theme-dock-options{display:flex;align-items:center;gap:5px}
-.theme-choice{appearance:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 11px;border:1px solid #d5c3a6;border-radius:10px;background:linear-gradient(180deg,#fffdf8,#f0e4d0);color:#33475c;font:700 11px/1.1 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;white-space:nowrap;box-shadow:0 2px 0 #d8c4a5;transition:transform .18s,box-shadow .18s,background .18s,border-color .18s}
-.theme-choice:hover{transform:translateY(-2px);box-shadow:0 4px 0 #c8b38f}.theme-choice.is-active{background:linear-gradient(180deg,#245fa4,#17477b);border-color:#17477b;color:#fff;box-shadow:inset 0 1px #ffffff55,0 2px 0 #123963}.theme-choice-icon{font-size:14px;line-height:1}
-@media(prefers-reduced-motion:reduce){.theme-choice{transition:none}}
-
-/* CLASSIC — the earlier dark, technical AELABS dashboard */
-html.theme-classic{--bg:#090d12;--panel:#111821;--panel2:#151f2a;--line:#263442;--muted:#8fa0b1;--text:#edf3f8;--cyan:#5ce1d0;--blue:#6ba8ff;--green:#5de0a0;--yellow:#ffc66d;--red:#ff7e88;color-scheme:dark}
-.theme-classic body{background:radial-gradient(ellipse at 80% 0%,#142b36 0,transparent 36%),var(--bg);color:var(--text);padding-bottom:0}
-.theme-classic body:after{display:none}
-.theme-classic header{height:76px;min-height:76px;flex-wrap:nowrap;gap:18px;padding:0 clamp(18px,4vw,54px);background:#0b1118e8;border-bottom:1px solid var(--line);border-image:none;box-shadow:none;backdrop-filter:blur(14px)}
-.theme-classic .brand strong{color:var(--text);font-size:16px;letter-spacing:.16em}.theme-classic .brand small{color:var(--muted);font-size:10px;letter-spacing:.12em;font-weight:400}.theme-classic .topright{color:var(--muted);font-size:12px}
-.theme-classic main{max-width:1320px;padding:32px clamp(16px,4vw,48px) 124px}.theme-classic .hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:0 0 28px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible}.theme-classic .hero:before,.theme-classic .hero:after{display:none}
-.theme-classic .eyebrow{color:var(--cyan);letter-spacing:.18em;font-size:10px}.theme-classic .hero h1{color:var(--text);font-size:clamp(28px,4vw,42px);text-shadow:none}.theme-classic .hero-subtitle{color:var(--muted)!important;font-weight:400;margin:0!important;max-width:none}.theme-classic .hero .pill{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:999px;box-shadow:none;font-weight:400}
-.theme-classic .grid{gap:12px}.theme-classic .card{background:linear-gradient(145deg,#151e28,#0f151d);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 12px 30px #0002;color:var(--text)}.theme-classic .grid>.card:nth-child(n){border-top:1px solid var(--line)}.theme-classic .metric-head{color:var(--muted);font-weight:400}.theme-classic .metric-icon{color:var(--cyan)}.theme-classic .value{color:var(--text);text-shadow:none}.theme-classic .unit{color:var(--muted)}.theme-classic .metric-foot{border-top-color:var(--line);color:var(--muted)}
-.theme-classic .section-title h2,.theme-classic .trend-head h2{color:var(--text);font-weight:650;letter-spacing:.01em}.theme-classic .section-title span,.theme-classic .trend-head p{color:var(--muted)}.theme-classic .meta-item{background:#0d141c;border-color:#202d39}.theme-classic .meta-item label{color:var(--muted)}.theme-classic .meta-item strong{color:var(--text)}.theme-classic .statusline{border-bottom-color:var(--line)}.theme-classic .statusmark{border-radius:9px;background:#17372f;color:var(--green)}.theme-classic .statusline small{color:var(--muted)}.theme-classic .history th{color:var(--muted);border-bottom-color:var(--line)}.theme-classic .history td{border-bottom-color:#202b36;color:var(--text)}.theme-classic .history tbody tr:nth-child(odd){background:#0d141c}.theme-classic .history tbody tr:hover{background:#18232e}.theme-classic .empty,.theme-classic .footer{color:var(--muted)}
-.theme-classic .btn{background:#142c32;border-color:#24504f;color:var(--cyan);font-weight:400}.theme-classic .btn:hover{background:#1a3a40}.theme-classic .stale-banner{border-color:#8f303b;background:#35151b;color:#ffdce0;box-shadow:none}.theme-classic .stale-banner small{color:#ffb8bf}.theme-classic .alarm-strip{border-color:#3a4654;background:#101720;box-shadow:none}.theme-classic .alarm-strip-head{background:#17212c;border-bottom-color:#293744;color:#a9bac8}.theme-classic .alarm-strip-head strong{color:var(--text)}.theme-classic .alarm-item{border-bottom-color:#27323e}.theme-classic .alarm-item.error{color:#ffe1e4;background:linear-gradient(90deg,#42182055,transparent)}.theme-classic .alarm-item.warning{color:#ffedce;background:linear-gradient(90deg,#49341755,transparent)}.theme-classic .alarm-item.info{color:#d9eaff;background:transparent}.theme-classic .alarm-empty{color:var(--green)}
-.theme-classic .trend-card{padding:18px}.theme-classic .trend-toggle{border-color:var(--line);background:#101720;color:var(--muted);font-weight:400}.theme-classic .trend-toggle.active{color:var(--text);border-color:#567080;background:#1b2b38}.theme-classic .trend-plot{border-color:#24313d;background:repeating-linear-gradient(to bottom,transparent 0,transparent 59px,#25323e 60px),linear-gradient(180deg,#0d141c,#0b1118);box-shadow:none}.theme-classic .trend-tooltip{background:#080d13ee;border-color:#3b4c5b;color:var(--text);box-shadow:0 8px 24px #0008}.theme-classic .trend-legend{color:var(--muted)}.theme-classic .legend-dot{box-shadow:none}
-.theme-classic .theme-dock{border-color:#263442;background:linear-gradient(180deg,#192633f5,#0e151df5);color:var(--text);box-shadow:0 12px 35px #0009,0 1px 0 #ffffff10 inset}.theme-classic .theme-dock-label{color:var(--cyan)}.theme-classic .theme-choice{background:linear-gradient(180deg,#192633,#101720);border-color:#344756;color:var(--muted);box-shadow:0 2px 0 #080c10}.theme-classic .theme-choice.is-active{background:linear-gradient(180deg,#27605e,#153a3d);border-color:#387c78;color:#efffff;box-shadow:inset 0 1px #ffffff22,0 2px 0 #06191b}
-
-/* FRUTIGER AERO — glossy Vista-era liquid glass, aqua gradients and bubble highlights */
-html.theme-aero{--bg:#c8edf7;--panel:#f4fdffb8;--panel2:#dff7ffbd;--line:#8acbdc;--muted:#426e83;--text:#123f58;--cyan:#008db8;--blue:#187cd3;--green:#118e70;--yellow:#a86700;--red:#c63850;color-scheme:light}
-.theme-aero body{background:radial-gradient(ellipse at 14% 2%,#fff 0,transparent 24%),radial-gradient(ellipse at 83% 5%,#75d4eeaa 0,transparent 28%),radial-gradient(ellipse at 52% 100%,#a7e9c7 0,transparent 38%),linear-gradient(150deg,#c4effb,#e8fbff 42%,#a4dbe9);color:var(--text);padding-bottom:0}
-.theme-aero body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 8% 28%,#ffffffa6 0 24px,transparent 25px),radial-gradient(circle at 93% 42%,#ffffff70 0 42px,transparent 43px),radial-gradient(circle at 85% 82%,#56c6e324 0 120px,transparent 121px),radial-gradient(circle at 28% 84%,#ffffff66 0 11px,transparent 12px);filter:blur(.3px)}
-.theme-aero body:after{content:"";position:fixed;z-index:0;pointer-events:none;inset:0;border:0;opacity:.6;background:radial-gradient(ellipse at 50% -5%,#fff9 0,transparent 50%),radial-gradient(ellipse at 105% 55%,#fff7 0,transparent 30%)}
-.theme-aero header{height:auto;min-height:78px;flex-wrap:wrap;gap:16px;padding:13px clamp(16px,4vw,50px);background:linear-gradient(180deg,#ffffffd9,#dff7ff9e);border:1px solid #ffffffd9;border-top:1px solid #fff;border-bottom:1px solid #86cada;box-shadow:0 10px 30px #1c81a326,inset 0 2px #fff;border-image:none;border-radius:0 0 20px 20px;backdrop-filter:blur(22px) saturate(145%)}
-.theme-aero .brand img{border-radius:14px;box-shadow:0 4px 11px #328da455,inset 0 1px #fff}.theme-aero .brand strong{color:#144b6c;text-shadow:0 1px #fff;font-size:16px}.theme-aero .brand small{color:#39768d;font-size:10px;font-weight:700}.theme-aero .topright{color:#316c82}.theme-aero .dot{box-shadow:0 0 0 4px #fff8,0 0 14px currentColor}
-.theme-aero main{max-width:1400px;padding:28px clamp(16px,4vw,48px) 130px}.theme-aero .hero{position:relative;display:flex;align-items:stretch;gap:20px;padding:clamp(22px,3vw,36px);margin:0 0 20px;border:1px solid #ffffffd9;border-radius:26px;background:linear-gradient(145deg,#ffffffbb 0%,#e7fbffd9 35%,#87d5e8b8 100%);box-shadow:0 18px 35px #1b729629,inset 0 2px #fff,inset 0 -2px #6cb6cc44;backdrop-filter:blur(22px) saturate(145%);overflow:hidden}
-.theme-aero .hero:before{content:"";position:absolute;left:0;right:0;top:0;height:46%;border-radius:25px 25px 50% 50%;background:linear-gradient(180deg,#ffffffa8,transparent);pointer-events:none}.theme-aero .hero:after{content:"";position:absolute;right:-48px;bottom:-128px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fffde8 0,#b8f0f8 22%,#6cc7e6 60%,#439bc9 100%);opacity:.48;box-shadow:inset -15px -22px 30px #327da033,inset 12px 12px 24px #fff9;pointer-events:none}
-.theme-aero .hero-copy{position:relative;z-index:1;align-self:center}.theme-aero .eyebrow{color:#0086aa;letter-spacing:.15em}.theme-aero .hero h1{color:#17516f;text-shadow:0 2px #fff,0 4px 9px #2c80a322;letter-spacing:-.035em}.theme-aero .hero-subtitle{color:#366d83!important;font-weight:600}.theme-aero .hero .pill{background:linear-gradient(180deg,#5dc7e9,#1388c4 55%,#086ba7);border:1px solid #6bd9ed;color:#fff;border-radius:999px;box-shadow:inset 0 2px #ffffffc9,inset 0 -3px #005d9b55,0 4px 0 #4aa2bf,0 8px 18px #087da833;font-weight:800;text-shadow:0 1px #005b8a}
-.theme-aero .grid{gap:14px}.theme-aero .card{position:relative;overflow:hidden;background:linear-gradient(145deg,#ffffffc9 0%,#e6faffb7 45%,#c5eef5a8 100%);border:1px solid #ffffffed;border-radius:21px;padding:16px;box-shadow:0 12px 24px #1b779126,inset 0 2px #fff,inset 0 -1px #5eaecb44;color:var(--text);backdrop-filter:blur(16px) saturate(140%)}.theme-aero .card:before{content:"";position:absolute;pointer-events:none;top:0;left:8%;right:8%;height:34%;border-radius:0 0 50% 50%;background:linear-gradient(180deg,#fff8,transparent);opacity:.8}.theme-aero .grid>.card:nth-child(n){border-top:1px solid #fff}.theme-aero .metric-head{position:relative;color:#39728a;font-weight:800}.theme-aero .metric-icon{display:inline-grid;place-items:center;min-width:30px;height:30px;padding:0 7px;border-radius:50%;color:#fff;background:linear-gradient(155deg,#a9f2ff 0%,#39bcdf 42%,#127ab6 100%);border:1px solid #ffffffd9;box-shadow:inset 0 2px #fff9,inset 0 -3px #005e8e66,0 3px 6px #207ba633;text-shadow:0 1px #12678b}.theme-aero .value{position:relative;color:#104c6b;text-shadow:0 1px #fff,0 2px 7px #399cc51a}.theme-aero .unit{color:#4a7a8c}.theme-aero .metric-foot{border-top-color:#8dcfdd88;color:#4b7b8b}
-.theme-aero .section-title h2,.theme-aero .trend-head h2{color:#164f6d;font-weight:850;text-shadow:0 1px #fff}.theme-aero .section-title span,.theme-aero .trend-head p{color:#507f92}.theme-aero .meta-item{background:linear-gradient(145deg,#faffffbc,#d5f2f8a8);border:1px solid #fff;border-radius:14px;box-shadow:inset 0 1px #fff,0 4px 10px #267fa414}.theme-aero .meta-item label{color:#5b8394}.theme-aero .meta-item strong{color:#164a65}.theme-aero .statusline{border-bottom-color:#8dcddd77}.theme-aero .statusmark{border-radius:50%;background:linear-gradient(145deg,#c5ffeb,#5fcfae);color:#087b5d;box-shadow:inset 0 2px #fff,0 3px 8px #2f997533}.theme-aero .statusline small{color:#527c8d}.theme-aero .history th{color:#47798c;border-bottom-color:#85c6d5}.theme-aero .history td{border-bottom-color:#a2d6df88;color:#20566d}.theme-aero .history tbody tr:nth-child(odd){background:#ffffff4d}.theme-aero .history tbody tr:hover{background:#ffffffb0}.theme-aero .empty,.theme-aero .footer{color:#517b8d}
-.theme-aero .btn{background:linear-gradient(180deg,#8ce4f5,#26add5 52%,#087bb4);border:1px solid #a7f2ff;color:white;font-weight:800;text-shadow:0 1px #126b8c;box-shadow:inset 0 2px #fff9,inset 0 -3px #00689b66,0 3px 0 #4fa8c3}.theme-aero .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}.theme-aero .stale-banner{border:1px solid #ffb0bb;background:linear-gradient(145deg,#fff7f7ed,#ffd9dfd9);color:#9c2438;box-shadow:inset 0 2px #fff,0 8px 20px #bc335022}.theme-aero .stale-banner small{color:#a3485a}.theme-aero .alarm-strip{border:1px solid #fff;background:#eafaffb8;box-shadow:0 10px 25px #2685a322,inset 0 1px #fff;backdrop-filter:blur(16px)}.theme-aero .alarm-strip-head{background:linear-gradient(180deg,#e7fbff,#b9eaf5);border-bottom-color:#9dd8e5;color:#28677e}.theme-aero .alarm-strip-head strong{color:#14516e}.theme-aero .alarm-item{border-bottom-color:#a9dbe477}.theme-aero .alarm-item.error{color:#9d263a;background:linear-gradient(90deg,#ffb8c055,transparent)}.theme-aero .alarm-item.warning{color:#82530e;background:linear-gradient(90deg,#ffe1a455,transparent)}.theme-aero .alarm-item.info{color:#205a7a;background:linear-gradient(90deg,#bfe9f566,transparent)}.theme-aero .alarm-empty{color:#128561}
-.theme-aero .trend-card{padding:19px}.theme-aero .trend-toggle{border:1px solid #ffffff;background:linear-gradient(180deg,#fff,#c8eff7);color:#45788d;border-radius:999px;box-shadow:inset 0 1px #fff,0 3px 0 #8acbdc;font-weight:800}.theme-aero .trend-toggle.active{background:linear-gradient(180deg,#66d7f1,#1596c8 60%,#0874ae);border-color:#95edff;color:#fff;box-shadow:inset 0 2px #ffffffd9,inset 0 -3px #005f9255,0 3px 0 #61b4cd;text-shadow:0 1px #075b83}.theme-aero .trend-plot{border:1px solid #fff;border-radius:17px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 59px,#7fc6d433 60px),linear-gradient(145deg,#f7ffffe6,#c9edf5ce);box-shadow:inset 0 2px 6px #6baec522,inset 0 -1px #fff,0 5px 12px #3187a315}.theme-aero .trend-tooltip{background:linear-gradient(145deg,#ffffffef,#d9f7ffef);border-color:#fff;color:#174c67;box-shadow:0 8px 22px #1e82a333,inset 0 1px #fff}.theme-aero .trend-legend{color:#427487}.theme-aero .legend-dot{box-shadow:0 0 0 2px #ffffffc9,0 2px 5px #1d759533}
-.theme-aero .theme-dock{border:1px solid #fff;background:linear-gradient(180deg,#fffffff2,#cdeff7ed);color:#1a536d;box-shadow:0 12px 35px #197da53b,inset 0 2px #fff;backdrop-filter:blur(24px) saturate(160%)}.theme-aero .theme-dock-label{color:#0784a9}.theme-aero .theme-choice{background:linear-gradient(180deg,#fff,#d1f2f9);border:1px solid #fff;color:#4a7c90;box-shadow:inset 0 1px #fff,0 3px 0 #8dcbdc}.theme-aero .theme-choice.is-active{background:linear-gradient(180deg,#68d8f3,#1999cb 55%,#0872ad);border-color:#b7f7ff;color:#fff;box-shadow:inset 0 2px #ffffffd9,inset 0 -3px #005f9255,0 3px 0 #53b5d2;text-shadow:0 1px #075b83}
-@media(max-width:900px){.theme-aero header{border-radius:0 0 17px 17px}}
-@media(max-width:700px){.theme-classic header{flex-wrap:wrap;height:auto;min-height:76px;padding:12px 16px}.theme-classic .topright{margin-left:auto}}
-@media(max-width:520px){.theme-aero .hero{padding:19px 15px;border-radius:18px}.theme-aero .grid{gap:9px}.theme-aero .card{padding:13px;border-radius:16px}.theme-aero .theme-choice{padding:8px 7px}.theme-classic .hero{flex-direction:column;align-items:flex-start}.theme-classic .topright .hide-sm{display:none}}
-
-
-
-/* Frutiger Aero refresh v2 — reference-led Vista-era liquid glass */
-html.theme-aero body{
-  min-height:100vh;
-  color:var(--text);
-  background-color:#38aee8;
-  background-image:linear-gradient(180deg,#48b9f015 0%,#e8fcff16 55%,#65bd4420 100%),url('/frutiger-aero-wallpaper.webp');
-  background-size:cover,cover;
-  background-position:center,center center;
-  background-repeat:no-repeat,no-repeat;
-  background-attachment:fixed,fixed;
-  isolation:isolate;
-}
-html.theme-aero body:before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 8% 24%,#ffffffbc 0 2px,#ffffff5e 3px 5px,transparent 7px),
-    radial-gradient(circle at 93% 31%,#ffffffa8 0 3px,#ffffff43 4px 8px,transparent 10px),
-    radial-gradient(circle at 82% 74%,#eaffffab 0 7px,#a5f0ff55 8px 16px,transparent 19px),
-    radial-gradient(circle at 24% 68%,#ffffff77 0 2px,#ffffff20 3px 5px,transparent 7px),
-    radial-gradient(ellipse at 50% 0%,#eaffff36,transparent 60%);
-  filter:blur(.25px);opacity:.88
-}
-html.theme-aero body:after{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    linear-gradient(112deg,transparent 0 30%,#ffffff09 40%,transparent 52%),
-    radial-gradient(ellipse at 50% 0%,#ffffff65,transparent 45%),
-    linear-gradient(180deg,#ffffff05 0%,transparent 70%,#5ca83a0c 100%);
-}
-html.theme-aero header{position:sticky;z-index:5;height:auto;min-height:84px;flex-wrap:wrap;gap:16px;padding:13px clamp(16px,4vw,50px);background:linear-gradient(180deg,#f9fefff0 0%,#e6faffc9 46%,#a4e0f2a3 100%);border:1px solid #ffffffed;border-top:1px solid #fff;border-bottom:1px solid #78c9e2;border-radius:0 0 26px 26px;box-shadow:0 12px 32px #006d9938,inset 0 2px 0 #fff,inset 0 -2px 0 #56b2d32b;backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%)}
-html.theme-aero .brand img{border:1px solid #ffffffed;border-radius:16px;background:linear-gradient(145deg,#ffffffce,#8cdef0b8);box-shadow:inset 0 2px 4px #fff,0 4px 12px #05699544}
-html.theme-aero .topright{font-weight:650;text-shadow:0 1px #fff9}
-html.theme-aero main{position:relative;z-index:1;max-width:1480px;padding:30px clamp(16px,4vw,48px) 145px}
-html.theme-aero .hero{isolation:isolate;border:1px solid #ffffffed;border-radius:32px;background:linear-gradient(145deg,#ffffffd9 0%,#e3faffb9 38%,#9fe3f296 72%,#70cbe88c 100%);box-shadow:0 22px 45px #086c963b,inset 0 3px 0 #fff,inset 0 -3px 0 #4cb0d13b,0 0 0 5px #ffffff15;backdrop-filter:blur(28px) saturate(185%);-webkit-backdrop-filter:blur(28px) saturate(185%)}
-html.theme-aero .hero:before{z-index:-1;left:1%;right:1%;top:1px;height:57%;border-radius:31px 31px 55% 55%;background:linear-gradient(180deg,#ffffffd4 0%,#ffffff57 34%,transparent 100%);filter:blur(.2px)}
-html.theme-aero .hero:after{right:-38px;bottom:-132px;width:310px;height:310px;opacity:.66;background:radial-gradient(circle at 29% 22%,#ffffff 0 3%,#e9fffff2 9%,#a8f0ffbd 20%,#52c1e5a8 43%,#187eb98a 65%,#72d9f044 72%,transparent 73%);box-shadow:inset -22px -26px 34px #145c8830,inset 17px 16px 24px #ffffffce,0 0 32px #b5f2ff54}
-html.theme-aero .hero-copy{z-index:2}
-html.theme-aero .eyebrow{color:#087fa8;text-shadow:0 1px #fff;letter-spacing:.18em}
-html.theme-aero .hero h1{color:#075078;text-shadow:0 2px 0 #fff,0 5px 12px #116c9c31;letter-spacing:-.045em}
-html.theme-aero .hero-subtitle{color:#235f7c!important;font-weight:650;text-shadow:0 1px #ffffffa8}
-html.theme-aero .hero .pill{border:1px solid #e6fcff;background:linear-gradient(180deg,#a4f0ff 0%,#47c9ed 30%,#168fc7 72%,#0873ad 100%);box-shadow:inset 0 3px 0 #ffffffed,inset 0 -4px 0 #00608b66,0 4px 0 #5ebad4,0 9px 18px #0878a83a;color:#fff;text-shadow:0 1px 2px #075681;font-weight:850}
-html.theme-aero .grid{gap:15px}
-html.theme-aero .card{isolation:isolate;border:1px solid #ffffffed;border-radius:25px;background:linear-gradient(145deg,#ffffffd7 0%,#edfcffb9 34%,#c7f2f7b0 68%,#a1e1ef9c 100%);box-shadow:0 15px 30px #075b8530,inset 0 3px 0 #fff,inset 0 -2px 0 #398db22b,0 0 0 1px #d9f9ff70;color:var(--text);backdrop-filter:blur(23px) saturate(175%);-webkit-backdrop-filter:blur(23px) saturate(175%);transition:transform .2s ease,box-shadow .2s ease}
-html.theme-aero .card:before{z-index:-1;top:0;left:5%;right:5%;height:47%;border-radius:0 0 48% 48%;background:linear-gradient(180deg,#ffffffcb 0%,#ffffff5c 44%,transparent 100%);opacity:.9}
-html.theme-aero .card:hover{transform:translateY(-2px);box-shadow:0 21px 36px #075b8539,inset 0 3px 0 #fff,inset 0 -2px 0 #398db22b,0 0 0 1px #d9f9ff90}
-html.theme-aero .metric-head{color:#286882;text-shadow:0 1px #fff9}
-html.theme-aero .metric-icon{width:31px;height:31px;padding:0;min-width:31px;border:1px solid #f1feff;background:radial-gradient(circle at 28% 20%,#ffffff 0 4%,#bdf7ff 16%,#59d1ee 42%,#1389c5 70%,#08649f 100%);box-shadow:inset 0 3px 4px #fff,inset 0 -4px 5px #0458847d,0 3px 0 #68b8d2,0 6px 10px #07689836;color:#fff;font-size:15px;text-shadow:0 1px 2px #075681}
-html.theme-aero .value{color:#064c72;text-shadow:0 2px 0 #fff,0 5px 13px #1689b226;font-weight:800}
-html.theme-aero .unit{color:#39748b}
-html.theme-aero .metric-foot{border-top-color:#7cc7dc85;color:#40788e}
-html.theme-aero .section-title h2,html.theme-aero .trend-head h2{color:#075276;text-shadow:0 2px 0 #ffffffd9;font-weight:850}
-html.theme-aero .section-title span,html.theme-aero .trend-head p{color:#326f86;text-shadow:0 1px #fff9}
-html.theme-aero .meta-item{border:1px solid #ffffffed;border-radius:17px;background:linear-gradient(145deg,#ffffffcf,#c9f1f8aa);box-shadow:inset 0 2px 0 #fff, inset 0 -1px 0 #62bfd52b,0 6px 13px #126f9416;backdrop-filter:blur(16px)}
-html.theme-aero .meta-item label{color:#467d91}
-html.theme-aero .meta-item strong{color:#124f6e}
-html.theme-aero .statusline{border-bottom-color:#75c2d780}
-html.theme-aero .statusmark{width:32px;height:32px;border:1px solid #ffffffed;border-radius:50%;background:radial-gradient(circle at 27% 20%,#fff 0 4%,#ccfff0 15%,#69d7b5 49%,#159876 78%,#08745b);box-shadow:inset 0 3px 3px #fff, inset 0 -3px 5px #086c565c,0 3px 0 #78c8b5,0 6px 10px #157b631a;color:white;text-shadow:0 1px 2px #08765b}
-html.theme-aero .statusline b{color:#155571;text-shadow:0 1px #fff9}
-html.theme-aero .statusline small{color:#426f83}
-html.theme-aero .history-wrap{border-radius:24px}
-html.theme-aero .history{border-radius:15px;overflow:hidden}
-html.theme-aero .history th{color:#1f6b86;border-bottom-color:#73c1d5;background:linear-gradient(180deg,#e9fcffcc,#bdebf5a8);text-shadow:0 1px #fff;font-weight:800}
-html.theme-aero .history td{border-bottom-color:#83cada7a;color:#1a5874}
-html.theme-aero .history tbody tr:nth-child(odd){background:#ffffff65}
-html.theme-aero .history tbody tr:hover{background:#ffffffd4}
-html.theme-aero .footer{padding:15px 18px;border:1px solid #ffffffbd;border-radius:18px;background:linear-gradient(145deg,#ffffffa8,#d7f8ff9e);box-shadow:inset 0 2px #fff8,0 8px 18px #076f9616;backdrop-filter:blur(18px);color:#376e83}
-html.theme-aero .btn{border:1px solid #e7fcff;border-radius:999px;background:linear-gradient(180deg,#dcfbff 0%,#7ae1f7 22%,#23afd9 58%,#077ab7 100%);box-shadow:inset 0 3px 0 #ffffffee,inset 0 -4px 0 #005e966e,0 4px 0 #65bed7,0 8px 15px #0876a32b;color:#fff;text-shadow:0 1px 2px #065580;font-weight:850;transition:transform .18s,filter .18s}
-html.theme-aero .btn:hover{filter:brightness(1.06);transform:translateY(-2px)}
-html.theme-aero .stale-banner{border:1px solid #fff;background:linear-gradient(145deg,#fff7f8f2,#ffd6dcdf);box-shadow:inset 0 2px #fff,0 12px 25px #ba344225;backdrop-filter:blur(18px)}
-html.theme-aero .alarm-strip{border:1px solid #fffffff2;border-radius:23px;background:#e9fbffc4;box-shadow:0 14px 30px #08749f2e,inset 0 2px #fff;backdrop-filter:blur(25px) saturate(165%)}
-html.theme-aero .alarm-strip-head{background:linear-gradient(180deg,#f3feff,#b5eaf7);border-bottom-color:#91d4e4}
-html.theme-aero .trend-card{padding:20px;border-radius:27px}
-html.theme-aero .trend-controls{gap:9px}
-html.theme-aero .trend-toggle{border:1px solid #ffffffee;background:linear-gradient(180deg,#ffffff 0%,#e5fbff 35%,#acdfea 100%);border-radius:999px;box-shadow:inset 0 2px #fff, inset 0 -2px #66b8d039,0 4px 0 #7bc8dc,0 7px 12px #08749f1c;color:#286c85;font-weight:850;text-shadow:0 1px #fff}
-html.theme-aero .trend-toggle.active{background:linear-gradient(180deg,#d8fcff 0%,#66d9f3 25%,#159dce 66%,#0871ad 100%);border-color:#f4ffff;color:#fff;box-shadow:inset 0 3px #ffffffeb,inset 0 -4px #005f9255,0 4px 0 #65bfd8,0 7px 13px #08749f33;text-shadow:0 1px 2px #075681}
-html.theme-aero .trend-plot{border:1px solid #fffffffa;border-radius:22px;background:linear-gradient(180deg,#f5feffdc,#d6f5f9c9),repeating-linear-gradient(to bottom,transparent 0,transparent 59px,#5db4cf2e 60px);box-shadow:inset 0 3px 8px #2b91b61a,inset 0 -2px 0 #fff,0 6px 15px #08749f1c;backdrop-filter:blur(16px)}
-html.theme-aero .trend-tooltip{border:1px solid #ffffff;background:linear-gradient(145deg,#fffffffa,#bdeffaef);border-radius:15px;box-shadow:inset 0 2px #fff,0 12px 25px #086c9638;color:#114d6b}
-html.theme-aero .trend-legend{color:#286b85;text-shadow:0 1px #fff9}
-html.theme-aero .legend-dot{box-shadow:0 0 0 2px #ffffffed,0 2px 7px #0c78a33b}
-html.theme-aero .theme-dock{border:1px solid #ffffffed;border-radius:25px;background:linear-gradient(180deg,#ffffffef 0%,#e5fbffdf 48%,#9fe0f2d9 100%);box-shadow:0 18px 40px #07699542,inset 0 3px 0 #fff,inset 0 -2px 0 #51afce38;backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)}
-html.theme-aero .theme-dock-label{color:#087aa3;text-shadow:0 1px #fff;letter-spacing:.17em}
-html.theme-aero .theme-choice{border:1px solid #ffffffed;border-radius:15px;background:linear-gradient(180deg,#ffffff 0%,#e5fbff 35%,#acdfea 100%);box-shadow:inset 0 2px #fff,inset 0 -2px #66b8d039,0 4px 0 #7bc8dc;color:#286c85;font-weight:850;text-shadow:0 1px #fff;transition:transform .18s,filter .18s,box-shadow .18s}
-html.theme-aero .theme-choice:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:inset 0 2px #fff,0 5px 0 #65bad2,0 9px 16px #08749f29}
-html.theme-aero .theme-choice.is-active{border-color:#f4ffff;background:linear-gradient(180deg,#d8fcff 0%,#66d9f3 25%,#159dce 66%,#0871ad 100%);box-shadow:inset 0 3px #ffffffeb,inset 0 -4px #005f9255,0 4px 0 #65bfd8,0 7px 13px #08749f33;color:#fff;text-shadow:0 1px 2px #075681}
-html.theme-aero .theme-choice-icon{filter:drop-shadow(0 1px 2px #07568144)}
-@media(max-width:900px){html.theme-aero body{background-position:center,center top;background-attachment:scroll,scroll}html.theme-aero header{border-radius:0 0 22px 22px}}
-@media(max-width:520px){html.theme-aero body{background-position:center,center top}html.theme-aero .hero{border-radius:23px}html.theme-aero .card{border-radius:20px}html.theme-aero .theme-dock{border-radius:19px}}
-@media(prefers-reduced-motion:reduce){html.theme-aero .card,html.theme-aero .btn,html.theme-aero .theme-choice{transition:none}}
-
-/* Private visitor analytics panel */
-.analytics-trigger{margin-left:auto;padding:6px 9px;border:1px solid #344756;border-radius:8px;background:#111b25;color:#91a6b8;font:600 10px/1.2 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.03em;cursor:pointer;opacity:.82;transition:opacity .15s,border-color .15s,color .15s}
-.analytics-trigger:hover{opacity:1;border-color:#5ce1d0;color:#e8ffff}
-.footer-admin{position:relative;z-index:70;display:inline-flex;align-items:center}
-.analytics-modal{position:fixed;z-index:1000;inset:0;display:flex;align-items:center;justify-content:center;padding:18px}
-.analytics-modal[hidden],.analytics-view[hidden]{display:none!important}
-.analytics-backdrop{position:absolute;inset:0;background:#02070dcc;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
-.analytics-dialog{position:relative;z-index:1;width:min(720px,100%);max-height:min(86vh,850px);overflow:auto;border:1px solid #344756;border-radius:20px;padding:22px;background:linear-gradient(145deg,#17232f,#0c121a 72%);color:#edf3f8;box-shadow:0 30px 100px #000a,inset 0 1px #ffffff10}
-.analytics-dialog-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:10px}
-.analytics-dialog-head h2{margin:0;font-size:20px;letter-spacing:-.02em}
-.analytics-dialog-head p{margin:5px 0 0;color:#91a6b8;font-size:11px}
-.analytics-close{width:34px;height:34px;flex:0 0 34px;border:1px solid #344756;border-radius:10px;background:#121c26;color:#d8e4ef;font-size:22px;line-height:1;cursor:pointer}
-.analytics-form{display:grid;gap:9px;margin:22px 0 4px;max-width:360px}
-.analytics-form label{font-size:12px;color:#a6b8c8}
-.analytics-form input{width:100%;margin-top:6px;padding:12px 13px;border:1px solid #344756;border-radius:10px;background:#080e15;color:#f2f7fb;font:inherit;outline:none}
-.analytics-form input:focus{border-color:#5ce1d0;box-shadow:0 0 0 3px #5ce1d01f}
-.analytics-submit,.analytics-logout{border:1px solid #32766d;border-radius:10px;padding:10px 14px;background:linear-gradient(180deg,#24584f,#143a37);color:#dffffa;font-weight:700;cursor:pointer}
-.analytics-message{min-height:18px;margin:0;color:#ff9ba3;font-size:12px}
-.analytics-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:19px 0 17px}
-.analytics-kpi{min-width:0;border:1px solid #2b3b49;border-radius:13px;padding:13px;background:linear-gradient(145deg,#1b2935,#111923);box-shadow:inset 0 1px #ffffff08}
-.analytics-kpi span{display:block;color:#91a6b8;font-size:10px;line-height:1.4}
-.analytics-kpi strong{display:block;margin-top:9px;font-size:27px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#f2f7fb}
-.analytics-kpi small{display:block;margin-top:3px;color:#7990a3;font-size:9px}
-.analytics-section-title{margin:18px 0 9px;color:#dce8f2;font-size:12px;font-weight:750}
-.analytics-bars{min-height:100px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:10px;border:1px solid #263442;border-radius:13px;padding:12px;background:#090f16}
-.analytics-bar-col{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:6px;min-width:0;height:92px}
-.analytics-bar-value{color:#a9c0d1;font-size:10px;font-variant-numeric:tabular-nums}
-.analytics-bar{width:min(100%,34px);min-height:3px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#76f4df,#238f91);box-shadow:0 0 14px #43dbba1c,inset 0 1px #d6fff8a8}
-.analytics-bar-label{color:#8095a6;font-size:9px}
-.analytics-pages{display:grid;gap:7px;margin-bottom:6px}
-.analytics-page{display:flex;justify-content:space-between;gap:12px;padding:9px 11px;border:1px solid #263442;border-radius:9px;background:#101923;color:#aebfcd;font-size:11px;overflow-wrap:anywhere}
-.analytics-page strong{color:#e5f0f8;white-space:nowrap}
-.analytics-notice{margin:14px 0 0;padding:10px 12px;border:1px solid #705b2c;border-radius:10px;background:#2a2417;color:#f0d9a7;font-size:11px;line-height:1.5}
-.analytics-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:13px;border-top:1px solid #263442;color:#7e93a4;font-size:10px}
-.analytics-logout{padding:7px 10px;font-size:10px}
-html.theme-aero .analytics-trigger{border-color:#fff;background:linear-gradient(180deg,#fff,#c8f1f8);color:#286c85;box-shadow:inset 0 2px #fff,0 3px 0 #7bc8dc;text-shadow:0 1px #fff}
-html.theme-aero .analytics-dialog{border-color:#fff;background:linear-gradient(145deg,#effefff5,#d5f4facf);color:#174e68;box-shadow:0 30px 100px #06456a4d,inset 0 2px #fff;backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}
-html.theme-aero .analytics-dialog-head p,html.theme-aero .analytics-form label{color:#46798d}
-html.theme-aero .analytics-close{border-color:#fff;background:linear-gradient(180deg,#fff,#caeef6);color:#176181;box-shadow:inset 0 2px #fff,0 3px 0 #8acfe0}
-html.theme-aero .analytics-form input{border-color:#a5dbe8;background:#f8feff;color:#164f6b}
-html.theme-aero .analytics-kpi{border-color:#fff;background:linear-gradient(145deg,#fffdf9df,#bfeaf4ba);box-shadow:inset 0 2px #fff,0 5px 12px #08749f14}
-html.theme-aero .analytics-kpi span,html.theme-aero .analytics-kpi small{color:#47798d}
-html.theme-aero .analytics-kpi strong,html.theme-aero .analytics-section-title{color:#0b5476}
-html.theme-aero .analytics-bars{border-color:#fff;background:linear-gradient(180deg,#effdffdd,#b7e9f5c2);box-shadow:inset 0 2px #fff}
-html.theme-aero .analytics-bar-label,html.theme-aero .analytics-bar-value{color:#286b85}
-html.theme-aero .analytics-page{border-color:#fff;background:#ffffff8c;color:#28657d}
-html.theme-aero .analytics-page strong{color:#0b5476}
-html.theme-aero .analytics-footer{border-top-color:#9bd4e0;color:#507f92}
-@media(max-width:600px){.analytics-modal{padding:9px}.analytics-dialog{padding:16px;border-radius:16px;max-height:90vh}.analytics-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.analytics-kpi strong{font-size:24px}.analytics-bars{gap:5px;padding:9px}.analytics-footer{align-items:start;flex-direction:column}}
-
-</style><script>
-(() => { try { const saved = localStorage.getItem('aelabs-web-theme'); const theme = ['classic','aero'].includes(saved) ? saved : 'classic'; document.documentElement.classList.add('theme-' + theme); } catch (_) { document.documentElement.classList.add('theme-classic'); } })();
-</script></head><body>
-<header>
-<div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small id="siteTagline">СИСТЕМА МОНИТОРИНГА БИОПРОЦЕССА</small></div></div>
-<div class="topright"><span class="connection-status"><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div>
-</header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero">
-<div class="hero-copy">
-<div class="eyebrow" id="heroEyebrow">AELABS MONITORING · DS-01.01 · LIVE SYSTEM</div>
-<h1>AELABS WEB</h1>
-<p class="hero-subtitle" id="heroSubtitle">Мониторинг процесса ферментации и история измерений в реальном времени.</p>
-<div class="hero-bottom"><div class="pill" id="heroPill">Автообновление каждые 5 секунд</div></div>
-</div>
-</div>
-<div class="grid" id="metrics"><article class="card"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card"><div class="metric-head">O₂ отходящего газа <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>EQ-013</span></div></article><article class="card"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Непрерывная история измерений по времени источника</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th></tr></thead><tbody id="historyRows"><tr><td colspan="5" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span id="footerBadge">AELABS SYMBIONT WEB · LIVE MONITORING · READ-ONLY</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span>
-<div class="footer-admin"><button type="button" class="analytics-trigger" id="analyticsOpen">Статистика</button></div>
-</div></main><script src="/source-history.js"></script><script>
+</style></head><body><header><div class="brand"><img src="/ae_logo.png" alt="AELABS"><div><strong>AELABS WEB</strong><small>Live Monitor</small></div></div><div class="topright"><span><i class="dot" id="liveDot"></i><span id="connection">ПОДКЛЮЧЕНИЕ…</span></span></div></header><main><div id="staleBanner" class="stale-banner" role="alert">⚠ ОШИБКА: новые записи не поступают более 10 минут.<small id="staleDetail">Проверьте настольное приложение и публикацию данных в GitHub.</small></div><section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong>Уведомления процесса</strong><span id="alarmCount">0 активных</span></div><div id="alarmItems" class="alarm-items"><div class="alarm-empty">Проверка состояния…</div></div></section><div class="hero"><div><div class="eyebrow">REAL-TIME DATA / DS-01.01</div><h1>AELABS WEB</h1></div><div class="pill">Синхронизация каждые 5 секунд</div></div><div class="grid" id="metrics"><article class="card g-proc"><div class="metric-head">pH <span class="metric-icon">◉</span></div><div class="value" id="ph">—</div><div class="metric-foot"><span>Кислотность</span><span>DS-01.01</span></div></article><article class="card g-proc"><div class="metric-head">DO · растворённый кислород <span class="metric-icon">⌁</span></div><div class="value" id="do">—</div><div class="unit">мг/л</div><div class="metric-foot"><span>DO</span><span>SEN-O2-001</span></div></article><article class="card g-proc"><div class="metric-head">Температура <span class="metric-icon">⌁</span></div><div class="value" id="temp">—</div><div class="unit">°C</div><div class="metric-foot"><span>Температурный датчик</span><span>SEN-TEMP-001</span></div></article><article class="card g-proc"><div class="metric-head">Скорость мешалки <span class="metric-icon">⟳</span></div><div class="value" id="rpm">—</div><div class="unit">об/мин</div><div class="metric-foot"><span>Мешалка</span><span>CTRL-AGT-001</span></div></article><article class="card g-proc"><div class="metric-head">ChekOD <span class="metric-icon">◌</span></div><div class="value" id="od">—</div><div class="unit">OD</div><div class="metric-foot"><span>Оптическая плотность</span><span>EQ-016</span></div></article><article class="card g-gas"><div class="metric-head">O₂ абгаза <span class="metric-icon">⌁</span></div><div class="value" id="offgas">—</div><div class="unit">%</div><div class="metric-foot"><span>O₂ в абгазе</span><span>DS-02.03</span></div></article><article class="card g-gas"><div class="metric-head">CH₄ абгаза <span class="metric-icon">⌁</span></div><div class="value" id="ch4">—</div><div class="unit">%</div><div class="metric-foot"><span>CH₄ в абгазе</span><span>DS-02.03</span></div></article><article class="card g-gas"><div class="metric-head">CO₂ абгаза <span class="metric-icon">⌁</span></div><div class="value" id="co2">—</div><div class="unit">%</div><div class="metric-foot"><span>CO₂ в абгазе</span><span>DS-02.03</span></div></article><article class="card g-air" id="flowCard"><div class="metric-head"><span id="flowTitle">Расход воздуха</span> <span class="metric-icon">≋</span></div><div class="value" id="airflow">—</div><div class="unit">л/мин</div><div class="metric-foot"><span id="flowFoot">Воздух, ПР100</span><span>DS-02.03</span></div></article><article class="card g-w"><div class="metric-head"><span id="weightName1">Весы 1</span><span class="metric-icon">⚖</span></div><div class="value" id="weight1">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 1</span></div></article><article class="card g-w"><div class="metric-head"><span id="weightName2">Весы 2</span><span class="metric-icon">⚖</span></div><div class="value" id="weight2">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 2</span></div></article><article class="card g-w"><div class="metric-head"><span id="weightName3">Весы 3</span><span class="metric-icon">⚖</span></div><div class="value" id="weight3">—</div><div class="unit">кг</div><div class="metric-foot"><span>Масса</span><span>Канал 3</span></div></article></div><section class="card trend-card"><div class="trend-head"><div><h2>Тренд параметров</h2><p>Тренд параметров</p></div><div class="trend-controls"><button class="trend-toggle active" data-series="ph">pH</button><button class="trend-toggle active" data-series="do">DO</button><button class="trend-toggle active" data-series="od">OD</button><button class="trend-toggle active" data-series="temp">Температура</button><button class="trend-toggle" data-series="o2">O₂</button><button class="trend-toggle" data-series="ch4">CH₄</button><button class="trend-toggle" data-series="co2">CO₂</button><button class="trend-toggle" data-series="air">Воздух</button><button class="trend-toggle" data-series="o2f">O₂ подача</button><button class="trend-follow" id="trendFollow" type="button">● Автопрокрутка: ВКЛ</button></div></div><div class="trend-plot" id="trendPlot"><div class="trend-empty">Ожидание истории измерений…</div><div id="trendTooltip" class="trend-tooltip"></div></div><div class="trend-legend"><span><i class="legend-dot" style="background:#4fd18b"></i>pH</span><span><i class="legend-dot" style="background:#5da9e9"></i><span id="trendDoLabel">DO, мг/л</span></span><span><i class="legend-dot" style="background:#b17aff"></i>OD</span><span><i class="legend-dot" style="background:#ff6468"></i>Температура, °C</span></div></section><div class="section-title"><h2>Состояние системы</h2><span id="updated">Последнее обновление: —</span></div><div class="lower"><section class="card"><div class="section-title" style="margin:0 0 12px"><h2>Метаданные измерения</h2><span>OBSERVATION</span></div><div class="meta"><div class="meta-item"><label>Локальное время источника</label><strong id="rawTime">—</strong></div><div class="meta-item"><label>Часовой пояс</label><strong id="tz">Asia/Yekaterinburg</strong></div><div class="meta-item"><label>Время события UTC</label><strong id="eventTime">—</strong></div><div class="meta-item"><label>Получено UTC</label><strong id="receivedTime">—</strong></div><div class="meta-item"><label>Experiment ID</label><strong id="experiment">—</strong></div><div class="meta-item"><label>Run ID</label><strong id="run">—</strong></div></div></section><section class="card"><div class="section-title" style="margin:0 0 8px"><h2>Канал данных</h2><button class="btn" id="refresh">Обновить</button></div><div class="statusline"><div class="statusmark">✓</div><div><b>GitHub Data Source</b><small id="repoStatus">Проверка соединения…</small></div></div><div class="statusline" id="pcLinkRow"><div class="statusmark" id="pcLinkMark">●</div><div><b>СВЯЗЬ С ПК</b><small id="pcLinkStatus">Ожидание сигнала от настольного AELABS…</small></div></div><div class="statusline"><div class="statusmark">↻</div><div><b>Текущие данные</b><small id="snapshotStatus">Ожидание данных</small></div></div><div class="statusline"><div class="statusmark">▤</div><div><b>История измерений</b><small id="historyStatus">Загрузка архива…</small></div></div><div class="statusline"><div class="statusmark">◷</div><div><b>Автообновление</b><small id="historyUpdateHint">Определение источника истории…</small></div></div></section></div><div class="section-title"><h2>История последних измерений</h2><span id="historyCount">0 записей</span></div><section class="card history-wrap"><table class="history"><thead><tr><th>Время источника</th><th>pH</th><th id="historyDoLabel">DO, мг/л</th><th>Темп., °C</th><th>RPM</th><th>O₂, %</th><th>CH₄, %</th><th>CO₂, %</th><th>Воздух, л/мин</th><th>O₂ подача, л/мин</th></tr></thead><tbody id="historyRows"><tr><td colspan="10" class="empty">Загрузка истории…</td></tr></tbody></table></section><div class="footer"><span>AELABS SYMBIONT WEB · READ-ONLY MONITORING</span><span>Данные считываются через защищённый серверный API. Токен GitHub не передаётся браузеру.</span></div></main><script src="/source-history.js"></script><script>
 const $=id=>document.getElementById(id);
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
 function setVal(id,v){$(id).textContent=fmt(v)}
 function setValIfReadable(id,v){if(v!==null&&v!==undefined&&!(typeof v==='string'&&!v.trim()))setVal(id,v)}
-let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],historyTableItems=[],historyTotalCount=0,latestObservation=null,historyInitialized=false,refreshInFlight=false,historyFetchInFlight=false,historySourceMode='detecting',historyDoUnits='mg_l';
-// The Git LOG CSV is the durable source of truth. The browser cache is only a fallback.
+let lastRecordKey=null,lastRecordChangeAt=Date.now(),lastHistoryLoadAt=0,historyItems=[],latestObservation=null,historyInitialized=false,refreshInFlight=false,historyFetchInFlight=false,historySourceMode='detecting',historyDoUnits='mg_l';
+// v2 intentionally drops the old browser-generated polling samples. Only source-timestamped Git observations are kept.
 const TREND_STORAGE_KEY='aelabs_live_trend_v2_source_time';
-const MAX_HISTORY_ITEMS=20000,MAX_LOCAL_CACHE_ITEMS=5000,MAX_TREND_RENDER_POINTS=2400;
-try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object'&&x._source_key&&AELABSHistory.sourceTimeLabel(x)).slice(-MAX_LOCAL_CACHE_ITEMS)}catch(_){historyItems=[]}
-const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000;
+try{const saved=JSON.parse(localStorage.getItem(TREND_STORAGE_KEY)||'[]');if(Array.isArray(saved))historyItems=saved.filter(x=>x&&x.measurements&&typeof x.measurements==='object'&&x._source_key&&AELABSHistory.sourceTimeLabel(x)).slice(-500)}catch(_){historyItems=[]}
+let trendAutoFollow=true,trendOffset=0,trendDrag=null,trendLastRenderKey='';const TREND_WINDOW=50;
+const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000,MAX_TREND_GAP_MS=30000;
 function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObservation);if(Number.isFinite(sourceMs)&&sourceMs<=Date.now()+5*60*1000)return Math.max(0,Date.now()-sourceMs);return Math.max(0,Date.now()-lastRecordChangeAt)}
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
 function scaleName(o,index){
@@ -241,7 +37,8 @@ function scaleName(o,index){
  const candidates=[o?.weight_names?.[key],o?.weight_names?.[`weight_${i}`],o?.scale_names?.[i-1],o?.scale_names?.[key],o?.settings?.weight_names?.[key],o?.settings?.scale_names?.[i-1],o?.desktop_status?.weight_names?.[key],o?.desktop_status?.scale_names?.[i-1],o?.provenance?.weight_names?.[key],o?.provenance?.scale_names?.[i-1]];
  const name=candidates.find(v=>typeof v==='string'&&v.trim()); return name?name.trim():`Весы ${i}`;
 }
-const SERIES={ph:{label:'pH',color:'#4fd18b',get:m=>numericValue(m,['ph','pH','ph_pc'])},do:{label:'DO (растворённый кислород), мг/л',color:'#5da9e9',get:m=>numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','dissolvedOxygen','DO'])},od:{label:'OD',color:'#b17aff',get:m=>numericValue(m,['microcheck_od','od_online','od','OD'])},temp:{label:'Температура',color:'#ff6468',get:m=>numericValue(m,['temperature_c','temperature','temp','tC'])}};
+const OFFGAS_O2_KEYS=['offgas_o2_online_ae_pct','offgas_do_pct'],AIRFLOW_KEYS=['air_flow_online_ae_l_min','air_flow_online_ae_nl_min','airflow_pr100'],O2FLOW_KEYS=['o2_flow_online_ae_l_min'];
+const SERIES={ph:{label:'pH',color:'#4fd18b',get:m=>numericValue(m,['ph','pH','ph_pc'])},do:{label:'DO (растворённый кислород), мг/л',color:'#5da9e9',get:m=>numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','dissolvedOxygen','DO'])},od:{label:'OD',color:'#b17aff',get:m=>numericValue(m,['microcheck_od','od_online','od','OD'])},temp:{label:'Температура',color:'#ff6468',get:m=>numericValue(m,['temperature_c','temperature','temp','tC'])},o2:{label:'O₂ абгаза, %',color:'#5ce1d0',get:m=>numericValue(m,OFFGAS_O2_KEYS)},ch4:{label:'CH₄ абгаза, %',color:'#ffc66d',get:m=>numericValue(m,['offgas_ch4_online_ae_pct','ch4'])},co2:{label:'CO₂ абгаза, %',color:'#ff9f5a',get:m=>numericValue(m,['offgas_co2_online_ae_pct','co2'])},air:{label:'Подача воздуха, л/мин',color:'#6ba8ff',get:m=>numericValue(m,AIRFLOW_KEYS)},o2f:{label:'Подача O₂, л/мин',color:'#62d3a2',get:m=>numericValue(m,O2FLOW_KEYS)}};
 function updateHistoryLabels(){const pct=historySourceMode==='github-csv'&&historyDoUnits==='pct';SERIES.do.label=pct?'DO, % насыщения':'DO (растворённый кислород), мг/л';if($('trendDoLabel'))$('trendDoLabel').textContent=pct?'DO, %':'DO, мг/л';if($('historyDoLabel'))$('historyDoLabel').textContent=pct?'DO, %':'DO, мг/л';const hint=$('historyUpdateHint');if(hint)hint.textContent=historySourceMode==='github-csv'?'История из GIT LOG CSV · обновление раз в 15 секунд':historySourceMode==='browser-local'?'История по уникальным WEB-наблюдениям с исходным временем':'Определение источника истории…'}
 const visibleSeries=new Set(['ph','do','od','temp']);
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -269,9 +66,9 @@ function buildAlarms(o,m,stale){
   ['ph','pH',6.5,8.0,'','pH вне заданного диапазона'],
   ['temperature_c','Температура',20,28,' °C','Температура вне заданного диапазона'],
   ['do_mg_l','DO растворённого кислорода',3,9,' мг/л','DO растворённого кислорода вне заданного диапазона'],
-  ['offgas_do_pct','O₂ в абгазе',3,9,'%','O₂ в абгазе вне заданного диапазона']
+  ['offgas_o2','O₂ в абгазе',3,9,'%','O₂ в абгазе вне заданного диапазона']
  ];
- for(const [key,label,lo,hi,unit,msg] of limits){const v=m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
+ for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
  for(const f of flags)a.push({level:'warning',text:'ПРЕДУПРЕЖДЕНИЕ качества данных: '+String(f)});
  if(q.status&&q.status!=='raw_received'&&q.status!=='ok')a.push({level:'warning',text:'Статус качества данных: '+q.status});
  for(let i=1;i<=3;i++){const key=`weight_${i}_kg`,v=m[key],name=scaleName(o,i);if(typeof v==='number'&&v<=1)a.push({level:'error',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(typeof v==='number'&&v<=2)a.push({level:'warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
@@ -291,7 +88,7 @@ async function refresh(){
   latestObservation=o;updatePcLink();
   // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
   setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
-  setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',m.offgas_do_pct);
+  setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Расход O₂ (генератор)':'Расход воздуха';$('flowFoot').textContent=isO2?'Чистый O₂, ПР100':'Воздух, ПР100';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
   for(let i=1;i<=3;i++){setValIfReadable(`weight${i}`,m[`weight_${i}_kg`]);$('weightName'+i).textContent=scaleName(o,i)}
   setValIfReadable('rawTime',o.source_time_raw);setValIfReadable('tz',o.source_timezone);setValIfReadable('eventTime',o.event_time_utc);setValIfReadable('receivedTime',o.received_at_utc);setValIfReadable('experiment',o.experiment_id);setValIfReadable('run',o.run_id);
   $('updated').textContent='Проверка веба: '+new Date().toLocaleTimeString('ru-RU');
@@ -315,16 +112,13 @@ async function refreshHistoryFromServer(){
    historySourceMode='github-csv';historyDoUnits=payload.do_units==='pct'?'pct':'mg_l';updateHistoryLabels();
    if(!response.ok||payload.error){$('historyStatus').textContent='GIT LOG: '+(payload.error||('HTTP '+response.status));$('repoStatus').textContent='WEB JSON доступен · ошибка чтения GIT LOG CSV';return}
    const sourceItems=Array.isArray(payload.items)?payload.items:[];
-   historyItems=sourceItems.map(item=>({...item,_source_key:AELABSHistory.sourceRecordKey(item)})).filter(item=>item._source_key&&AELABSHistory.sourceTimeLabel(item)&&item.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(item.measurements)!==null)).slice(-MAX_HISTORY_ITEMS);
-   historyTableItems=Array.isArray(payload.recent_items)?payload.recent_items:historyItems.slice(-100);
-   historyTotalCount=Number.isFinite(Number(payload.count))?Number(payload.count):historyItems.length;
-   persistTrendCache();
-   $('historyStatus').textContent=`GIT LOG · ${historyTotalCount} исходных записей · ${historyItems.length} точек тренда · ${payload.repo||'CSV'}`;
+   historyItems=sourceItems.map(item=>({...item,_source_key:AELABSHistory.sourceRecordKey(item)})).filter(item=>item._source_key&&AELABSHistory.sourceTimeLabel(item)&&item.measurements&&Object.keys(SERIES).some(k=>SERIES[k].get(item.measurements)!==null)).slice(-500);
+   try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* optional local cache */}
+   $('historyStatus').textContent=`GIT LOG · ${historyItems.length} уникальных показаний · ${payload.repo||'CSV'}`;
   }else if(payload.storage==='browser-local'){
    if(historySourceMode!=='github-csv'){
     historySourceMode='browser-local';updateHistoryLabels();
     if(latestObservation)mergeLatestIntoHistory();
-    historyTableItems=historyItems;historyTotalCount=historyItems.length;
     $('historyStatus').textContent=historyItems.length+' уникальных показаний с временной меткой источника · локально';
    }
   }else if(!response.ok){throw new Error(payload.error||('HTTP '+response.status))}
@@ -335,43 +129,10 @@ async function refreshHistoryFromServer(){
  }finally{historyFetchInFlight=false}
 }
 function renderHistoryTable(){
- if(!$('historyRows'))return;const tableItems=historySourceMode==='github-csv'?historyTableItems:historyItems;$('historyCount').textContent=(historyTotalCount||tableItems.length)+' записей';
- if(!tableItems.length){$('historyRows').innerHTML='<tr><td colspan="5" class="empty">Ожидание новых показаний со временем источника…</td></tr>';return}
- $('historyRows').innerHTML=tableItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(AELABSHistory.sourceTimeLabel(x)||'—')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td></tr>`}).join('')
+ if(!$('historyRows'))return;$('historyCount').textContent=historyItems.length+' записей';
+ if(!historyItems.length){$('historyRows').innerHTML='<tr><td colspan="10" class="empty">Ожидание новых показаний со временем источника…</td></tr>';return}
+ $('historyRows').innerHTML=historyItems.slice().reverse().slice(0,100).map(x=>{let m=x.measurements||{};return `<tr><td>${esc(AELABSHistory.sourceTimeLabel(x)||'—')}</td><td>${esc(fmt(m.ph))}</td><td>${esc(fmt(numericValue(m,['do_mg_l','do_sat_pct','do','dissolved_oxygen','DO'])))}</td><td>${esc(fmt(m.temperature_c))}</td><td>${esc(fmt(m.rpm))}</td><td>${esc(fmt(numericValue(m,OFFGAS_O2_KEYS)))}</td><td>${esc(fmt(numericValue(m,['offgas_ch4_online_ae_pct','ch4'])))}</td><td>${esc(fmt(numericValue(m,['offgas_co2_online_ae_pct','co2'])))}</td><td>${esc(fmt(numericValue(m,AIRFLOW_KEYS)))}</td><td>${esc(fmt(numericValue(m,O2FLOW_KEYS)))}</td></tr>`}).join('')
 }
-function persistTrendCache(){
- try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems.slice(-MAX_LOCAL_CACHE_ITEMS)))}catch(_){/* localStorage is only a fallback; Git LOG remains authoritative */}
-}
-function axisTimeLabel(row, timestamp, includeDate){
- const raw=String(AELABSHistory.sourceTimeLabel(row)||'');
- const local=/^(\d{1,2}[./-]\d{1,2}[./-]\d{4})[ T,]+(\d{1,2}:\d{2})(?::\d{2})?/.exec(raw);
- if(local)return includeDate?`${local[1].slice(0,5)} ${local[2]}`:local[2];
- const iso=/^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(raw);
- if(iso)return includeDate?`${iso[3]}.${iso[2]} ${iso[4]}:${iso[5]}`:`${iso[4]}:${iso[5]}`;
- if(Number.isFinite(timestamp)){
-  const d=new Date(timestamp),time=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',hour12:false});
-  return includeDate?`${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${time}`:time;
- }
- return raw;
-}
-function downsampleTrendRows(rows,limit=MAX_TREND_RENDER_POINTS){
- if(rows.length<=limit)return rows;
- const keys=[...visibleSeries],bucketCount=Math.max(1,Math.floor((limit-2)/(2*keys.length+2))),selected=new Set([0,rows.length-1]);
- for(let b=0;b<bucketCount;b++){
-  const start=Math.floor(b*rows.length/bucketCount),end=Math.max(start+1,Math.floor((b+1)*rows.length/bucketCount));
-  selected.add(start);selected.add(Math.min(rows.length-1,end-1));
-  for(const key of keys){
-   let minIndex=-1,maxIndex=-1,minValue=Infinity,maxValue=-Infinity;
-   for(let i=start;i<end;i++){
-    const value=SERIES[key]?.get(rows[i].measurements||{});if(!Number.isFinite(value))continue;
-    if(value<minValue){minValue=value;minIndex=i}if(value>maxValue){maxValue=value;maxIndex=i}
-   }
-   if(minIndex>=0)selected.add(minIndex);if(maxIndex>=0)selected.add(maxIndex);
-  }
- }
- return [...selected].sort((a,b)=>a-b).map(i=>rows[i]);
-}
-
 function mergeLatestIntoHistory(){
  if(!latestObservation)return;
  const o=latestObservation,m=o.measurements||{},sourceKey=AELABSHistory.sourceRecordKey(o),sourceTime=AELABSHistory.sourceTimeLabel(o);
@@ -381,9 +142,8 @@ function mergeLatestIntoHistory(){
  if(historyItems.some(x=>x._source_key===sourceKey)){$('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника';return}
  const row={observation_no:o.observation_no,source_time_raw:o.source_time_raw||null,event_time_utc:o.event_time_utc||null,source_timezone:o.source_timezone||null,source_timestamp_ms:AELABSHistory.sourceTimestampMs(o),_source_key:sourceKey,measurements:{...m}};
  historyItems.push(row);
- historyItems.sort((a,b)=>{const ta=AELABSHistory.sourceTimestampMs(a),tb=AELABSHistory.sourceTimestampMs(b);return Number.isFinite(ta)&&Number.isFinite(tb)?ta-tb:0});
- if(historyItems.length>MAX_LOCAL_CACHE_ITEMS)historyItems=historyItems.slice(-MAX_LOCAL_CACHE_ITEMS);
- persistTrendCache();
+ if(historyItems.length>500)historyItems=historyItems.slice(-500);
+ try{localStorage.setItem(TREND_STORAGE_KEY,JSON.stringify(historyItems))}catch(_){/* local storage is optional */}
  $('historyStatus').textContent=historyItems.length+' уникальных показаний · время из источника'
 }
 
@@ -393,265 +153,53 @@ function drawTrend(){
  let allRows=historyItems.filter(x=>x&&x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));
  const allTimes=allRows.map(x=>AELABSHistory.sourceTimestampMs(x));
  if(allTimes.length&&allTimes.every(Number.isFinite))allRows=allRows.map((r,i)=>({r,t:allTimes[i]})).sort((a,b)=>a.t-b.t).map(x=>x.r);
- const rows=downsampleTrendRows(allRows);
- if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание истории измерений из GIT LOG CSV…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
- const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:46,r:14,t:16,b:34},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
- const rowTimes=rows.map(r=>AELABSHistory.sourceTimestampMs(r)),useTimeAxis=allRows.length>1&&allRows.every(r=>Number.isFinite(AELABSHistory.sourceTimestampMs(r)))&&Math.max(...allTimes)>Math.min(...allTimes);
- const minTime=useTimeAxis?Math.min(...allTimes):0,maxTime=useTimeAxis?Math.max(...allTimes):0;
+ const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);trendOffset=trendAutoFollow?0:Math.max(0,Math.min(maxOffset,trendOffset));
+ const end=allRows.length-trendOffset,rows=allRows.slice(Math.max(0,end-TREND_WINDOW),end);
+ if(!rows.length){const empty=plot.querySelector('.trend-empty')||document.createElement('div');empty.className='trend-empty';empty.textContent='Ожидание новых измерений с временем из исходного файла…';if(!empty.parentNode)plot.insertBefore(empty,tooltip);const old=plot.querySelector('svg');if(old)old.remove();return}else{const empty=plot.querySelector('.trend-empty');if(empty)empty.remove()}
+ const w=Math.max(320,plot.clientWidth||900),h=Math.max(180,plot.clientHeight||300),pad={l:42,r:16,t:18,b:30},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
+ const rowTimes=rows.map(r=>AELABSHistory.sourceTimestampMs(r)),useTimeAxis=rowTimes.every(Number.isFinite)&&rowTimes.length>1&&Math.max(...rowTimes)>Math.min(...rowTimes);
+ const minTime=useTimeAxis?Math.min(...rowTimes):0,maxTime=useTimeAxis?Math.max(...rowTimes):0;
  const rowXs=rows.map((r,i)=>pad.l+pw*(useTimeAxis?(rowTimes[i]-minTime)/(maxTime-minTime):(rows.length<=1?.5:i/(rows.length-1))));
- const visibleValues=allRows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
- let dataMin=0,dataMax=10;if(visibleValues.length){dataMin=visibleValues.reduce((a,b)=>Math.min(a,b),Infinity);dataMax=visibleValues.reduce((a,b)=>Math.max(a,b),-Infinity)}let spread=dataMax-dataMin;
- if(spread<1)spread=Math.max(5,Math.abs(dataMax)*.2);const margin=Math.max(1,spread*.12);
+ const visibleValues=rows.flatMap(r=>Object.keys(SERIES).filter(k=>visibleSeries.has(k)).map(k=>SERIES[k].get(r.measurements||{}))).filter(Number.isFinite);
+ let dataMin=visibleValues.length?Math.min(...visibleValues):0,dataMax=visibleValues.length?Math.max(...visibleValues):10,spread=dataMax-dataMin;
+ if(spread<1)spread=Math.max(5,Math.abs(dataMax)*.2);const margin=Math.max(1,spread*.16);
  let yMin=Math.floor((dataMin-margin)/5)*5,yMax=Math.ceil((dataMax+margin)/5)*5;if(yMax-yMin<10){yMin-=5;yMax+=5}
  const range=yMax-yMin,rawStep=range/4,tickStep=rawStep<=5?Math.max(1,Math.ceil(rawStep)):Math.ceil(rawStep/5)*5,tickStart=Math.ceil(yMin/tickStep)*tickStep;
- let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Непрерывный тренд по ${allRows.length} исходным измерениям"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
- for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#d7c8b1" stroke-width="1" stroke-dasharray="3 5"/><text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#657484" font-size="10">${Number(tick.toFixed(2))}</text>`}
- const tickCount=w<500?3:5,spanMs=useTimeAxis?maxTime-minTime:0,includeDate=useTimeAxis&&spanMs>=6*60*60*1000;
- for(let i=0;i<tickCount;i++){
-  const f=i/(tickCount-1),x=pad.l+pw*f;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#e1d4c0" stroke-width="1" stroke-dasharray="3 6"`+(i===0||i===tickCount-1?'':'')+`/>`;
-  const target=useTimeAxis?minTime+spanMs*f:NaN;let idx=Math.round((rows.length-1)*f);
-  if(useTimeAxis){let best=Infinity;for(let j=0;j<rowTimes.length;j++){const d=Math.abs(rowTimes[j]-target);if(d<best){best=d;idx=j}}}
-  const label=axisTimeLabel(rows[idx],rowTimes[idx],includeDate);svg+=`<text x="${x}" y="${h-10}" text-anchor="${i===0?'start':i===tickCount-1?'end':'middle'}" fill="#657484" font-size="9">${esc(label)}</text>`;
- }
- // Draw only real source readings. No synthetic samples or point markers; a long pause
- // in logging leaves a horizontal time gap but does not sever the trend line.
+ let svg=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Тренд по ${rows.length} уникальным измерениям с временем источника"><defs><filter id="trendGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+ for(let tick=tickStart;tick<=yMax;tick+=tickStep){const y=pad.t+ph*(1-(tick-yMin)/range);svg+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" stroke="#293744" stroke-width="1" stroke-dasharray="3 5"/><text x="${pad.l-7}" y="${y+4}" text-anchor="end" fill="#8193a3" font-size="10">${Number(tick.toFixed(2))}</text>`}
+ for(let i=0;i<5;i++){const x=pad.l+pw*i/4;svg+=`<line x1="${x}" y1="${pad.t}" x2="${x}" y2="${h-pad.b}" stroke="#24313d" stroke-width="1" stroke-dasharray="3 6"/>`}
+ // Each source sample is drawn once. Missing readings and long timestamp gaps break the line instead of implying measurements existed.
  for(const key of visibleSeries){
-  const series=SERIES[key],coords=rows.map((r,i)=>({x:rowXs[i],v:series.get(r.measurements||{}),t:rowTimes[i]})).filter(point=>Number.isFinite(point.v)).map(point=>({...point,y:pad.t+ph*(1-(point.v-yMin)/(yMax-yMin))}));
-  if(coords.length>1){
-   let path=`M ${coords[0].x} ${coords[0].y}`;
-   for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}
-   svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color}"/>`;
+  const series=SERIES[key],allPoints=rows.map((r,i)=>({i,x:rowXs[i],v:series.get(r.measurements||{}),t:rowTimes[i]}));
+  const segments=[];let segment=[];
+  for(const point of allPoints){
+   if(!Number.isFinite(point.v)){if(segment.length)segments.push(segment);segment=[];continue}
+   const prev=segment.length?segment[segment.length-1]:null;
+   if(prev&&Number.isFinite(point.t)&&Number.isFinite(prev.t)&&point.t-prev.t>MAX_TREND_GAP_MS){segments.push(segment);segment=[]}
+   segment.push({...point,y:pad.t+ph*(1-(point.v-yMin)/(yMax-yMin))})
+  }
+  if(segment.length)segments.push(segment);
+  for(const coords of segments){
+   if(coords.length>1){let path=`M ${coords[0].x} ${coords[0].y}`;for(let j=1;j<coords.length;j++){const a=coords[j-1],b=coords[j],mid=(a.x+b.x)/2;path+=` C ${mid} ${a.y}, ${mid} ${b.y}, ${b.x} ${b.y}`}
+    svg+=`<path class="trend-line trend-glow" fill="none" stroke="${series.color}" stroke-width="4.5" stroke-linecap="round" d="${path}"/><path class="trend-line trend-main" fill="none" stroke="${series.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" d="${path}" style="--series-glow:${series.color};stroke-dasharray:2000;stroke-dashoffset:0"><animate attributeName="opacity" from=".75" to="1" dur=".35s" fill="freeze"/></path>`
+   }
+   for(const point of coords)svg+=`<circle cx="${point.x}" cy="${point.y}" r="${coords.length===1?4:2.5}" fill="${series.color}" stroke="#0b1118" stroke-width="1.2"/>`;
   }
  }
- svg+='</svg>';
+ svg+=`<text x="${pad.l}" y="${h-8}" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[0])||'')}</text><text x="${w-pad.r}" y="${h-8}" text-anchor="end" fill="#8193a3" font-size="10">${esc(AELABSHistory.sourceTimeLabel(rows[rows.length-1])||'')}</text></svg>`;
  const old=plot.querySelector('svg'),holder=document.createElement('div');holder.innerHTML=svg;const next=holder.firstElementChild;if(old)old.replaceWith(next);else plot.insertBefore(next,tooltip);
  next.addEventListener('mousemove',ev=>{const rect=next.getBoundingClientRect(),x=(ev.clientX-rect.left)/Math.max(1,rect.width)*w;let idx=0,best=Infinity;for(let i=0;i<rowXs.length;i++){const d=Math.abs(rowXs[i]-x);if(d<best){best=d;idx=i}}const row=rows[idx],m=row.measurements||{},lines=Object.entries(SERIES).filter(([k])=>visibleSeries.has(k)).map(([k,ser])=>`<div><span style="color:${ser.color}">●</span> ${ser.label}: <b>${esc(fmt(ser.get(m)))}</b></div>`).join('');tooltip.innerHTML=`<b>${esc(AELABSHistory.sourceTimeLabel(row)||'Время отсутствует')}</b>${lines}`;tooltip.style.display='block';tooltip.style.left=Math.min(Math.max(8,ev.clientX-rect.left+12),Math.max(8,rect.width-185))+'px';tooltip.style.top='10px'});
- next.addEventListener('mouseleave',()=>{tooltip.style.display='none'});
+ next.addEventListener('mouseleave',()=>{if(!trendDrag)tooltip.style.display='none'});
 }
 
 const trendPlot=$('trendPlot');
+trendPlot.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;trendDrag={x:ev.clientX,offset:trendOffset,pointerId:ev.pointerId};trendPlot.classList.add('dragging');try{trendPlot.setPointerCapture(ev.pointerId)}catch(_){}});
+trendPlot.addEventListener('pointermove',ev=>{if(!trendDrag)return;const dx=ev.clientX-trendDrag.x;const step=Math.round(-dx/Math.max(1,trendPlot.clientWidth)*TREND_WINDOW);const allRows=historyItems.filter(x=>x.measurements&&AELABSHistory.sourceTimeLabel(x)&&Object.keys(SERIES).some(k=>SERIES[k].get(x.measurements)!==null));const maxOffset=Math.max(0,allRows.length-TREND_WINDOW);const next=Math.max(0,Math.min(maxOffset,trendDrag.offset+step));if(next!==trendOffset){trendAutoFollow=false;trendOffset=next;updateTrendFollowButton();drawTrend()}});
+function endTrendDrag(){trendDrag=null;trendPlot.classList.remove('dragging')}
+trendPlot.addEventListener('pointerup',endTrendDrag);trendPlot.addEventListener('pointercancel',endTrendDrag);trendPlot.addEventListener('lostpointercapture',endTrendDrag);
+function updateTrendFollowButton(){const b=$('trendFollow');if(!b)return;b.textContent=trendAutoFollow?'● Автопрокрутка: ВКЛ':'○ Автопрокрутка: ВЫКЛ';b.classList.toggle('off',!trendAutoFollow)}
 setInterval(updatePcLink,1000);updatePcLink();
+$('trendFollow').addEventListener('click',()=>{trendAutoFollow=!trendAutoFollow;if(trendAutoFollow)trendOffset=0;updateTrendFollowButton();drawTrend()});
 document.querySelectorAll('.trend-toggle').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.series;if(visibleSeries.has(k)){visibleSeries.delete(k);b.classList.remove('active')}else{visibleSeries.add(k);b.classList.add('active')}drawTrend()}));
 window.addEventListener('resize',()=>drawTrend());$('refresh').addEventListener('click',()=>{refresh();refreshHistoryFromServer()});refresh();setInterval(refresh,5000);setInterval(refreshHistoryFromServer,15000);
-</script>
-<nav class="theme-dock" id="themeDock" aria-label="Выбор темы интерфейса">
-  <span class="theme-dock-label">ТЕМА</span>
-  <div class="theme-dock-options" role="group" aria-label="Доступные темы">
-<button type="button" class="theme-choice" data-theme-choice="classic" aria-pressed="true"><span class="theme-choice-icon">◈</span><span>Классика</span></button>
-    <button type="button" class="theme-choice" data-theme-choice="aero" aria-pressed="false"><span class="theme-choice-icon">💧</span><span>Frutiger Aero</span></button>
-  </div>
-</nav>
-<script>
-(() => {
-  const root = document.documentElement;
-  const choices = [...document.querySelectorAll('[data-theme-choice]')];
-  const valid = new Set(['classic', 'aero']);
-  const copy = {
-    classic: { tagline: 'СИСТЕМА МОНИТОРИНГА БИОПРОЦЕССА', eyebrow: 'AELABS MONITORING · DS-01.01 · LIVE SYSTEM', subtitle: 'Мониторинг процесса ферментации и история измерений в реальном времени.', pill: 'Автообновление каждые 5 секунд', footer: 'AELABS SYMBIONT WEB · LIVE MONITORING · READ-ONLY' },
-    aero: { tagline: 'AQUA LAB · LIVE MONITORING', eyebrow: 'AELABS · BIOPROCESS CONTROL ROOM', subtitle: 'Все показатели процесса — в ясном и непрерывном потоке данных.', pill: 'Живые данные · обновление каждые 5 секунд', footer: 'AELABS SYMBIONT WEB · AQUA LAB · LIVE MONITORING' }
-  };
-  function applyTheme(theme, persist = true) {
-    if (!valid.has(theme)) theme = 'classic';
-    for (const name of valid) root.classList.toggle('theme-' + name, name === theme);
-    const content = copy[theme];
-    const put = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
-    put('siteTagline', content.tagline); put('heroEyebrow', content.eyebrow); put('heroSubtitle', content.subtitle); put('heroPill', content.pill); put('footerBadge', content.footer);
-    choices.forEach(button => { const active = button.dataset.themeChoice === theme; button.setAttribute('aria-pressed', String(active)); button.classList.toggle('is-active', active); });
-    if (persist) { try { localStorage.setItem('aelabs-web-theme', theme); } catch (_) {} }
-  }
-  choices.forEach(button => button.addEventListener('click', () => applyTheme(button.dataset.themeChoice)));
-  const current = ['classic','aero'].find(name => root.classList.contains('theme-' + name)) || 'classic';
-  applyTheme(current, false);
-})();
-</script>
-<div class="analytics-modal" id="analyticsModal" hidden>
-  <div class="analytics-backdrop" id="analyticsBackdrop"></div>
-  <section class="analytics-dialog" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle">
-    <div class="analytics-dialog-head">
-      <div><h2 id="analyticsTitle">Статистика сайта</h2><p>Посещаемость AELABS WEB · без имён и сохранения IP-адресов</p></div>
-      <button type="button" class="analytics-close" id="analyticsClose" aria-label="Закрыть">×</button>
-    </div>
-    <div class="analytics-view" id="analyticsLoginView">
-      <p style="color:var(--muted);font-size:12px;margin:18px 0 0">Введите пароль администратора.</p>
-      <form class="analytics-form" id="analyticsLoginForm">
-        <label for="analyticsPassword">Пароль</label>
-        <input id="analyticsPassword" type="password" autocomplete="current-password" maxlength="256" required>
-        <button type="submit" class="analytics-submit">Войти</button>
-        <p class="analytics-message" id="analyticsAuthMessage" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-    <div class="analytics-view" id="analyticsDashboard" hidden>
-      <div class="analytics-kpis">
-        <div class="analytics-kpi"><span>Сейчас на сайте</span><strong id="analyticsActive">—</strong><small>активные браузеры · 90 сек.</small></div>
-        <div class="analytics-kpi"><span>Посещений сегодня</span><strong id="analyticsToday">—</strong><small>по московскому времени</small></div>
-        <div class="analytics-kpi"><span>Всего посещений</span><strong id="analyticsTotal">—</strong><small>сессии с момента запуска</small></div>
-        <div class="analytics-kpi"><span>Уникальные браузеры</span><strong id="analyticsVisitors">—</strong><small>ориентировочная оценка</small></div>
-      </div>
-      <h3 class="analytics-section-title">Посещения за 7 дней</h3>
-      <div class="analytics-bars" id="analyticsBars" aria-label="Посещения по дням"></div>
-      <h3 class="analytics-section-title">Активные страницы</h3>
-      <div class="analytics-pages" id="analyticsPages"><div class="analytics-page">Сейчас активных страниц нет</div></div>
-      <p class="analytics-notice" id="analyticsStorageNotice" hidden></p>
-      <div class="analytics-footer"><span id="analyticsUpdated">Обновление каждые 15 секунд</span><button type="button" class="analytics-logout" id="analyticsLogout">Выйти из панели</button></div>
-    </div>
-  </section>
-</div>
-
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const modal = $('analyticsModal');
-  const loginView = $('analyticsLoginView');
-  const dashboard = $('analyticsDashboard');
-  const authMessage = $('analyticsAuthMessage');
-  let refreshTimer = null;
-  let visitorId = null;
-  let visitSessionId = null;
-
-  function newId() {
-    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
-    const bytes = new Uint8Array(16);
-    if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
-    else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
-    bytes[6] = (bytes[6] & 0x0f) | 0x40;
-    bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    const hex = [...bytes].map(b => b.toString(16).padStart(2, '0')).join('');
-    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
-  }
-  function storedId(storageName, key) {
-    try {
-      const storage = window[storageName];
-      let id = storage.getItem(key);
-      if (!id) { id = newId(); storage.setItem(key, id); }
-      return id;
-    } catch (_) { return newId(); }
-  }
-  visitorId = storedId('localStorage', 'aelabs_analytics_visitor_id');
-  visitSessionId = storedId('sessionStorage', 'aelabs_analytics_session_id');
-
-  function ping() {
-    if (document.visibilityState === 'hidden') return;
-    fetch('/api/analytics/ping', {
-      method: 'POST', credentials: 'same-origin', keepalive: true,
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({visitor_id: visitorId, session_id: visitSessionId, path: window.location.pathname})
-    }).catch(() => {});
-  }
-  ping();
-  window.setInterval(ping, 25000);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') ping(); });
-
-  function setMessage(message) { authMessage.textContent = message || ''; }
-  function showLogin(message = '') {
-    if (refreshTimer) window.clearInterval(refreshTimer);
-    refreshTimer = null;
-    loginView.hidden = false;
-    dashboard.hidden = true;
-    setMessage(message);
-    window.setTimeout(() => $('analyticsPassword').focus(), 20);
-  }
-  function showDashboard() {
-    loginView.hidden = true;
-    dashboard.hidden = false;
-    setMessage('');
-    loadStats();
-    if (refreshTimer) window.clearInterval(refreshTimer);
-    refreshTimer = window.setInterval(() => { if (!modal.hidden && !dashboard.hidden) loadStats(); }, 15000);
-  }
-  function closePanel() {
-    modal.hidden = true;
-    if (refreshTimer) window.clearInterval(refreshTimer);
-    refreshTimer = null;
-    $('analyticsOpen').focus();
-  }
-  async function openPanel() {
-    modal.hidden = false;
-    showLogin('');
-    try {
-      const response = await fetch('/api/analytics/session', {credentials: 'same-origin', cache: 'no-store'});
-      const state = await response.json();
-      if (!state.configured) {
-        showLogin('Панель ещё не настроена на сервере. Добавьте переменные ANALYTICS_ADMIN_PASSWORD и FLASK_SECRET_KEY в Render.');
-      } else if (state.authenticated) {
-        showDashboard();
-      }
-    } catch (_) {
-      showLogin('Не удалось связаться с сервером. Проверьте подключение и попробуйте ещё раз.');
-    }
-  }
-  async function loadStats() {
-    try {
-      const response = await fetch('/api/analytics/stats', {credentials: 'same-origin', cache: 'no-store'});
-      const data = await response.json();
-      if (response.status === 401) { showLogin('Сеанс завершён. Войдите снова.'); return; }
-      if (!response.ok) throw new Error(data.error || 'Статистика временно недоступна.');
-      $('analyticsActive').textContent = data.active_visitors ?? '—';
-      $('analyticsToday').textContent = data.today_visits ?? '—';
-      $('analyticsTotal').textContent = data.total_visits ?? '—';
-      $('analyticsVisitors').textContent = data.total_visitors ?? '—';
-      $('analyticsUpdated').textContent = `Обновлено: ${new Date(data.updated_at).toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit',second:'2-digit'})} · время: ${data.timezone}`;
-      const bars = $('analyticsBars');
-      bars.replaceChildren();
-      const days = Array.isArray(data.daily) ? data.daily : [];
-      const max = Math.max(1, ...days.map(day => Number(day.visits) || 0));
-      for (const day of days) {
-        const col = document.createElement('div'); col.className = 'analytics-bar-col';
-        const value = document.createElement('span'); value.className = 'analytics-bar-value'; value.textContent = String(day.visits ?? 0);
-        const bar = document.createElement('div'); bar.className = 'analytics-bar'; bar.style.height = `${Math.max(3, ((Number(day.visits) || 0) / max) * 59)}px`;
-        bar.title = `${day.label}: ${day.visits} посещений`;
-        const label = document.createElement('span'); label.className = 'analytics-bar-label'; label.textContent = day.label || '';
-        col.append(value, bar, label); bars.append(col);
-      }
-      const pages = $('analyticsPages'); pages.replaceChildren();
-      const activePages = Array.isArray(data.active_pages) ? data.active_pages : [];
-      if (!activePages.length) {
-        const empty = document.createElement('div'); empty.className = 'analytics-page'; empty.textContent = 'Сейчас нет активных страниц'; pages.append(empty);
-      } else {
-        for (const item of activePages) {
-          const row = document.createElement('div'); row.className = 'analytics-page';
-          const path = document.createElement('span'); path.textContent = item.path;
-          const count = document.createElement('strong'); count.textContent = `${item.sessions} сесс.`;
-          row.append(path, count); pages.append(row);
-        }
-      }
-      const notice = $('analyticsStorageNotice');
-      notice.hidden = Boolean(data.persistent_storage);
-      notice.textContent = 'История статистики сейчас хранится во временной SQLite-базе приложения. Для сохранения данных между перезапусками и обновлениями Render подключите PostgreSQL и задайте DATABASE_URL.';
-    } catch (error) {
-      if (!modal.hidden) $('analyticsUpdated').textContent = error.message || 'Ошибка загрузки статистики';
-    }
-  }
-
-  $('analyticsOpen').addEventListener('click', openPanel);
-  $('analyticsClose').addEventListener('click', closePanel);
-  $('analyticsBackdrop').addEventListener('click', closePanel);
-  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.hidden) closePanel(); });
-  $('analyticsLoginForm').addEventListener('submit', async event => {
-    event.preventDefault();
-    const button = event.submitter || $('analyticsLoginForm').querySelector('button[type="submit"]');
-    button.disabled = true;
-    setMessage('Проверка…');
-    try {
-      const response = await fetch('/api/analytics/login', {
-        method: 'POST', credentials: 'same-origin',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({password: $('analyticsPassword').value})
-      });
-      const data = await response.json();
-      if (!response.ok) { showLogin(data.error || 'Не удалось войти.'); return; }
-      $('analyticsPassword').value = '';
-      showDashboard();
-    } catch (_) {
-      showLogin('Ошибка соединения с сервером.');
-    } finally { button.disabled = false; }
-  });
-  $('analyticsLogout').addEventListener('click', async () => {
-    try { await fetch('/api/analytics/logout', {method:'POST', credentials:'same-origin'}); } catch (_) {}
-    if (refreshTimer) window.clearInterval(refreshTimer);
-    refreshTimer = null;
-    showLogin('Вы вышли из панели статистики.');
-  });
-})();
-
-</script>
-</body></html>
+</script></body></html>

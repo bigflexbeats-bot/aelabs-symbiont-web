@@ -41,39 +41,16 @@ def _first(row: dict[str, Any], *names: str) -> str | None:
     return None
 
 
-def downsample_history(items: list[dict[str, Any]], max_points: int = 2400) -> list[dict[str, Any]]:
-    """Keep the full time span while choosing real rows that preserve each signal's extrema."""
-    if len(items) <= max_points:
-        return items
-    metric_keys = ('ph', 'do_mg_l', 'do_sat_pct', 'temperature_c', 'microcheck_od', 'rpm')
-    bucket_count = max(1, (max_points - 2) // (2 * len(metric_keys) + 2))
-    selected = {0, len(items) - 1}
-    for bucket in range(bucket_count):
-        start = (bucket * len(items)) // bucket_count
-        end = max(start + 1, ((bucket + 1) * len(items)) // bucket_count)
-        selected.add(start)
-        selected.add(min(len(items) - 1, end - 1))
-        for key in metric_keys:
-            min_idx = max_idx = None
-            min_value = float('inf')
-            max_value = float('-inf')
-            for idx in range(start, end):
-                value = (items[idx].get('measurements') or {}).get(key)
-                if not isinstance(value, (int, float)) or not math.isfinite(value):
-                    continue
-                if value < min_value:
-                    min_value, min_idx = value, idx
-                if value > max_value:
-                    max_value, max_idx = value, idx
-            if min_idx is not None:
-                selected.add(min_idx)
-            if max_idx is not None:
-                selected.add(max_idx)
-    return [items[idx] for idx in sorted(selected)]
+def _first_number(row: dict[str, Any], *names: str) -> float | None:
+    for name in names:
+        value = number_cell(row.get(name))
+        if value is not None:
+            return value
+    return None
 
 
-def parse_github_log_csv(content: str, limit: int | None = None, max_points: int = 2400) -> dict[str, Any]:
-    """Parse the full CSV, return a trend-preserving sample plus the latest real rows."""
+def parse_github_log_csv(content: str, limit: int = 500) -> dict[str, Any]:
+    """Parse canonical semicolon CSV and return the latest unique source rows."""
     content = (content or '').lstrip('\ufeff')
     reader = csv.DictReader(io.StringIO(content, newline=''), delimiter=';')
     if not reader.fieldnames:
@@ -112,6 +89,12 @@ def parse_github_log_csv(content: str, limit: int | None = None, max_points: int
             'medium_feed_tank_mass_ae_g': number_cell(row.get('medium_feed_tank_mass_ae_g')),
             'nh4oh_bottle_mass_ae_g': number_cell(row.get('nh4oh_bottle_mass_ae_g')),
             'koh_bottle_mass_ae_g': number_cell(row.get('koh_bottle_mass_ae_g')),
+            'offgas_o2_online_ae_pct': number_cell(row.get('offgas_o2_online_ae_pct')),
+            'offgas_ch4_online_ae_pct': number_cell(row.get('offgas_ch4_online_ae_pct')),
+            'offgas_co2_online_ae_pct': number_cell(row.get('offgas_co2_online_ae_pct')),
+            # airflow_pr100 / air_flow_online_ae_nl_min — прежние имена того же столбца.
+            'air_flow_online_ae_l_min': _first_number(row, 'air_flow_online_ae_l_min', 'air_flow_online_ae_nl_min', 'airflow_pr100'),
+            'o2_flow_online_ae_l_min': _first_number(row, 'o2_flow_online_ae_l_min'),
         }
         # A timestamp-only/fully blank row is not a process measurement.
         plot_values = [measurements['ph'], measurements['do_mg_l'], measurements['do_sat_pct'],
@@ -140,16 +123,10 @@ def parse_github_log_csv(content: str, limit: int | None = None, max_points: int
         seen.add(identity)
         unique_rows.append(item)
 
-    if limit is not None:
-        unique_rows = unique_rows[-max(1, int(limit)):]
-    total_count = len(unique_rows)
-    recent_items = unique_rows[-100:]
-    trend_items = downsample_history(unique_rows, max_points=max_points)
+    items = unique_rows[-max(1, int(limit)):]
     return {
-        'items': trend_items,
-        'recent_items': recent_items,
-        'count': total_count,
-        'trend_count': len(trend_items),
+        'items': items,
+        'count': len(items),
         'storage': 'github-csv',
         'do_units': do_units,
     }
