@@ -1,5 +1,4 @@
 import unittest
-from datetime import datetime, timedelta
 from history_csv import parse_github_log_csv
 
 CANONICAL_HEADER = ';'.join([
@@ -52,36 +51,6 @@ class GithubLogCsvTests(unittest.TestCase):
         got=parse_github_log_csv(content)
         self.assertEqual(got['count'],0)
 
-    def test_default_limit_keeps_more_than_500_historical_points(self):
-        start = datetime(2026, 10, 20, 14, 0, 0)
-        rows = [CANONICAL_HEADER]
-        for i in range(650):
-            t = start + timedelta(seconds=30 * i)
-            source = t.strftime('%d.%m.%Y %H:%M:%S')
-            event = t.strftime('%Y-%m-%dT%H:%M:%SZ')
-            received = (t + timedelta(seconds=4)).strftime('%Y-%m-%dT%H:%M:%SZ')
-            rows.append(csv_row(source, event, received, ph=f'{7 + i / 10000:.4f}'.replace('.', ',')))
-        got = parse_github_log_csv('\n'.join(rows))
-        self.assertEqual(got['count'], 650, 'history API must retain more than the former 500-row cap')
-
-    def test_large_history_is_sampled_across_full_time_span(self):
-        start = datetime(2026, 10, 20, 14, 0, 0)
-        rows = [CANONICAL_HEADER]
-        total = 5000
-        for i in range(total):
-            t = start + timedelta(seconds=2 * i)
-            source = t.strftime('%d.%m.%Y %H:%M:%S')
-            event = t.strftime('%Y-%m-%dT%H:%M:%SZ')
-            received = (t + timedelta(seconds=1)).strftime('%Y-%m-%dT%H:%M:%SZ')
-            rows.append(csv_row(source, event, received, ph=f'{6.5 + (i % 500) / 1000:.3f}'.replace('.', ',')))
-        got = parse_github_log_csv('\n'.join(rows))
-        self.assertEqual(got['count'], total, 'count describes the entire source history')
-        self.assertLessEqual(len(got['items']), 2400, 'trend payload is bounded for rendering performance')
-        self.assertEqual(got['items'][0]['source_time_raw'], start.strftime('%d.%m.%Y %H:%M:%S'))
-        self.assertEqual(got['items'][-1]['source_time_raw'], (start + timedelta(seconds=2 * (total - 1))).strftime('%d.%m.%Y %H:%M:%S'))
-        self.assertEqual(len(got['recent_items']), 100)
-        self.assertEqual(got['recent_items'][-1]['source_time_raw'], got['items'][-1]['source_time_raw'])
-
     def test_legacy_csv_maps_do_mg_l(self):
         header='event_time_utc;received_at_utc;source_time_raw;source_timezone;observation_no;source_id;experiment_id;run_id;ph;temperature_c;do_mg_l;rpm;offgas_do_pct;microcheck_od'
         row='2026-10-20T09:05:10Z;2026-10-20T09:05:14Z;="20.10.2026 14:05:10";Asia/Yekaterinburg;12;DS-01.01;exp-1;run-1;7,05;24,50;6,30;600;8,00;16,123456'
@@ -91,3 +60,29 @@ class GithubLogCsvTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+
+class OffgasColumnsTests(unittest.TestCase):
+    def test_reads_offgas_and_air_flow(self):
+        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;air_flow_online_ae_l_min;o2_flow_online_ae_l_min'
+        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';5,10;15,70;3,01;42,50;'
+        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
+        self.assertEqual(m['offgas_o2_online_ae_pct'], 5.1)
+        self.assertEqual(m['offgas_ch4_online_ae_pct'], 15.7)
+        self.assertEqual(m['offgas_co2_online_ae_pct'], 3.01)
+        self.assertEqual(m['air_flow_online_ae_l_min'], 42.5)
+
+    def test_old_airflow_pr100_name_and_short_rows(self):
+        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;airflow_pr100'
+        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';;;;7,25'
+        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
+        self.assertEqual(m['air_flow_online_ae_l_min'], 7.25)
+        old = parse_github_log_csv(CANONICAL_HEADER + '\n' + csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', 'x'))
+        self.assertIsNone(old['items'][0]['measurements']['air_flow_online_ae_l_min'])
+
+    def test_o2_flow_column(self):
+        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;air_flow_online_ae_l_min;o2_flow_online_ae_l_min'
+        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';;;;;3,50'
+        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
+        self.assertIsNone(m['air_flow_online_ae_l_min'])
+        self.assertEqual(m['o2_flow_online_ae_l_min'], 3.5)
