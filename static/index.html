@@ -142,7 +142,7 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 <main>
 <div id="staleBanner"><small id="staleDetail"></small></div>
 <section class="hero" id="hero"><h1>Мониторинг</h1><p><span id="updated">—</span></p></section>
-<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><span id="alarmCount">0</span></div><div id="alarmItems" class="alarm-items"></div></section>
+<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><span id="alarmCount">0</span><button id="soundToggle" type="button" class="ib" style="width:auto;padding:7px 12px;font-size:12px" aria-pressed="false">Включить звук ошибок</button></div><div id="alarmItems" class="alarm-items"></div></section>
 <h2>Процесс</h2><div class="grid gp" id="g-p"></div>
 <h2>Абгаз</h2><div class="grid gg" id="g-g"></div>
 <h2>Весы</h2><div class="grid gw" id="g-w"></div>
@@ -167,6 +167,11 @@ let trendAutoFollow=true,trendOffset=0,trendDrag=null,trendLastRenderKey='';cons
 const STALE_AFTER_MS=10*60*1000,PC_HEARTBEAT_TIMEOUT_MS=20000,MAX_TREND_GAP_MS=30000;
 function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObservation);if(Number.isFinite(sourceMs)&&sourceMs<=Date.now()+5*60*1000)return Math.max(0,Date.now()-sourceMs);return Math.max(0,Date.now()-lastRecordChangeAt)}
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
+// Desktop v38 publishes scale readings in grams (weight_N_g); the web cards display kg.
+function weightKg(m,i){const kg=numericValue(m,[`weight_${i}_kg`,`weight_${i}_kg_online`]);if(kg!==null)return kg;const grams=numericValue(m,[`weight_${i}_g`,`weight_${i}_grams`]);return grams===null?null:grams/1000}
+let alarmSoundEnabled=false,lastErrorAlarmActive=false;const alarmAudio=new Audio('/signal.wav');alarmAudio.preload='auto';
+const soundToggle=document.getElementById('soundToggle');soundToggle?.addEventListener('click',async()=>{alarmSoundEnabled=true;soundToggle.textContent='Звук ошибок включён';soundToggle.setAttribute('aria-pressed','true');soundToggle.style.color='var(--green)';try{alarmAudio.currentTime=0;await alarmAudio.play();alarmAudio.pause();alarmAudio.currentTime=0}catch(_){}});
+function updateErrorSound(){const active=!!document.querySelector('#alarmItems .alarm-item.error');if(active&&!lastErrorAlarmActive&&alarmSoundEnabled){try{alarmAudio.currentTime=0;alarmAudio.play().catch(()=>{})}catch(_){}}lastErrorAlarmActive=active;}
 function scaleName(o,index){
  const i=Number(index), key=`weight_${i}_kg`;
  const candidates=[o?.weight_names?.[key],o?.weight_names?.[`weight_${i}`],o?.scale_names?.[i-1],o?.scale_names?.[key],o?.settings?.weight_names?.[key],o?.settings?.scale_names?.[i-1],o?.desktop_status?.weight_names?.[key],o?.desktop_status?.scale_names?.[i-1],o?.provenance?.weight_names?.[key],o?.provenance?.scale_names?.[i-1]];
@@ -224,11 +229,11 @@ function buildAlarms(o,m,stale){
  for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
  for(const f of flags)a.push({level:'warning',text:'ПРЕДУПРЕЖДЕНИЕ качества данных: '+String(f)});
  if(q.status&&q.status!=='raw_received'&&q.status!=='ok')a.push({level:'warning',text:'Статус качества данных: '+q.status});
- for(let i=1;i<=3;i++){const key=`weight_${i}_kg`,v=m[key],name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
+ for(let i=1;i<=3;i++){const v=weightKg(m,i),name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
  if(!a.length)a.push({level:'ok',text:'Всё в норме'});
  return a
 }
-function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''))}
+function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''));updateErrorSound()}
 function setAlarmHtml(h){const el=$('alarmItems');if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}
 function updatePcLink(){const row=$('pcLinkRow'),mark=$('pcLinkMark'),label=$('pcLinkStatus');if(!row||!mark||!label)return;const age=sourceAgeMs();const online=!!latestObservation&&age<PC_HEARTBEAT_TIMEOUT_MS;row.classList.toggle('pc-online',online);row.classList.toggle('pc-offline',!online);mark.textContent=online?'✓':'!';label.textContent=online?'Подключено':'Нет сигнала';label.style.color=online?'var(--green)':'var(--red)'}
 async function refresh(){
@@ -243,14 +248,14 @@ async function refresh(){
   // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
   setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
   setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Подача O₂':'Подача воздуха';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
-  window.__SC=window.__SC||{};for(let i=1;i<=3;i++){const wv=m[`weight_${i}_kg`];if(typeof wv==='number')window.__SC[i]={...scaleLimits(o,i),state:scaleState(o,i,wv)};setValIfReadable(`weight${i}`,wv);$('weightName'+i).textContent=scaleName(o,i)}
+  window.__SC=window.__SC||{};for(let i=1;i<=3;i++){const wv=weightKg(m,i);if(typeof wv==='number')window.__SC[i]={...scaleLimits(o,i),state:scaleState(o,i,wv)};setValIfReadable(`weight${i}`,wv);$('weightName'+i).textContent=scaleName(o,i)}
   setValIfReadable('rawTime',o.source_time_raw);setValIfReadable('tz',o.source_timezone);setValIfReadable('eventTime',o.event_time_utc);setValIfReadable('receivedTime',o.received_at_utc);setValIfReadable('experiment',o.experiment_id);setValIfReadable('run',o.run_id);
   $('updated').textContent=''+new Date().toLocaleTimeString('ru-RU');
   const stale=checkStale();renderAlarms(o,m,stale);$('connection').textContent=stale?'Нет новых данных':'В сети';$('liveDot').style.background=stale?'var(--red)':'var(--green)';$('repoStatus').textContent='Доступен';
   $('snapshotStatus').textContent=stale?'Нет новых записей':(AELABSHistory.sourceTimeLabel(o)||'—');
   if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}
   else{if(historySourceMode==='browser-local')mergeLatestIntoHistory();drawTrend();renderHistoryTable()}
- }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`}
+ }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
  finally{refreshInFlight=false;window.__bootDone&&window.__bootDone()}
 }
 async function loadHistory(){
