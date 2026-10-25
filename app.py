@@ -161,6 +161,22 @@ def normalize_observation(payload):
         }
     raise ValueError('Неизвестный формат data/live/latest.json')
 
+def env_weight_thresholds():
+    """Optional: mirror desktop limits via env (WEIGHT_YELLOW_KG / WEIGHT_RED_KG or WEIGHT_<N>_YELLOW_KG / _RED_KG)."""
+    result = {}
+    for i in (1, 2, 3):
+        entry = {}
+        for name, key in (('yellow', 'YELLOW'), ('red', 'RED')):
+            raw = os.getenv(f'WEIGHT_{i}_{key}_KG', os.getenv(f'WEIGHT_{key}_KG', '')).strip().replace(',', '.')
+            try:
+                if raw:
+                    entry[name] = float(raw)
+            except ValueError:
+                pass
+        if entry:
+            result[f'weight_{i}_kg'] = entry
+    return result
+
 @app.get('/')
 def home():
     response = send_from_directory('static', 'index.html', max_age=0)
@@ -183,7 +199,11 @@ def health():
 def latest():
     try:
         payload = cached('latest', 4, lambda: file_json('data/live/latest.json'))
-        return jsonify(normalize_observation(payload))
+        obs = normalize_observation(payload)
+        env_limits = env_weight_thresholds()
+        if env_limits and not obs.get('weight_thresholds'):
+            obs = dict(obs, weight_thresholds=env_limits)
+        return jsonify(obs)
     except urllib.error.HTTPError as exc:
         app.logger.warning('GitHub latest request failed: HTTP %s', exc.code)
         return jsonify({'error': f'GitHub HTTP {exc.code}; проверьте путь data/live/latest.json, ветку и права токена'}), 502
