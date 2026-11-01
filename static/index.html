@@ -41,7 +41,7 @@ h2{font-size:18px;letter-spacing:-.01em;margin:40px 0 14px;font-weight:600}
 .atom{filter:drop-shadow(0 5px 5px rgba(0,0,0,.4))}
 .flow{filter:drop-shadow(0 0 5px color-mix(in srgb,var(--flow) 55%,transparent));fill:none;stroke:var(--flow);stroke-width:4;stroke-linecap:round;stroke-dasharray:16 14;animation:dash var(--fd,2s) linear infinite}.o2 .flow{stroke:var(--c-o2f)}@keyframes dash{to{stroke-dashoffset:-60}}
 .drift{animation:drf 6s ease-in-out infinite alternate;animation-delay:var(--d)}@keyframes drf{to{transform:translate(var(--x,4px),var(--y,-6px))}}.pulse{animation:pl 2s ease-in-out infinite alternate}@keyframes pl{to{opacity:.55}}
-.alarm-strip{display:none;margin:0 0 6px}.alarm-strip.visible{display:block}.alarm-strip-head{display:none}.alarm-items{display:grid;gap:8px}
+.alarm-strip{display:none;margin:0 0 6px}.alarm-strip.visible{display:block}.alarm-strip-head{display:none}.sound-hint{display:none;width:100%;margin:0 0 10px;padding:11px 16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--warn) 50%,transparent);background:color-mix(in srgb,var(--warn) 12%,transparent);color:var(--text);font:600 13px/1.3 inherit;font-family:inherit;text-align:left;cursor:pointer}.sound-hint.show{display:block}#soundToggle .snd-on{display:none}#soundToggle.on .snd-on{display:block}#soundToggle.on .snd-off{display:none}#soundToggle.on{color:var(--ok)}#soundToggle.blocked{color:var(--warn)}.alarm-items{display:grid;gap:8px}
 .alarm-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:14px;animation:aIn .7s var(--ease) both}@keyframes aIn{from{opacity:0;transform:translateY(-8px)}}
 .alarm-icon{flex:0 0 22px;height:22px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:13px}
 .alarm-item.error{border-color:color-mix(in srgb,var(--bad) 50%,transparent)}.alarm-item.error .alarm-icon{background:var(--bad);color:#fff}.alarm-item.warning{border-color:color-mix(in srgb,var(--warn) 50%,transparent)}.alarm-item.warning .alarm-icon{background:var(--warn);color:#fff}.alarm-item.info{color:var(--muted);width:fit-content;padding:8px 14px 8px 8px}.alarm-item.info .alarm-icon{background:var(--ok);color:#fff}
@@ -152,11 +152,11 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 <radialGradient id="metalR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f2f4f7"/><stop offset=".6" stop-color="#9aa4b1"/><stop offset="1" stop-color="#4c5662"/></radialGradient>
 <radialGradient id="vesR" cx=".5" cy=".5" r=".5"><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></radialGradient>
 <linearGradient id="pdS" x1="0" y1="0" x2="0" y2="1"><stop offset=".4" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></linearGradient></defs></svg>
-<nav id="nav"><img src="/ae_logo.png" alt="AELABS"><div class="nr"><div class="chip"><i class="dot" id="liveDot"></i><span id="connection">Подключение</span></div><button class="ib" id="th" aria-label="Тема" type="button"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div></nav>
+<nav id="nav"><img src="/ae_logo.png" alt="AELABS"><div class="nr"><div class="chip"><i class="dot" id="liveDot"></i><span id="connection">Подключение</span></div><button class="ib" id="soundToggle" aria-label="Звук ошибок" aria-pressed="false" title="Звуковые уведомления об ошибках" type="button"><svg class="snd-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg><svg class="snd-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button><button class="ib" id="th" aria-label="Тема" type="button"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div></nav>
 <main>
 <div id="staleBanner"><small id="staleDetail"></small></div>
 <section class="hero" id="hero"><h1>Мониторинг</h1><p><span id="updated">—</span></p></section>
-<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><span id="alarmCount">0</span><button id="soundToggle" type="button" class="ib" style="width:auto;padding:7px 12px;font-size:12px" aria-pressed="false">Включить звук ошибок</button></div><div id="alarmItems" class="alarm-items"></div></section>
+<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><span id="alarmCount">0</span></div><button id="soundHint" type="button" class="sound-hint">🔇 Звук выключен: нажмите, чтобы включить звуковые уведомления об ошибках</button><div id="alarmItems" class="alarm-items"></div></section>
 <h2>Процесс</h2><div class="grid gp" id="g-p"></div>
 <h2>Абгаз</h2><div class="grid gg" id="g-g"></div>
 <h2>Весы</h2><div class="grid gw" id="g-w"></div>
@@ -183,9 +183,46 @@ function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObser
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
 // Desktop v38 publishes scale readings in grams (weight_N_g); the web cards display kg.
 function weightKg(m,i){const kg=numericValue(m,[`weight_${i}_kg`,`weight_${i}_kg_online`]);if(kg!==null)return kg;const grams=numericValue(m,[`weight_${i}_g`,`weight_${i}_grams`]);return grams===null?null:grams/1000}
-let alarmSoundEnabled=false,lastErrorAlarmActive=false;const alarmAudio=new Audio('/signal.wav');alarmAudio.preload='auto';
-const soundToggle=document.getElementById('soundToggle');soundToggle?.addEventListener('click',async()=>{alarmSoundEnabled=true;soundToggle.textContent='Звук ошибок включён';soundToggle.setAttribute('aria-pressed','true');soundToggle.style.color='var(--green)';try{alarmAudio.currentTime=0;await alarmAudio.play();alarmAudio.pause();alarmAudio.currentTime=0}catch(_){}});
-function updateErrorSound(){const active=!!document.querySelector('#alarmItems .alarm-item.error');if(active&&!lastErrorAlarmActive&&alarmSoundEnabled){try{alarmAudio.currentTime=0;alarmAudio.play().catch(()=>{})}catch(_){}}lastErrorAlarmActive=active;}
+// ---- Sound alarms (same scheme as the desktop app) ----
+// Own sound per category; while any ERROR is active a sound is repeated every 4 s, cycling
+// through the active categories. Weight "yellow" warnings play once when they appear.
+const SOUND_FILES={connection:'/signal-connection.wav',sensor:'/signal-sensors.wav',weight_red:'/signal.wav',generic:'/signal.wav',yellow:'/signal.wav'};
+const ALARM_REPEAT_MS=4000,ALARM_ORDER=['connection','sensor','weight_red','generic'];
+const alarmAudio={};for(const [k,u] of Object.entries(SOUND_FILES)){const a=new Audio(u);a.preload='auto';alarmAudio[k]=a}
+let alarmSoundEnabled=false,soundBlocked=false,alarmRR=0,alarmTimer=null,alarmKinds=[],yellowSeen=new Set();
+try{alarmSoundEnabled=localStorage.getItem('aelabs_sound')==='1'}catch(_){}
+function alarmKind(key,text,level){const k=String(key||'');
+ if(k.startsWith('connection:'))return 'connection';
+ if(k.startsWith('weight:red:'))return 'weight_red';
+ if(k.startsWith('weight:yellow:'))return 'yellow';
+ if(k.startsWith('sensor:')||k==='process:ph'||k==='process:temp'||k==='process:do')return 'sensor';
+ if(/устарев|не поступают|потер|связи|INI/i.test(String(text||'')))return 'connection';
+ return level==='warning'?'':'generic'}
+function playAlarm(kind){const a=alarmAudio[kind];if(!a||!alarmSoundEnabled)return;try{a.pause();a.currentTime=0;const p=a.play();if(p&&p.catch)p.catch(e=>{if(e&&e.name==='NotAllowedError'){soundBlocked=true;paintSound()}})}catch(_){}}
+// Browsers only allow audio after a user gesture: "prime" every sound inside a click.
+function primeSounds(){for(const a of Object.values(alarmAudio)){try{a.muted=true;const p=a.play();const done=()=>{a.pause();a.currentTime=0;a.muted=false};if(p&&p.then)p.then(done).catch(()=>{a.muted=false});else done()}catch(_){a.muted=false}}soundBlocked=false}
+function stopAlarmTimer(){if(alarmTimer){clearInterval(alarmTimer);alarmTimer=null}}
+function startAlarmTimer(){if(alarmTimer)return;alarmTimer=setInterval(()=>{if(!alarmKinds.length||!alarmSoundEnabled){stopAlarmTimer();return}alarmRR%=alarmKinds.length;playAlarm(alarmKinds[alarmRR]);alarmRR=(alarmRR+1)%alarmKinds.length},ALARM_REPEAT_MS)}
+function restartAlarmSound(){stopAlarmTimer();for(const a of Object.values(alarmAudio)){try{a.pause();a.currentTime=0}catch(_){}}if(alarmSoundEnabled&&alarmKinds.length){alarmRR=1%alarmKinds.length;playAlarm(alarmKinds[0]);startAlarmTimer()}}
+function paintSound(){const b=document.getElementById('soundToggle'),h=document.getElementById('soundHint');
+ if(b){b.classList.toggle('on',alarmSoundEnabled&&!soundBlocked);b.classList.toggle('blocked',alarmSoundEnabled&&soundBlocked);b.setAttribute('aria-pressed',String(alarmSoundEnabled));b.title=!alarmSoundEnabled?'Звук ошибок выключен: нажмите, чтобы включить':soundBlocked?'Браузер заблокировал звук: нажмите в любом месте страницы':'Звук ошибок включён: нажмите, чтобы выключить'}
+ if(h){const need=alarmKinds.length>0&&(!alarmSoundEnabled||soundBlocked);h.classList.toggle('show',need);h.textContent=!alarmSoundEnabled?'🔇 Звук выключен: нажмите, чтобы включить звуковые уведомления об ошибках':'🔊 Нажмите в любом месте страницы, чтобы браузер разрешил звук'}}
+function setAlarmSound(on){alarmSoundEnabled=on;try{localStorage.setItem('aelabs_sound',on?'1':'0')}catch(_){}if(on)primeSounds();restartAlarmSound();paintSound()}
+document.getElementById('soundToggle')?.addEventListener('click',()=>setAlarmSound(!alarmSoundEnabled));
+document.getElementById('soundHint')?.addEventListener('click',()=>setAlarmSound(true));
+// after a reload the browser forgets the permission: the first click anywhere restores it
+document.addEventListener('pointerdown',()=>{if(alarmSoundEnabled&&soundBlocked){primeSounds();restartAlarmSound();paintSound()}},true);
+function updateErrorSound(){
+ const items=[...document.querySelectorAll('#alarmItems .alarm-item.error')];
+ const kinds=[...new Set(items.map(i=>i.dataset.kind||'generic'))].sort((x,y)=>ALARM_ORDER.indexOf(x)-ALARM_ORDER.indexOf(y));
+ const had=alarmKinds.length>0;alarmKinds=kinds;
+ const yel=new Set([...document.querySelectorAll('#alarmItems .alarm-item.warning[data-kind="yellow"]')].map(i=>i.dataset.key||i.textContent));
+ const fresh=[...yel].some(k=>!yellowSeen.has(k));yellowSeen=yel;
+ if(kinds.length){if(!had)restartAlarmSound();else if(alarmSoundEnabled)startAlarmTimer()}
+ else{stopAlarmTimer();alarmRR=0}
+ if(fresh&&!kinds.length)playAlarm('yellow');
+ paintSound()}
+paintSound();
 function scaleName(o,index){
  const i=Number(index), key=`weight_${i}_kg`;
  const candidates=[o?.weight_names?.[key],o?.weight_names?.[`weight_${i}`],o?.scale_names?.[i-1],o?.scale_names?.[key],o?.settings?.weight_names?.[key],o?.settings?.scale_names?.[i-1],o?.desktop_status?.weight_names?.[key],o?.desktop_status?.scale_names?.[i-1],o?.provenance?.weight_names?.[key],o?.provenance?.scale_names?.[i-1]];
@@ -223,31 +260,31 @@ function buildAlarms(o,m,stale){
  if(desktop && desktop.alarm_state_authoritative===true && Array.isArray(desktop.active_alarms)){
    for(const item of desktop.active_alarms){
      if(item && item.active!==false && item.message){
-       a.push({level:item.level==='warning'?'warning':'error',text:String(item.message),key:item.key||''});
+       a.push({level:item.level==='warning'?'warning':'error',text:String(item.message),key:item.key||'',kind:alarmKind(item.key,item.message,item.level==='warning'?'warning':'error')});
      }
    }
    if(desktop.process_data_stale && !a.some(x=>/INI|данных|обновлен/i.test(x.text))){
-     a.push({level:'error',text:'ОШИБКА: настольное приложение сообщает об устаревших данных процесса.'});
+     a.push({level:'error',kind:'connection',text:'ОШИБКА: настольное приложение сообщает об устаревших данных процесса.'});
    }
-   if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
+   if(stale)a.push({level:'error',kind:'connection',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
    if(!a.length)a.push({level:'ok',text:'Всё в норме'});
    return a;
  }
- if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
+ if(stale)a.push({level:'error',kind:'connection',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
  const limits=[
   ['ph','pH',6.5,8.0,'','pH вне заданного диапазона'],
   ['temperature_c','Температура',20,28,' °C','Температура вне заданного диапазона'],
   ['do_mg_l','DO растворённого кислорода',3,9,' мг/л','DO растворённого кислорода вне заданного диапазона'],
   ['offgas_o2','O₂ в абгазе',3,9,'%','O₂ в абгазе вне заданного диапазона']
  ];
- for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
+ for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',kind:'sensor',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
  for(const f of flags)a.push({level:'warning',text:'ПРЕДУПРЕЖДЕНИЕ качества данных: '+String(f)});
  if(q.status&&q.status!=='raw_received'&&q.status!=='ok')a.push({level:'warning',text:'Статус качества данных: '+q.status});
- for(let i=1;i<=3;i++){const v=weightKg(m,i),name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
+ for(let i=1;i<=3;i++){const v=weightKg(m,i),name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',kind:'weight_red',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',kind:'yellow',key:'weight:yellow:'+i,text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
  if(!a.length)a.push({level:'ok',text:'Всё в норме'});
  return a
 }
-function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''));updateErrorSound()}
+function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}" data-kind="${esc(a.kind||'')}" data-key="${esc(a.key||'')}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''));updateErrorSound()}
 function setAlarmHtml(h){const el=$('alarmItems');if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}
 function updatePcLink(){const row=$('pcLinkRow'),mark=$('pcLinkMark'),label=$('pcLinkStatus');if(!row||!mark||!label)return;const age=sourceAgeMs();const online=!!latestObservation&&age<PC_HEARTBEAT_TIMEOUT_MS;row.classList.toggle('pc-online',online);row.classList.toggle('pc-offline',!online);mark.textContent=online?'✓':'!';label.textContent=online?'Подключено':'Нет сигнала';label.style.color=online?'var(--green)':'var(--red)'}
 async function refresh(){
@@ -269,7 +306,7 @@ async function refresh(){
   $('snapshotStatus').textContent=stale?'Нет новых записей':(AELABSHistory.sourceTimeLabel(o)||'—');
   if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}
   else{if(historySourceMode==='browser-local')mergeLatestIntoHistory();drawTrend();renderHistoryTable()}
- }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
+ }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error" data-kind="connection"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
  finally{refreshInFlight=false;window.__bootDone&&window.__bootDone()}
 }
 async function loadHistory(){
