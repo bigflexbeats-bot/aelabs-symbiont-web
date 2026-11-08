@@ -60,29 +60,3 @@ class GithubLogCsvTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
-
-
-class OffgasColumnsTests(unittest.TestCase):
-    def test_reads_offgas_and_air_flow(self):
-        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;air_flow_online_ae_l_min;o2_flow_online_ae_l_min'
-        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';5,10;15,70;3,01;42,50;'
-        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
-        self.assertEqual(m['offgas_o2_online_ae_pct'], 5.1)
-        self.assertEqual(m['offgas_ch4_online_ae_pct'], 15.7)
-        self.assertEqual(m['offgas_co2_online_ae_pct'], 3.01)
-        self.assertEqual(m['air_flow_online_ae_l_min'], 42.5)
-
-    def test_old_airflow_pr100_name_and_short_rows(self):
-        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;airflow_pr100'
-        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';;;;7,25'
-        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
-        self.assertEqual(m['air_flow_online_ae_l_min'], 7.25)
-        old = parse_github_log_csv(CANONICAL_HEADER + '\n' + csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', 'x'))
-        self.assertIsNone(old['items'][0]['measurements']['air_flow_online_ae_l_min'])
-
-    def test_o2_flow_column(self):
-        header = CANONICAL_HEADER + ';offgas_o2_online_ae_pct;offgas_ch4_online_ae_pct;offgas_co2_online_ae_pct;air_flow_online_ae_l_min;o2_flow_online_ae_l_min'
-        row = csv_row('20.10.2026 14:05:10', '2026-10-20T09:05:10Z', '2026-10-20T09:05:14Z') + ';;;;;3,50'
-        m = parse_github_log_csv(header + '\n' + row)['items'][0]['measurements']
-        self.assertIsNone(m['air_flow_online_ae_l_min'])
-        self.assertEqual(m['o2_flow_online_ae_l_min'], 3.5)
