@@ -41,6 +41,14 @@ def _first(row: dict[str, Any], *names: str) -> str | None:
     return None
 
 
+def _first_number(row: dict[str, Any], *names: str) -> float | None:
+    for name in names:
+        value = number_cell(row.get(name))
+        if value is not None:
+            return value
+    return None
+
+
 def parse_github_log_csv(content: str, limit: int = 500) -> dict[str, Any]:
     """Parse canonical semicolon CSV and return the latest unique source rows."""
     content = (content or '').lstrip('\ufeff')
@@ -81,6 +89,12 @@ def parse_github_log_csv(content: str, limit: int = 500) -> dict[str, Any]:
             'medium_feed_tank_mass_ae_g': number_cell(row.get('medium_feed_tank_mass_ae_g')),
             'nh4oh_bottle_mass_ae_g': number_cell(row.get('nh4oh_bottle_mass_ae_g')),
             'koh_bottle_mass_ae_g': number_cell(row.get('koh_bottle_mass_ae_g')),
+            'offgas_o2_online_ae_pct': number_cell(row.get('offgas_o2_online_ae_pct')),
+            'offgas_ch4_online_ae_pct': number_cell(row.get('offgas_ch4_online_ae_pct')),
+            'offgas_co2_online_ae_pct': number_cell(row.get('offgas_co2_online_ae_pct')),
+            # airflow_pr100 / air_flow_online_ae_nl_min — прежние имена того же столбца.
+            'air_flow_online_ae_l_min': _first_number(row, 'air_flow_online_ae_l_min', 'air_flow_online_ae_nl_min', 'airflow_pr100'),
+            'o2_flow_online_ae_l_min': _first_number(row, 'o2_flow_online_ae_l_min'),
         }
         # A timestamp-only/fully blank row is not a process measurement.
         plot_values = [measurements['ph'], measurements['do_mg_l'], measurements['do_sat_pct'],
