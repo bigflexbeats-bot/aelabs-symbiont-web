@@ -126,7 +126,7 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 @media(max-width:760px){.card{border-radius:22px;padding:18px}.art{height:112px}#subnav{justify-content:flex-start}}
 @media(prefers-reduced-motion:reduce){.card[data-k^=weight].warn,.card[data-k^=weight].bad{animation:none!important;box-shadow:var(--shadow),inset 0 0 0 2px var(--lvc)}}
 /* GIT WEB methane feed: separate from CH4 offgas and local browser samples only. */
-.g-f, .gf{min-width:0}.feed-status{font-size:12px;color:var(--muted);margin-top:13px;min-height:18px}
+.g-f, .gf{min-width:0}
 .card[data-k=ch4flow]{box-shadow:var(--shadow),inset 0 0 0 1px var(--line),0 0 30px -24px var(--c-ch4f)}
 .card[data-k=ch4flow] .val b{color:var(--c-ch4f)}
 .feed-history-card{margin-top:20px;padding:clamp(20px,3vw,34px)}
@@ -137,6 +137,59 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 .ch4-flow-plot svg{width:100%;height:100%;display:block}
 .ch4-flow-plot .plot-empty{color:var(--muted);padding:50px 6px;text-align:center}
 @media(max-width:760px){.gf{grid-template-columns:repeat(2,minmax(0,1fr))}.ch4-flow-plot{height:190px}}
+
+/* ===== AELABS WEB compact layout / methane feed (2026-11-19) ===== */
+body{font-size:14px}
+main{max-width:1210px;padding-bottom:48px}
+nav#nav{height:48px}
+nav#nav img{height:24px}
+#subnav{top:48px;padding:5px clamp(12px,3vw,32px)}
+#subnav a{font-size:12px;padding:5px 11px}
+.hero{padding:clamp(24px,4vw,52px) 0 clamp(14px,2vw,23px)}
+.eyebrow{font-size:12px;margin-bottom:9px}
+.hero h1{font-size:clamp(36px,6.3vw,70px)}
+.hero p{font-size:14px;margin-top:11px}
+.hstatus{font-size:12px;margin-top:14px;padding:7px 14px 7px 12px}
+main>h2{font-size:clamp(21px,2.5vw,29px);margin:clamp(30px,4.5vw,54px) 0 13px}
+main>h2,.trend-card{scroll-margin-top:102px}
+.grid{gap:12px}
+.card{border-radius:20px;padding:17px}
+.cn{font-size:13px;min-height:18px}
+.art{height:104px;margin:7px 0 5px}
+.val b{font-size:clamp(26px,2.35vw,33px)}
+.val b.sm{font-size:clamp(21px,1.9vw,25px)}
+.val span{font-size:12px}
+.card[data-k=ch4flow]{--flow:#39c96d}
+.card[data-k=ch4flow] .flow{stroke:#39c96d;filter:drop-shadow(0 0 5px rgba(57,201,109,.4))}
+.trend-card{border-radius:22px;padding:clamp(17px,2.5vw,24px);margin-top:clamp(32px,4.5vw,54px)}
+.trend-head h2{font-size:clamp(19px,2.1vw,25px)}
+.trend-plot{height:290px;margin-top:14px}
+.feed-history-card{margin-top:14px;padding:clamp(16px,2.4vw,24px)}
+.feed-history-head h2{font-size:clamp(18px,2vw,23px)}
+.ch4-flow-plot{height:195px;margin-top:12px}
+.lower{gap:12px}
+.lower .card{padding:7px 18px}
+.row,.statusline{padding:11px 0}
+.footer{margin-top:clamp(32px,4.5vw,54px)}
+@media(max-width:760px){
+ .card{border-radius:16px;padding:14px}
+ .art{height:86px;margin:5px 0 3px}
+ .val b{font-size:clamp(22px,4.8vw,29px)}
+ .hero h1{font-size:clamp(34px,9vw,53px)}
+ main>h2{margin:28px 0 11px}
+ .trend-plot{height:245px}
+ .ch4-flow-plot{height:175px}
+ .lower .card{padding:8px 14px}
+}
+@media(max-width:420px){
+ .card{padding:12px}
+ .cn{font-size:12px}
+ .art{height:77px}
+ .val b{font-size:25px}
+ .val span{font-size:11px}
+ .grid{gap:9px}
+ .trend-controls{gap:0}
+}
 </style></head><body><div class="amb"></div>
 <div id="boot"><div class="bl"><img src="/ae_logo.png" alt="AELABS"><div class="sh"></div></div><div class="bar"><i id="bar"></i></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -167,7 +220,7 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 <div class="footer"><a href="https://t.me/aeetherwave" target="_blank" rel="noopener noreferrer" aria-label="AELABS в Telegram" title="AELABS в Telegram"><img src="/ae_logo.png" alt="AELABS"><span>Мы в Telegram</span></a></div>
 </main>
 <script src="/source-history.js"></script><script>(function(){const G={p:[['ph','pH','','ph'],['do','Растворённый кислород','мг/л','do'],['temp','Температура','°C','temp'],['rpm','Мешалка','об/мин','rpm'],['od','Оптическая плотность','OD','od']],g:[['offgas','O₂ в абгазе','%','o2'],['ch4','CH₄ в абгазе','%','ch4'],['co2','CO₂ в абгазе','%','co2']],f:[['airflow','Подача воздуха','л/мин','air'],['ch4flow','Подача CH₄','л/мин','ch4f']],w:[['weight1','Весы 1','кг','w1'],['weight2','Весы 2','кг','w2'],['weight3','Весы 3','кг','w3']]};
-let i=0;for(const g in G)document.getElementById('g-'+g).innerHTML=G[g].map(([id,n,u,a],j)=>{const nid=id==='airflow'?'flowTitle':id.startsWith('weight')?'weightName'+id.slice(6):'n-'+id;return`<article class="card rv" ${id==='airflow'?'id="flowCard"':''} data-k="${id}" style="--d:${j*70}ms"><div class="cn"><span id="${nid}">${n}</span><i class="al"></i></div><div class="art" data-art="${a}"></div><div class="val"><b id="${id}">—</b>${u?`<span>${u}</span>`:''}</div>${id==='ch4flow'?'<div class="feed-status" id="ch4FlowStatus">Ожидание показаний GIT WEB</div>':''}</article>`}).join('')})();
+let i=0;for(const g in G)document.getElementById('g-'+g).innerHTML=G[g].map(([id,n,u,a],j)=>{const nid=id==='airflow'?'flowTitle':id.startsWith('weight')?'weightName'+id.slice(6):'n-'+id;return`<article class="card rv" ${id==='airflow'?'id="flowCard"':''} data-k="${id}" style="--d:${j*70}ms"><div class="cn"><span id="${nid}">${n}</span><i class="al"></i></div><div class="art" data-art="${a}"></div><div class="val"><b id="${id}">—</b>${u?`<span>${u}</span>`:''}</div></article>`}).join('')})();
 </script><script>
 const $=id=>document.getElementById(id);
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
@@ -307,15 +360,15 @@ async function refresh(){
   latestObservation=o;updatePcLink();recordCh4WebReading(o);drawCh4WebTrend();
   // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
   setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
-  setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));const ch4Feed=numericValue(m,CH4FLOW_KEYS);if(ch4Feed===null){if(window.clearCh4Flow)window.clearCh4Flow();else $('ch4flow').textContent='—';$('ch4FlowStatus').textContent='Нет показаний подачи CH₄ в GIT WEB'}else{setVal('ch4flow',ch4Feed);$('ch4FlowStatus').textContent='РРГ-20 · данные GIT WEB'};{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Подача O₂':'Подача воздуха';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
+  setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));const ch4Feed=numericValue(m,CH4FLOW_KEYS);if(ch4Feed===null){if(window.clearCh4Flow)window.clearCh4Flow();else $('ch4flow').textContent='—'}else{setVal('ch4flow',ch4Feed)};{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Подача O₂':'Подача воздуха';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
   window.__SC=window.__SC||{};for(let i=1;i<=3;i++){const wv=weightKg(m,i);if(typeof wv==='number')window.__SC[i]={...scaleLimits(o,i),state:scaleState(o,i,wv)};setValIfReadable(`weight${i}`,wv);$('weightName'+i).textContent=scaleName(o,i)}
   setValIfReadable('rawTime',o.source_time_raw);setValIfReadable('tz',o.source_timezone);setValIfReadable('eventTime',o.event_time_utc);setValIfReadable('receivedTime',o.received_at_utc);setValIfReadable('experiment',o.experiment_id);setValIfReadable('run',o.run_id);
   $('updated').textContent=''+new Date().toLocaleTimeString('ru-RU');
-  const stale=checkStale();if(stale)$('ch4FlowStatus').textContent='Показания устарели — новых данных нет';renderAlarms(o,m,stale);$('connection').textContent=stale?'Нет новых данных':'В сети';$('liveDot').style.background=stale?'var(--red)':'var(--green)';$('repoStatus').textContent='Доступен';
+  const stale=checkStale();renderAlarms(o,m,stale);$('connection').textContent=stale?'Нет новых данных':'В сети';$('liveDot').style.background=stale?'var(--red)':'var(--green)';$('repoStatus').textContent='Доступен';
   $('snapshotStatus').textContent=stale?'Нет новых записей':(AELABSHistory.sourceTimeLabel(o)||'—');
   if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}
   else{if(historySourceMode==='browser-local')mergeLatestIntoHistory();drawTrend();renderHistoryTable()}
- }catch(e){$('ch4FlowStatus').textContent='Нет связи с GIT WEB';$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
+ }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
  finally{refreshInFlight=false;window.__bootDone&&window.__bootDone()}
 }
 async function loadHistory(){
@@ -444,7 +497,7 @@ rpm:{h:SV(`<circle cx="80" cy="65" r="56" fill="url(#vesR)"/><circle cx="80" cy=
 od:{h:SV(`<defs><linearGradient id="ob"><stop offset="0" stop-color="#ffe9a8" stop-opacity=".95"/><stop offset="1" stop-color="#ffe9a8" stop-opacity=".5"/></linearGradient></defs><circle class="pulse" cx="12" cy="65" r="7" fill="#ffe9a8"/><path d="M18 62L64 54V76L18 68Z" fill="url(#ob)"/><path id="oout" d="M98 56L142 61V69L98 74Z" fill="#ffe9a8" style="transition:opacity 1.4s;opacity:.9"/><rect id="oliq" x="65" y="38" width="30" height="68" rx="3" fill="#7bd88f" style="transition:opacity 1.4s;opacity:.2"/>${[0,1,2,3,4,5,6,7].map(i=>`<circle class="drift" cx="${70+(i*7)%22}" cy="${50+(i*13)%48}" r="1.8" fill="#fff" opacity=".7" style="--d:${-i*.7}s;--x:${i%2?5:-5}px;--y:${i%3?-7:7}px"/>`).join('')}<rect x="62" y="26" width="36" height="82" rx="6" fill="url(#glassH)"/><rect class="glass" x="62" y="26" width="36" height="82" rx="6"/><rect class="plat" x="144" y="56" width="9" height="18" rx="3"/>`),u(v){const a=document.querySelector('[data-art=od]');a.querySelector('#oout').style.opacity=(.95/(1+v*.9)).toFixed(3);a.querySelector('#oliq').style.opacity=(.18+.72*v/(v+2)).toFixed(3)}},
 o2:{h:mol(bd(62,60,98,60,4)+bd(62,70,98,70,4)+at(60,65,22,'O')+at(100,65,22,'O'),1),u(){}},
 ch4:{h:mol(bd(80,65,46,36)+bd(80,65,114,36)+bd(80,65,50,98)+bd(80,65,110,98)+at(46,36,11,'H')+at(114,36,11,'H')+at(50,98,11,'H')+at(110,98,11,'H')+at(80,65,19,'C'),1),u(){}},
-ch4f:{h:mol(bd(80,65,46,36)+bd(80,65,114,36)+bd(80,65,50,98)+bd(80,65,110,98)+at(46,36,11,'H')+at(114,36,11,'H')+at(50,98,11,'H')+at(110,98,11,'H')+at(80,65,19,'C'),1),u(){}},
+ch4f:{h:SV(`<g id="methaneFeedFlow"><path class="flow" d="M8 38C38 16 58 60 88 38S130 20 152 36"/><path class="flow" style="animation-delay:-.7s" d="M8 66C38 44 58 88 88 66S130 48 152 64"/><path class="flow" style="animation-delay:-1.3s" d="M8 94C38 72 58 116 88 94S130 76 152 92"/></g>`),u(v){const a=document.querySelector('[data-art=ch4f] svg');if(a)a.style.setProperty('--fd',clamp(5/(1+Math.max(0,v)/6),.5,4)+'s')}},
 co2:{h:mol(bd(34,60,80,60,4)+bd(34,70,80,70,4)+bd(80,60,126,60,4)+bd(80,70,126,70,4)+at(32,65,19,'O')+at(128,65,19,'O')+at(80,65,16,'C'),1),u(){}},
 air:{h:SV(`<g id="fl"><path class="flow" d="M8 38C38 16 58 60 88 38S130 20 152 36"/><path class="flow" style="animation-delay:-.7s" d="M8 66C38 44 58 88 88 66S130 48 152 64"/><path class="flow" style="animation-delay:-1.3s" d="M8 94C38 72 58 116 88 94S130 76 152 92"/></g>`),u(v){const a=document.querySelector('[data-art=air] svg');a.classList.toggle('o2',document.getElementById('flowCard').classList.contains('g-o2'));a.style.setProperty('--fd',clamp(5/(1+v/6),.5,4)+'s')}}};
 ['w1','w2','w3'].forEach((k,i)=>{const cs=[['#d9b46a','#b9822c'],['#b39ad9','#7d5cb8'],['#7fc0dd','#3f86ad']][i];ART[k]={h:SV(tank(k,BOT,24,110,'M56 56V92','<rect class="plat" x="28" y="112" width="104" height="12" rx="6"/><rect x="68" y="116" width="24" height="4" rx="2" fill="var(--acc)"/>')),c:cs,u(v){const id='weight'+(i+1),a=document.querySelector(`[data-art=${k}] svg`);window.__wm=window.__wm||{};__wm[id]=Math.max(__wm[id]||3,v);const sc=(window.__SC||{})[i+1]||{yellow:2,red:1},kn=sc.state!==undefined,bad=kn?sc.state==='bad':v<=sc.red,w=kn?sc.state!=='':v<=sc.yellow;a.style.setProperty('--lc1',bad?'#ff8a92':w?'#ffcf7a':cs[0]);a.style.setProperty('--lc2',bad?'#e0343f':w?'#e0891e':cs[1]);lvl(k,v/__wm[id],24,110);thm(a,sc,__wm[id],24,110)}}});
