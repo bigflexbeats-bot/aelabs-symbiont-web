@@ -190,6 +190,16 @@ main>h2,.trend-card{scroll-margin-top:102px}
  .grid{gap:9px}
  .trend-controls{gap:0}
 }
+
+/* Restored alarm UI — visible controls even in compact layout. */
+#nav .sound-master{min-height:30px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--bad) 10%,var(--card));color:var(--text);font:inherit;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer}
+#nav .sound-master.sound-enabled{background:color-mix(in srgb,var(--ok) 17%,var(--card));border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.alarm-strip{margin:0 0 10px}.alarm-strip-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;margin-bottom:10px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.alarm-strip-head strong{font-size:13px;white-space:nowrap}.alarm-strip-head #alarmAudioStatus{flex:1;min-width:165px;font-size:12px;color:var(--muted)}
+.alarm-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.alarm-action{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--text);font:inherit;font-size:12px;cursor:pointer}
+.alarm-action:hover:not(:disabled){background:color-mix(in srgb,var(--text) 13%,transparent)}.alarm-action:disabled{opacity:.4;cursor:not-allowed}
+.alarm-ack{border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}.alarm-volume{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}.alarm-volume input{width:82px;accent-color:var(--acc)}
+@media(max-width:600px){nav#nav{padding:0 10px}nav#nav img{height:21px}.nr{gap:5px}.chip{font-size:11px;padding:0 8px}#nav .sound-master{font-size:11px;padding:5px 8px}.alarm-strip-head{gap:8px;padding:10px}.alarm-strip-head #alarmAudioStatus{flex-basis:100%;min-width:0}.alarm-actions{width:100%;justify-content:space-between}.alarm-volume input{width:70px}}
 </style></head><body><div class="amb"></div>
 <div id="boot"><div class="bl"><img src="/ae_logo.png" alt="AELABS"><div class="sh"></div></div><div class="bar"><i id="bar"></i></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -203,11 +213,11 @@ main>h2,.trend-card{scroll-margin-top:102px}
 <radialGradient id="metalR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f2f4f7"/><stop offset=".6" stop-color="#9aa4b1"/><stop offset="1" stop-color="#4c5662"/></radialGradient>
 <radialGradient id="vesR" cx=".5" cy=".5" r=".5"><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></radialGradient>
 <linearGradient id="pdS" x1="0" y1="0" x2="0" y2="1"><stop offset=".4" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></linearGradient></defs></svg>
-<nav id="nav"><img src="/ae_logo.png" alt="AELABS"><div class="nr"><div class="chip"><i class="dot" id="liveDot"></i><span id="connection">Подключение</span></div><button class="ib" id="th" aria-label="Тема" type="button"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div></nav>
+<nav id="nav"><img src="/ae_logo.png" alt="AELABS"><div class="nr"><div class="chip"><i class="dot" id="liveDot"></i><span id="connection">Подключение</span></div><button id="soundToggle" type="button" class="sound-master" aria-pressed="false" title="Нажмите, чтобы разрешить звук в браузере">🔇 Включить звук</button><button class="ib" id="th" aria-label="Тема" type="button"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div></nav>
 <main>
 <div id="staleBanner"><small id="staleDetail"></small></div>
 <section class="hero" id="hero"><h1>Мониторинг</h1><p><span id="updated">—</span></p></section>
-<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><span id="alarmCount">0</span><button id="soundToggle" type="button" class="ib" style="width:auto;padding:7px 12px;font-size:12px" aria-pressed="false">Включить звук ошибок</button></div><div id="alarmItems" class="alarm-items"></div></section>
+<section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong id="alarmCount">0 активных</strong><span id="alarmAudioStatus" role="status">Звуковые уведомления выключены</span><div class="alarm-actions"><label class="alarm-volume" title="Громкость звука">Громкость <input id="alarmVolume" type="range" min="0" max="100" step="5" value="65" aria-label="Громкость сигнализации"></label><button id="alarmTest" type="button" class="alarm-action">Проверить звук</button><button id="alarmAck" type="button" class="alarm-action alarm-ack" disabled>Квитировать</button></div></div><div id="alarmItems" class="alarm-items"></div></section>
 <h2>Процесс</h2><div class="grid gp" id="g-p"></div>
 <h2>Абгаз</h2><div class="grid gg" id="g-g"></div>
 <h2>Подача газов</h2><div class="grid gf" id="g-f"></div>
@@ -219,7 +229,7 @@ main>h2,.trend-card{scroll-margin-top:102px}
 <section class="card rv"><div class="statusline"><b>Источник данных</b><small id="repoStatus">—</small></div><div class="statusline" id="pcLinkRow"><b>Связь с ПК</b><small id="pcLinkStatus">—</small><span id="pcLinkMark" hidden></span></div><div class="statusline"><b>Последняя запись</b><small id="snapshotStatus">—</small></div><div class="statusline"><b>История</b><small id="historyStatus">—</small></div><div class="statusline"><b>Обновить</b><button class="ib" id="refresh" type="button" aria-label="Обновить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div></section></div>
 <div class="footer"><a href="https://t.me/aeetherwave" target="_blank" rel="noopener noreferrer" aria-label="AELABS в Telegram" title="AELABS в Telegram"><img src="/ae_logo.png" alt="AELABS"><span>Мы в Telegram</span></a></div>
 </main>
-<script src="/source-history.js"></script><script>(function(){const G={p:[['ph','pH','','ph'],['do','Растворённый кислород','мг/л','do'],['temp','Температура','°C','temp'],['rpm','Мешалка','об/мин','rpm'],['od','Оптическая плотность','OD','od']],g:[['offgas','O₂ в абгазе','%','o2'],['ch4','CH₄ в абгазе','%','ch4'],['co2','CO₂ в абгазе','%','co2']],f:[['airflow','Подача воздуха','л/мин','air'],['ch4flow','Подача CH₄','л/мин','ch4f']],w:[['weight1','Весы 1','кг','w1'],['weight2','Весы 2','кг','w2'],['weight3','Весы 3','кг','w3']]};
+<script src="/source-history.js"></script><script src="/alarm-controller.js"></script><script>(function(){const G={p:[['ph','pH','','ph'],['do','Растворённый кислород','мг/л','do'],['temp','Температура','°C','temp'],['rpm','Мешалка','об/мин','rpm'],['od','Оптическая плотность','OD','od']],g:[['offgas','O₂ в абгазе','%','o2'],['ch4','CH₄ в абгазе','%','ch4'],['co2','CO₂ в абгазе','%','co2']],f:[['airflow','Подача воздуха','л/мин','air'],['ch4flow','Подача CH₄','л/мин','ch4f']],w:[['weight1','Весы 1','кг','w1'],['weight2','Весы 2','кг','w2'],['weight3','Весы 3','кг','w3']]};
 let i=0;for(const g in G)document.getElementById('g-'+g).innerHTML=G[g].map(([id,n,u,a],j)=>{const nid=id==='airflow'?'flowTitle':id.startsWith('weight')?'weightName'+id.slice(6):'n-'+id;return`<article class="card rv" ${id==='airflow'?'id="flowCard"':''} data-k="${id}" style="--d:${j*70}ms"><div class="cn"><span id="${nid}">${n}</span><i class="al"></i></div><div class="art" data-art="${a}"></div><div class="val"><b id="${id}">—</b>${u?`<span>${u}</span>`:''}</div></article>`}).join('')})();
 </script><script>
 const $=id=>document.getElementById(id);
@@ -236,9 +246,8 @@ function sourceAgeMs(){const sourceMs=AELABSHistory.eventTimestampMs(latestObser
 function numericValue(m,keys){for(const k of keys){const v=m?.[k];if(typeof v==='number'&&Number.isFinite(v))return v;if(typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v)))return Number(v)}return null}
 // Desktop v38 publishes scale readings in grams (weight_N_g); the web cards display kg.
 function weightKg(m,i){const kg=numericValue(m,[`weight_${i}_kg`,`weight_${i}_kg_online`]);if(kg!==null)return kg;const grams=numericValue(m,[`weight_${i}_g`,`weight_${i}_grams`]);return grams===null?null:grams/1000}
-let alarmSoundEnabled=false,lastErrorAlarmActive=false;const alarmAudio=new Audio('/signal.wav');alarmAudio.preload='auto';
-const soundToggle=document.getElementById('soundToggle');soundToggle?.addEventListener('click',async()=>{alarmSoundEnabled=true;soundToggle.textContent='Звук ошибок включён';soundToggle.setAttribute('aria-pressed','true');soundToggle.style.color='var(--green)';try{alarmAudio.currentTime=0;await alarmAudio.play();alarmAudio.pause();alarmAudio.currentTime=0}catch(_){}});
-function updateErrorSound(){const active=!!document.querySelector('#alarmItems .alarm-item.error');if(active&&!lastErrorAlarmActive&&alarmSoundEnabled){try{alarmAudio.currentTime=0;alarmAudio.play().catch(()=>{})}catch(_){}}lastErrorAlarmActive=active;}
+// The alarm controller is loaded separately and requires a browser user gesture.
+function updateErrorSound(alarms){window.AELABSAlarm?.update(alarms);}
 function scaleName(o,index){
  const i=Number(index), key=`weight_${i}_kg`;
  const candidates=[o?.weight_names?.[key],o?.weight_names?.[`weight_${i}`],o?.scale_names?.[i-1],o?.scale_names?.[key],o?.settings?.weight_names?.[key],o?.settings?.scale_names?.[i-1],o?.desktop_status?.weight_names?.[key],o?.desktop_status?.scale_names?.[i-1],o?.provenance?.weight_names?.[key],o?.provenance?.scale_names?.[i-1]];
@@ -326,27 +335,27 @@ function buildAlarms(o,m,stale){
      }
    }
    if(desktop.process_data_stale && !a.some(x=>/INI|данных|обновлен/i.test(x.text))){
-     a.push({level:'error',text:'ОШИБКА: настольное приложение сообщает об устаревших данных процесса.'});
+     a.push({level:'error',key:'desktop-stale',text:'ОШИБКА: настольное приложение сообщает об устаревших данных процесса.'});
    }
-   if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
+   if(stale)a.push({level:'error',key:'source-stale',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
    if(!a.length)a.push({level:'ok',text:'Всё в норме'});
    return a;
  }
- if(stale)a.push({level:'error',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
+ if(stale)a.push({level:'error',key:'source-stale',text:'ОШИБКА: новые записи не поступают более 10 минут. Проверьте настольное приложение и публикацию данных в GitHub.'});
  const limits=[
   ['ph','pH',6.5,8.0,'','pH вне заданного диапазона'],
   ['temperature_c','Температура',20,28,' °C','Температура вне заданного диапазона'],
   ['do_mg_l','DO растворённого кислорода',3,9,' мг/л','DO растворённого кислорода вне заданного диапазона'],
   ['offgas_o2','O₂ в абгазе',3,9,'%','O₂ в абгазе вне заданного диапазона']
  ];
- for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
+ for(const [key,label,lo,hi,unit,msg] of limits){const v=key==='offgas_o2'?numericValue(m,OFFGAS_O2_KEYS):m[key];if(typeof v==='number'&&Number.isFinite(v)&&(v<lo||v>hi))a.push({level:'error',key:'parameter-'+key,text:`ОШИБКА: ${msg}: ${v.toFixed(2)}${unit} (норма ${lo.toFixed(2)}–${hi.toFixed(2)}${unit})`})}
  for(const f of flags)a.push({level:'warning',text:'ПРЕДУПРЕЖДЕНИЕ качества данных: '+String(f)});
  if(q.status&&q.status!=='raw_received'&&q.status!=='ok')a.push({level:'warning',text:'Статус качества данных: '+q.status});
- for(let i=1;i<=3;i++){const v=weightKg(m,i),name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
+ for(let i=1;i<=3;i++){const v=weightKg(m,i),name=scaleName(o,i);if(scaleState(o,i,v)==='bad')a.push({level:'error',key:'weight-'+i+'-critical',text:`ОШИБКА: ${name}: критически низкий уровень (${v.toFixed(3)} кг)`});else if(scaleState(o,i,v)==='warn')a.push({level:'warning',key:'weight-'+i+'-warning',text:`ПРЕДУПРЕЖДЕНИЕ: ${name}: достигнут жёлтый порог (${v.toFixed(3)} кг)`})}
  if(!a.length)a.push({level:'ok',text:'Всё в норме'});
  return a
 }
-function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''));updateErrorSound()}
+function renderAlarms(o,m,stale){const alarms=buildAlarms(o,m,stale);$('alarmStrip').classList.add('visible');$('alarmCount').textContent=alarms.filter(a=>a.level!=='ok').length+' активных';setAlarmHtml(alarms.map(a=>`<div class="alarm-item ${a.level==='ok'?'info':a.level}"><span class="alarm-icon">${a.level==='error'?'!':a.level==='warning'?'△':'✓'}</span><span>${esc(a.text)}</span></div>`).join(''));updateErrorSound(alarms)}
 function setAlarmHtml(h){const el=$('alarmItems');if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}
 function updatePcLink(){const row=$('pcLinkRow'),mark=$('pcLinkMark'),label=$('pcLinkStatus');if(!row||!mark||!label)return;const age=sourceAgeMs();const online=!!latestObservation&&age<PC_HEARTBEAT_TIMEOUT_MS;row.classList.toggle('pc-online',online);row.classList.toggle('pc-offline',!online);mark.textContent=online?'✓':'!';label.textContent=online?'Подключено':'Нет сигнала';label.style.color=online?'var(--green)':'var(--red)'}
 async function refresh(){
@@ -368,7 +377,7 @@ async function refresh(){
   $('snapshotStatus').textContent=stale?'Нет новых записей':(AELABSHistory.sourceTimeLabel(o)||'—');
   if(!historyInitialized){await loadHistory();historyInitialized=true;lastHistoryLoadAt=Date.now()}
   else{if(historySourceMode==='browser-local')mergeLatestIntoHistory();drawTrend();renderHistoryTable()}
- }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound()}
+ }catch(e){$('connection').textContent='Ошибка связи';$('liveDot').style.background='var(--red)';$('repoStatus').textContent=e.message;$('snapshotStatus').textContent='Нет данных';$('staleDetail').textContent='Ошибка чтения источника: '+e.message;$('staleBanner').classList.add('visible');$('alarmStrip').classList.add('visible');$('alarmCount').textContent='1 активная';$('alarmItems').innerHTML=`<div class="alarm-item error"><span class="alarm-icon">!</span><span>ОШИБКА СВЯЗИ: ${esc(e.message)}</span></div>`;updateErrorSound([{level:'error',key:'network-fetch-failure',text:'ОШИБКА СВЯЗИ: '+e.message}])}
  finally{refreshInFlight=false;window.__bootDone&&window.__bootDone()}
 }
 async function loadHistory(){
