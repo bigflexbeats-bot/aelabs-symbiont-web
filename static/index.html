@@ -229,6 +229,33 @@ main>h2,.trend-card{scroll-margin-top:102px}
   <h2 id="station-title">Станция титрования</h2>
   <p id="station-status" role="status">Ожидание телеметрии</p>
   <dl id="station-values"></dl>
+  <form id="remote-station-form" hidden>
+    <h3>Изменение параметра через WEB</h3>
+    <label>Параметр <select name="parameter">
+      <option value="mode">Режим титрования</option>
+      <option value="base_pulse_s" data-pump>Ручная подача щёлочи</option>
+      <option value="acid_pulse_s" data-pump>Ручная подача кислоты</option>
+      <option value="pump_stop" data-pump>Стоп WEB-подачи</option>
+      <option value="base_start_ph">pH пуска щёлочи</option>
+      <option value="base_stop_ph">pH останова щёлочи</option>
+      <option value="acid_start_ph">pH пуска кислоты</option>
+      <option value="acid_stop_ph">pH останова кислоты</option>
+      <option value="base_dose_s">Доза щёлочи</option>
+      <option value="base_pause_s">Пауза щёлочи</option>
+      <option value="acid_dose_s">Доза кислоты</option>
+      <option value="acid_pause_s">Пауза кислоты</option>
+    </select></label>
+    <label id="remote-station-seconds"><span id="remote-station-unit">Секунды</span> <input name="value" type="number" min="0.1" max="120" step="0.01" required></label>
+    <label id="remote-station-mode">Режим <select name="mode">
+      <option value="manual">Ручной</option>
+      <option value="semi">Полуавтомат</option>
+      <option value="auto">Автомат</option>
+    </select></label>
+    <label>Ключ оператора <input name="operator_key" type="password" minlength="32" autocomplete="off" required></label>
+    <button class="trend-toggle" type="submit">Отправить заявку</button>
+    <p id="remote-station-result" role="status"></p>
+  </form>
+
 
 </section><h2>Процесс</h2><div class="grid gp" id="g-p"></div>
 <h2>Абгаз</h2><div class="grid gg" id="g-g"></div>
@@ -383,7 +410,7 @@ async function refresh(){
   const m=o.measurements||{},recordKey=AELABSHistory.sourceRecordKey(o);
   // A changed received_at/file-fetch time is NOT a new measurement. Only source timestamp + content can advance the trend.
   if(recordKey&&recordKey!==lastRecordKey){lastRecordKey=recordKey;lastRecordChangeAt=Date.now()}
-  latestObservation=o;window.AELabsStation?.update(o.titration_station);window.AELabsTasks?.update(o.active_tasks);updatePcLink();recordCh4WebReading(o);drawCh4WebTrend();
+  latestObservation=o;window.AELabsStation?.update(o.titration_station);window.AELabsRemote?.update(o.titration_station);window.AELabsTasks?.update(o.active_tasks);updatePcLink();recordCh4WebReading(o);drawCh4WebTrend();
   // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
   setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
   setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));const ch4Feed=numericValue(m,CH4FLOW_KEYS);if(ch4Feed===null){if(window.clearCh4Flow)window.clearCh4Flow();else $('ch4flow').textContent='—'}else{setVal('ch4flow',ch4Feed)};{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Подача O₂':'Подача воздуха';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
@@ -566,4 +593,4 @@ document.getElementById('nav').after(sub);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){sub.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-40% 0px -55% 0px'});
 list.forEach(([,el])=>io.observe(el));
 })();</script>
-<script src="/station-monitor.js"></script><script src="/web-presence.js"></script><script src="/active-tasks.js"></script></body></html>
+<script src="/station-monitor.js"></script><script src="/web-presence.js"></script><script src="/active-tasks.js"></script><script src="/remote-station.js"></script></body></html>
