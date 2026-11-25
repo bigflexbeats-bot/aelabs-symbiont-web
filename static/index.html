@@ -229,6 +229,7 @@ main>h2,.trend-card{scroll-margin-top:102px}
   <h2 id="station-title">Станция титрования</h2>
   <p id="station-status" role="status">Ожидание телеметрии</p>
   <dl id="station-values"></dl>
+  <p id="remote-station-status" role="status">Управление WEB: ожидание ПК станции</p>
   <form id="remote-station-form" hidden>
     <h3>Изменение параметра через WEB</h3>
     <label>Параметр <select name="parameter">
@@ -251,7 +252,7 @@ main>h2,.trend-card{scroll-margin-top:102px}
       <option value="semi">Полуавтомат</option>
       <option value="auto">Автомат</option>
     </select></label>
-    <button class="trend-toggle" type="submit">Отправить заявку</button>
+    <button class="trend-toggle" type="submit">Отправить команду</button>
     <p id="remote-station-result" role="status"></p>
   </form>
 
@@ -592,4 +593,4 @@ document.getElementById('nav').after(sub);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){sub.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-40% 0px -55% 0px'});
 list.forEach(([,el])=>io.observe(el));
 })();</script>
-<script src="/station-monitor.js"></script><script src="/web-presence.js"></script><script src="/active-tasks.js"></script><script src="/remote-station.js"></script></body></html>
+<script src="/station-monitor.js"></script><script src="/web-presence.js"></script><script src="/active-tasks.js"></script><script src="/remote-station.js?v=2"></script></body></html>

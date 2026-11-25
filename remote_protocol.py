@@ -1,13 +1,11 @@
-"""Validated, signed requests for one station and one adjustment."""
-import hashlib
-import hmac
-import json
+"""Validate commands transported through the private GIT WEB buffer."""
 import math
 import re
 import time
 import uuid
 
 PATH = "data/control/titration-buffer.json"
+PROTOCOL = "git-buffer-v2"
 TTL_MS = 120_000
 PUMP_TTL_MS = 15_000
 PULSE_TAGS = {"base_pulse_s", "acid_pulse_s"}
@@ -22,17 +20,12 @@ def valid_station(value):
     return isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9_-]{1,40}", value) is not None
 
 
-def signature(payload, key):
-    raw = json.dumps(payload, separators=(",", ":"), sort_keys=True, allow_nan=False).encode()
-    return hmac.new(key.encode(), raw, hashlib.sha256).hexdigest()
-
-
-def issue(station, parameter, value, key):
+def issue(station, parameter, value):
     payload = dict(station=station, id=uuid.uuid4().hex, issued_ms=time.time_ns() // 1_000_000,
-                   parameter=parameter, value=value, execution="automatic")
+                   parameter=parameter, value=value, execution=PROTOCOL)
     if not valid_values(payload):
         raise ValueError("Недопустимый параметр или значение")
-    return {**payload, "signature": signature(payload, key)}
+    return payload
 
 
 def request_ttl_ms(parameter):
@@ -55,17 +48,14 @@ def valid_values(payload):
             and math.isfinite(value) and round(value, 2) == value)
 
 
-def verify(message, station, key, seen=0):
+def verify(message, station, seen=0):
     now = time.time_ns() // 1_000_000
-    if not isinstance(message, dict) or message.keys() != FIELDS | {"signature"}:
+    if not isinstance(message, dict) or message.keys() != FIELDS:
         return False
     issued = message["issued_ms"]
-    digest = message["signature"]
     identifier = message["id"]
-    return (len(key) >= 32 and message["station"] == station and type(issued) is int
-            and message["execution"] == "automatic"
+    return (message["station"] == station and type(issued) is int
+            and message["execution"] == PROTOCOL
             and issued > seen and -5_000 <= now - issued <= request_ttl_ms(message["parameter"])
             and isinstance(identifier, str) and re.fullmatch(r"[0-9a-f]{32}", identifier)
-            and isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)
-            and valid_values(message) and hmac.compare_digest(
-                digest, signature({field: message[field] for field in FIELDS}, key)))
+            and valid_values(message))

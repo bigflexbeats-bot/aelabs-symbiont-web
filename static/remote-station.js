@@ -1,5 +1,6 @@
 (() => {
   const form = document.getElementById("remote-station-form");
+  const status = document.getElementById("remote-station-status");
   const result = document.getElementById("remote-station-result");
   const submit = form.querySelector("button");
   const fields = form.elements;
@@ -8,7 +9,7 @@
     const mode = parameter === "mode";
     const pulse = parameter === "base_pulse_s" || parameter === "acid_pulse_s";
     const noSeconds = mode || parameter === "pump_stop";
-    submit.textContent = parameter === "pump_stop" ? "Остановить WEB-подачу" : "Отправить заявку";
+    submit.textContent = parameter === "pump_stop" ? "Остановить WEB-подачу" : "Отправить команду";
     document.getElementById("remote-station-mode").hidden = !mode;
     document.getElementById("remote-station-seconds").hidden = noSeconds;
     fields.value.disabled = noSeconds;
@@ -19,9 +20,14 @@
   }
   fields.parameter.addEventListener("change", syncParameter);
   syncParameter();
+  let target = null;
   let pending = null, timer = null;
   window.AELabsRemote = { update(station) {
-    form.hidden = !station?.remote_station || station.remote_execution !== "automatic";
+    target = station?.remote_execution === "git-buffer-v2" ? station.remote_station : null;
+    form.hidden = !target;
+    status.hidden = Boolean(target);
+    status.textContent = station ? "Управление WEB: запустите обновлённый AE AUTOLABS с подключённым GIT WEB"
+      : "Управление WEB: ожидание ПК станции";
     for (const option of fields.parameter.querySelectorAll("[data-pump]")) {
       option.disabled = !station?.remote_pump_control;
     }
@@ -46,6 +52,7 @@
   }};
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    if (!target) return;
     submit.disabled = true;
     try {
       if (!window.isSecureContext) throw new Error("Откройте веб-монитор по HTTPS");
@@ -55,7 +62,7 @@
       const response = await fetch("/api/titration/request", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({parameter, value}),
+        body: JSON.stringify({station: target, parameter, value}),
         signal: AbortSignal.timeout(35000)
       });
       const body = await response.json();
@@ -70,7 +77,7 @@
       result.textContent = "Заявка отправлена. Ожидается ответ станции";
       timer = setTimeout(() => {
         pending = null;
-      syncParameter();
+        syncParameter();
         submit.disabled = false;
         result.textContent = "Подтверждение не получено в срок";
       }, parameter === "pump_stop" || parameter.endsWith("_pulse_s") ? 30000 : 145000);

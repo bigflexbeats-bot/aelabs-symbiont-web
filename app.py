@@ -1,4 +1,4 @@
-"""AELABS SYMBIONT WEB: read-only dashboard backed by GitHub JSON telemetry."""
+"""AELABS SYMBIONT WEB: GitHub telemetry and station commands."""
 import base64
 import json
 import os
@@ -9,7 +9,7 @@ import urllib.request
 from urllib.parse import quote
 from flask import Flask, jsonify, request, send_from_directory
 from web_presence import Presence
-from remote_protocol import PATH as REMOTE_PATH, issue, valid_station, verify
+from remote_protocol import PATH as REMOTE_PATH, PROTOCOL, issue, verify
 from history_csv import parse_github_log_csv
 
 app = Flask(__name__, static_folder='static')
@@ -204,27 +204,30 @@ _remote_write_lock = threading.Lock()
 
 @app.post("/api/titration/request")
 def request_titration():
-    signing_key = os.getenv("AE_AUTOLABS_REMOTE_SIGNING_KEY", "")
-    write_token = os.getenv("AE_AUTOLABS_REMOTE_GITHUB_TOKEN", "")
-    station = os.getenv("AE_AUTOLABS_REMOTE_STATION", "").strip()
-    if not (len(signing_key) >= 32 and write_token and valid_station(station)):
-        return jsonify({"error": "Удалённые заявки не настроены на сервере"}), 503
+    if not TOKEN:
+        return jsonify({"error": "На сервере не настроен GIT WEB"}), 503
     if not request.is_json or request.headers.get("Sec-Fetch-Site") == "cross-site":
         return jsonify({"error": "Требуется запрос с этого сайта"}), 400
     if request.content_length is None or not 0 < request.content_length <= 1024:
         return jsonify({"error": "Недопустимый размер запроса"}), 400
     body = request.get_json(silent=True)
-    if not isinstance(body, dict) or body.keys() != {"parameter", "value"}:
-        return jsonify({"error": "Требуются параметр и значение"}), 400
+    if not isinstance(body, dict) or body.keys() != {"station", "parameter", "value"}:
+        return jsonify({"error": "Требуются станция, параметр и значение"}), 400
+    station = body["station"]
     try:
-        message = issue(station, body["parameter"], body["value"], signing_key)
+        message = issue(station, body["parameter"], body["value"])
     except ValueError:
         return jsonify({"error": "Недопустимый параметр или значение"}), 400
     url = f"{API}/contents/{REMOTE_PATH}"
-    headers = {"Authorization": f"Bearer {write_token}", "Accept": "application/vnd.github+json",
+    headers = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json",
                "Content-Type": "application/json", "User-Agent": "AE-AUTOLABS-Remote"}
     try:
         with _remote_write_lock:
+            latest_data = normalize_observation(file_json("data/live/latest.json"))
+            target = latest_data.get("titration_station")
+            if (not isinstance(target, dict) or target.get("remote_execution") != PROTOCOL
+                    or target.get("remote_station") != station):
+                return jsonify({"error": "ПК станции ещё не готов к командам. Дождитесь обновления показаний"}), 409
             sha = None
             try:
                 req = urllib.request.Request(url + "?ref=" + quote(BRANCH, safe=""), headers=headers)
@@ -232,9 +235,8 @@ def request_titration():
                     current = json.load(response)
                 sha = current["sha"]
                 previous = json.loads(base64.b64decode(current["content"]))
-                if body["parameter"] != "pump_stop" and verify(previous, station, signing_key):
-                    latest_data = normalize_observation(file_json("data/live/latest.json"))
-                    outcome = latest_data.get("titration_station", {}).get("remote_result")
+                if body["parameter"] != "pump_stop" and verify(previous, station):
+                    outcome = target.get("remote_result")
                     if not isinstance(outcome, dict) or outcome.get("id") != previous["id"]:
                         return jsonify({"error": "Предыдущая заявка ещё ожидает обработки"}), 409
             except urllib.error.HTTPError as exc:
@@ -250,6 +252,8 @@ def request_titration():
     except urllib.error.HTTPError as exc:
         if exc.code in (409, 422):
             return jsonify({"error": "Заявка уже изменилась; проверьте её состояние"}), 409
+        if exc.code in (401, 403):
+            return jsonify({"error": "Проверьте право Contents: Read and write у GITHUB_TOKEN для GIT WEB"}), 502
         return jsonify({"error": "Приватный GIT WEB отклонил запись"}), 502
     except (OSError, RuntimeError, ValueError, KeyError, TypeError, AttributeError):
         return jsonify({"error": "Не удалось проверить или записать заявку в GIT WEB"}), 502
