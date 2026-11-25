@@ -200,7 +200,14 @@ main>h2,.trend-card{scroll-margin-top:102px}
 .alarm-action:hover:not(:disabled){background:color-mix(in srgb,var(--text) 13%,transparent)}.alarm-action:disabled{opacity:.4;cursor:not-allowed}
 .alarm-ack{border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}.alarm-volume{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}.alarm-volume input{width:82px;accent-color:var(--acc)}
 @media(max-width:600px){nav#nav{padding:0 10px}nav#nav img{height:21px}.nr{gap:5px}.chip{font-size:11px;padding:0 8px}#nav .sound-master{font-size:11px;padding:5px 8px}.alarm-strip-head{gap:8px;padding:10px}.alarm-strip-head #alarmAudioStatus{flex-basis:100%;min-width:0}.alarm-actions{width:100%;justify-content:space-between}.alarm-volume input{width:70px}}
-</style></head><body><div class="amb"></div>
+#station-panel{margin:20px 0;padding:18px}#station-panel h2{margin:0}
+#station-values{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 16px}
+#station-values dd{margin:0;font-weight:600}#station-demo label{display:block;margin:.45rem 0}
+#station-demo input{width:6rem;margin-left:.5rem;color:inherit;background:var(--bg);border:1px solid currentColor;border-radius:6px;padding:.25rem}#active-task-panel{margin:20px 0;padding:18px}#active-task-panel h2{margin:0}
+#active-task-panel p{margin:.35rem 0 1rem}#active-task-list{margin:0}
+#active-task-list div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.75fr);gap:.5rem;padding:.5rem 0;border-top:1px solid var(--border)}
+#active-task-list dd{margin:0}#active-task-list dd[data-state=active]{color:var(--green)}
+#active-task-list dd[data-state=error]{color:var(--red)}</style></head><body><div class="amb"></div>
 <div id="boot"><div class="bl"><img src="/ae_logo.png" alt="AELABS"><div class="sh"></div></div><div class="bar"><i id="bar"></i></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
 <radialGradient id="gO" cx=".34" cy=".28" r=".85"><stop offset="0" stop-color="#f6a29c"/><stop offset=".45" stop-color="#d4504a"/><stop offset="1" stop-color="#7d211e"/></radialGradient>
@@ -218,7 +225,12 @@ main>h2,.trend-card{scroll-margin-top:102px}
 <div id="staleBanner"><small id="staleDetail"></small></div>
 <section class="hero" id="hero"><h1>Мониторинг</h1><p><span id="updated">—</span></p></section>
 <section id="alarmStrip" class="alarm-strip" aria-live="polite"><div class="alarm-strip-head"><strong id="alarmCount">0 активных</strong><span id="alarmAudioStatus" role="status">Звуковые уведомления выключены</span><div class="alarm-actions"><label class="alarm-volume" title="Громкость звука">Громкость <input id="alarmVolume" type="range" min="0" max="100" step="5" value="65" aria-label="Громкость сигнализации"></label><button id="alarmTest" type="button" class="alarm-action">Проверить звук</button><button id="alarmAck" type="button" class="alarm-action alarm-ack" disabled>Квитировать</button></div></div><div id="alarmItems" class="alarm-items"></div></section>
-<h2>Процесс</h2><div class="grid gp" id="g-p"></div>
+<section class="card" id="station-panel" aria-labelledby="station-title">
+  <h2 id="station-title">Станция титрования</h2>
+  <p id="station-status" role="status">Ожидание телеметрии</p>
+  <dl id="station-values"></dl>
+
+</section><h2>Процесс</h2><div class="grid gp" id="g-p"></div>
 <h2>Абгаз</h2><div class="grid gg" id="g-g"></div>
 <h2>Подача газов</h2><div class="grid gf" id="g-f"></div>
 <h2>Весы</h2><div class="grid gw" id="g-w"></div>
@@ -227,6 +239,11 @@ main>h2,.trend-card{scroll-margin-top:102px}
 <h2>Система</h2>
 <div class="lower"><section class="card rv"><div class="row"><span>Время источника</span><strong id="rawTime">—</strong></div><div class="row"><span>Часовой пояс</span><strong id="tz">—</strong></div><div class="row"><span>UTC</span><strong id="eventTime">—</strong></div><div class="row"><span>Получено UTC</span><strong id="receivedTime">—</strong></div><div class="row"><span>Эксперимент</span><strong id="experiment">—</strong></div><div class="row"><span>Запуск</span><strong id="run">—</strong></div></section>
 <section class="card rv"><div class="statusline"><b>Источник данных</b><small id="repoStatus">—</small></div><div class="statusline" id="pcLinkRow"><b>Связь с ПК</b><small id="pcLinkStatus">—</small><span id="pcLinkMark" hidden></span></div><div class="statusline"><b>Последняя запись</b><small id="snapshotStatus">—</small></div><div class="statusline"><b>История</b><small id="historyStatus">—</small></div><div class="statusline"><b>Обновить</b><button class="ib" id="refresh" type="button" aria-label="Обновить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div></section></div>
+<section class="card" id="active-task-panel" aria-labelledby="active-task-title">
+  <h2 id="active-task-title">Текущие задачи</h2>
+  <p id="active-task-timestamp">Ожидание статусов из AE AUTOLABS</p>
+  <dl id="active-task-list"></dl>
+</section>
 <div class="footer"><a href="https://t.me/aeetherwave" target="_blank" rel="noopener noreferrer" aria-label="AELABS в Telegram" title="AELABS в Telegram"><img src="/ae_logo.png" alt="AELABS"><span>Мы в Telegram</span></a></div>
 </main>
 <script src="/source-history.js"></script><script src="/alarm-controller.js"></script><script>(function(){const G={p:[['ph','pH','','ph'],['do','Растворённый кислород','мг/л','do'],['temp','Температура','°C','temp'],['rpm','Мешалка','об/мин','rpm'],['od','Оптическая плотность','OD','od']],g:[['offgas','O₂ в абгазе','%','o2'],['ch4','CH₄ в абгазе','%','ch4'],['co2','CO₂ в абгазе','%','co2']],f:[['airflow','Подача воздуха','л/мин','air'],['ch4flow','Подача CH₄','л/мин','ch4f']],w:[['weight1','Весы 1','кг','w1'],['weight2','Весы 2','кг','w2'],['weight3','Весы 3','кг','w3']]};
@@ -366,7 +383,7 @@ async function refresh(){
   const m=o.measurements||{},recordKey=AELABSHistory.sourceRecordKey(o);
   // A changed received_at/file-fetch time is NOT a new measurement. Only source timestamp + content can advance the trend.
   if(recordKey&&recordKey!==lastRecordKey){lastRecordKey=recordKey;lastRecordChangeAt=Date.now()}
-  latestObservation=o;updatePcLink();recordCh4WebReading(o);drawCh4WebTrend();
+  latestObservation=o;window.AELabsStation?.update(o.titration_station);window.AELabsTasks?.update(o.active_tasks);updatePcLink();recordCh4WebReading(o);drawCh4WebTrend();
   // Keep the last readable value on screen when a field is temporarily absent from the latest snapshot.
   setValIfReadable('ph',m.ph);setValIfReadable('do',numericValue(m,['do_mg_l','do','dissolved_oxygen','dissolvedOxygen','DO']));
   setValIfReadable('temp',m.temperature_c);setValIfReadable('rpm',m.rpm);setValIfReadable('od',m.microcheck_od);setValIfReadable('offgas',numericValue(m,OFFGAS_O2_KEYS));setValIfReadable('ch4',numericValue(m,['offgas_ch4_online_ae_pct','ch4']));setValIfReadable('co2',numericValue(m,['offgas_co2_online_ae_pct','co2']));const ch4Feed=numericValue(m,CH4FLOW_KEYS);if(ch4Feed===null){if(window.clearCh4Flow)window.clearCh4Flow();else $('ch4flow').textContent='—'}else{setVal('ch4flow',ch4Feed)};{const airV=numericValue(m,AIRFLOW_KEYS),o2V=numericValue(m,O2FLOW_KEYS),isO2=o.flow_mode==='o2'||(o.flow_mode===undefined&&o2V!==null&&airV===null);setValIfReadable('airflow',isO2?o2V:airV);$('flowTitle').textContent=isO2?'Подача O₂':'Подача воздуха';const fc=$('flowCard');fc.classList.toggle('g-o2',isO2);fc.classList.toggle('g-air',!isO2)}
@@ -549,4 +566,4 @@ document.getElementById('nav').after(sub);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){sub.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-40% 0px -55% 0px'});
 list.forEach(([,el])=>io.observe(el));
 })();</script>
-</body></html>
+<script src="/station-monitor.js"></script><script src="/web-presence.js"></script><script src="/active-tasks.js"></script></body></html>

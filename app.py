@@ -7,7 +7,8 @@ import time
 import urllib.error
 import urllib.request
 from urllib.parse import quote
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory
+from web_presence import Presence
 from history_csv import parse_github_log_csv
 
 app = Flask(__name__, static_folder='static')
@@ -182,6 +183,20 @@ def home():
     response = send_from_directory('static', 'index.html', max_age=0)
     response.headers['Cache-Control'] = 'no-cache'
     return response
+
+_presence = Presence()
+
+
+@app.route('/api/web-presence', methods=['GET', 'POST'])
+def web_presence():
+    if request.method == 'POST':
+        if not request.is_json or request.headers.get('Sec-Fetch-Site') == 'cross-site':
+            return jsonify({'error': 'same-origin JSON required'}), 400
+        _presence.beat()
+    response = jsonify({'active': _presence.active()})
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
 
 @app.get('/api/health')
 def health():
