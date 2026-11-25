@@ -1,7 +1,6 @@
 """AELABS SYMBIONT WEB: read-only dashboard backed by GitHub JSON telemetry."""
 import base64
 import json
-import hmac
 import os
 import threading
 import time
@@ -205,16 +204,11 @@ _remote_write_lock = threading.Lock()
 
 @app.post("/api/titration/request")
 def request_titration():
-    operator_key = os.getenv("AE_AUTOLABS_REMOTE_OPERATOR_KEY", "")
     signing_key = os.getenv("AE_AUTOLABS_REMOTE_SIGNING_KEY", "")
     write_token = os.getenv("AE_AUTOLABS_REMOTE_GITHUB_TOKEN", "")
     station = os.getenv("AE_AUTOLABS_REMOTE_STATION", "").strip()
-    if not (len(operator_key) >= 32 and len(signing_key) >= 32 and operator_key != signing_key
-            and write_token and valid_station(station)):
+    if not (len(signing_key) >= 32 and write_token and valid_station(station)):
         return jsonify({"error": "Удалённые заявки не настроены на сервере"}), 503
-    auth = request.headers.get("Authorization", "")
-    if not hmac.compare_digest(auth.encode(), f"Bearer {operator_key}".encode()):
-        return jsonify({"error": "Неверный ключ оператора"}), 401
     if not request.is_json or request.headers.get("Sec-Fetch-Site") == "cross-site":
         return jsonify({"error": "Требуется запрос с этого сайта"}), 400
     if request.content_length is None or not 0 < request.content_length <= 1024:

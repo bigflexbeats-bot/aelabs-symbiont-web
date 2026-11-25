@@ -3,13 +3,11 @@
   const result = document.getElementById("remote-station-result");
   const submit = form.querySelector("button");
   const fields = form.elements;
-  let pulseStopKey = "";
   function syncParameter() {
     const parameter = fields.parameter.value;
     const mode = parameter === "mode";
     const pulse = parameter === "base_pulse_s" || parameter === "acid_pulse_s";
     const noSeconds = mode || parameter === "pump_stop";
-    fields.operator_key.required = parameter !== "pump_stop" || !pulseStopKey;
     submit.textContent = parameter === "pump_stop" ? "Остановить WEB-подачу" : "Отправить заявку";
     document.getElementById("remote-station-mode").hidden = !mode;
     document.getElementById("remote-station-seconds").hidden = noSeconds;
@@ -33,7 +31,6 @@
     if (!waitingForStop) {
       clearTimeout(timer);
       pending = null;
-      pulseStopKey = "";
       syncParameter();
     }
     submit.disabled = false;
@@ -55,20 +52,17 @@
       const parameter = fields.parameter.value;
       const value = parameter === "mode" ? fields.mode.value :
         parameter === "pump_stop" ? true : fields.value.valueAsNumber;
-      const operatorKey = fields.operator_key.value || (parameter === "pump_stop" ? pulseStopKey : "");
       const response = await fetch("/api/titration/request", {
         method: "POST",
-        headers: {"Content-Type": "application/json", "Authorization": "Bearer " + operatorKey},
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({parameter, value}),
         signal: AbortSignal.timeout(35000)
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || "Заявка не отправлена");
-      fields.operator_key.value = "";
       clearTimeout(timer);
       pending = body.id;
       if (parameter === "base_pulse_s" || parameter === "acid_pulse_s") {
-        pulseStopKey = operatorKey;
         fields.parameter.value = "pump_stop";
         syncParameter();
         submit.disabled = false;
@@ -76,7 +70,6 @@
       result.textContent = "Заявка отправлена. Ожидается ответ станции";
       timer = setTimeout(() => {
         pending = null;
-      pulseStopKey = "";
       syncParameter();
         submit.disabled = false;
         result.textContent = "Подтверждение не получено в срок";
