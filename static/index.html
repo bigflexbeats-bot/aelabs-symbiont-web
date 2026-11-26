@@ -115,6 +115,7 @@ main>h2{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.04em;m
 .card.warn .sbadge,.card.bad .sbadge{max-width:190px;padding:4px 11px;margin:0 8px 0 auto;opacity:1;transform:none;animation:breathe var(--bt) var(--soft) infinite}
 .card.warn .sbadge{background:var(--warn)}.card.bad .sbadge{background:var(--bad)}
 .card[data-k^=weight]{--bt:3.4s;--lvc:transparent}
+.weight-rate{display:block;margin-top:.3rem;color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
 .card[data-k^=weight].warn{--lvc:var(--warn);--bt:3.4s;animation:wp 3.4s var(--soft) infinite}.card[data-k^=weight].bad{--lvc:var(--bad);--bt:1.9s;animation:wp 1.9s var(--soft) infinite}
 .card[data-k^=weight]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;background:radial-gradient(90% 70% at 50% 35%,color-mix(in srgb,var(--lvc) 26%,transparent),transparent 72%);transition:opacity 1s var(--soft)}
 .card[data-k^=weight].warn::after,.card[data-k^=weight].bad::after{opacity:1;animation:breathe var(--bt) var(--soft) infinite}
@@ -274,9 +275,21 @@ main>h2,.trend-card{scroll-margin-top:102px}
 <div class="footer"><a href="https://t.me/aeetherwave" target="_blank" rel="noopener noreferrer" aria-label="AELABS в Telegram" title="AELABS в Telegram"><img src="/ae_logo.png" alt="AELABS"><span>Мы в Telegram</span></a></div>
 </main>
 <script src="/source-history.js"></script><script src="/alarm-controller.js"></script><script>(function(){const G={p:[['ph','pH','','ph'],['do','Растворённый кислород','мг/л','do'],['temp','Температура','°C','temp'],['rpm','Мешалка','об/мин','rpm'],['od','Оптическая плотность','OD','od']],g:[['offgas','O₂ в абгазе','%','o2'],['ch4','CH₄ в абгазе','%','ch4'],['co2','CO₂ в абгазе','%','co2']],f:[['airflow','Подача воздуха','л/мин','air'],['ch4flow','Подача CH₄','л/мин','ch4f']],w:[['weight1','Весы 1','кг','w1'],['weight2','Весы 2','кг','w2'],['weight3','Весы 3','кг','w3']]};
-let i=0;for(const g in G)document.getElementById('g-'+g).innerHTML=G[g].map(([id,n,u,a],j)=>{const nid=id==='airflow'?'flowTitle':id.startsWith('weight')?'weightName'+id.slice(6):'n-'+id;return`<article class="card rv" ${id==='airflow'?'id="flowCard"':''} data-k="${id}" style="--d:${j*70}ms"><div class="cn"><span id="${nid}">${n}</span><i class="al"></i></div><div class="art" data-art="${a}"></div><div class="val"><b id="${id}">—</b>${u?`<span>${u}</span>`:''}</div></article>`}).join('')})();
+let i=0;for(const g in G)document.getElementById('g-'+g).innerHTML=G[g].map(([id,n,u,a],j)=>{const nid=id==='airflow'?'flowTitle':id.startsWith('weight')?'weightName'+id.slice(6):'n-'+id;return`<article class="card rv" ${id==='airflow'?'id="flowCard"':''} data-k="${id}" style="--d:${j*70}ms"><div class="cn"><span id="${nid}">${n}</span><i class="al"></i></div><div class="art" data-art="${a}"></div><div class="val"><b id="${id}">—</b>${u?`<span>${u}</span>`:''}</div>${g==='w'?`<small class="weight-rate" id="weightRate${j+1}">— г/мин · — г/ч</small>`:''}</article>`}).join('')})();
 </script><script>
 const $=id=>document.getElementById(id);
+const weightRateFormat=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1});
+function renderWeightRates(observation){
+ const now=Date.now();
+ for(let i=1;i<=3;i++){
+  const rate=observation?.weight_consumption?.[`weight_${i}`];
+  const age=now-rate?.sampled_at_ms;
+  const fresh=age>=-5000&&age<=20000&&Number.isFinite(rate?.g_min)&&Number.isFinite(rate?.g_hour);
+  const text=fresh?`${weightRateFormat.format(rate.g_min)} г/мин · ${weightRateFormat.format(rate.g_hour)} г/ч`:'— г/мин · — г/ч';
+  const label=$(`weightRate${i}`);
+  if(label.textContent!==text)label.textContent=text;
+ }
+}
 const fmt=v=>v===null||v===undefined||v===''?'—':(typeof v==='number'?Number(v.toFixed(3)).toString():String(v));
 function setVal(id,v){$(id).textContent=fmt(v)}
 function setValIfReadable(id,v){if(v!==null&&v!==undefined&&!(typeof v==='string'&&!v.trim()))setVal(id,v)}
@@ -523,7 +536,7 @@ trendPlot.addEventListener('pointermove',ev=>{if(!trendDrag)return;const dx=ev.c
 function endTrendDrag(){trendDrag=null;trendPlot.classList.remove('dragging')}
 trendPlot.addEventListener('pointerup',endTrendDrag);trendPlot.addEventListener('pointercancel',endTrendDrag);trendPlot.addEventListener('lostpointercapture',endTrendDrag);
 function updateTrendFollowButton(){const b=$('trendFollow');if(!b)return;b.textContent=trendAutoFollow?'● Live':'Пауза';b.classList.toggle('off',!trendAutoFollow)}
-setInterval(updatePcLink,1000);updatePcLink();
+setInterval(()=>{updatePcLink();renderWeightRates(latestObservation)},1000);updatePcLink();
 $('trendFollow').addEventListener('click',()=>{trendAutoFollow=!trendAutoFollow;if(trendAutoFollow)trendOffset=0;updateTrendFollowButton();drawTrend()});
 document.querySelectorAll('.trend-toggle').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.series;if(visibleSeries.has(k)){visibleSeries.delete(k);b.classList.remove('active')}else{visibleSeries.add(k);b.classList.add('active')}drawTrend()}));
 drawCh4WebTrend();window.addEventListener('resize',()=>{drawTrend();drawCh4WebTrend()});$('refresh').addEventListener('click',()=>{refresh();refreshHistoryFromServer()});refresh();setInterval(refresh,5000);setInterval(refreshHistoryFromServer,15000);
